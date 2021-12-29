@@ -1,0 +1,72 @@
+NOTICES FOR THIRD-PARTY CODE/DEPENDENCIES
+
+Name: Requests
+Project: https://github.com/psf/requests
+License: Apache License, Version 2.0
+
+
+Name: first
+Project: https://github.com/hynek/first
+License: MIT License
+
+
+Name:  influxdb
+Project: https://github.com/influxdata/influxdb
+License: MIT License
+
+
+Name: marshmallow
+Project: https://marshmallow.readthedocs.io/en/stable/
+License: https://marshmallow.readthedocs.io/en/stable/license.html
+
+
+Name: jinja2 
+Project: https://github.com/pallets/jinja/
+License: https://github.com/pallets/jinja/blob/main/LICENSE.rst
+
+
+Name: PyYAML
+Project: https://github.com/yaml/pyyaml
+License:  MIT License
+
+
+Name: aiohttp
+Project: https://github.com/aio-libs/aiohttp 
+License: Apache License, Version 2.0 (
+
+
+Name: certifi
+Project: https://github.com/certifi/python-certifi
+License: https://github.com/certifi/python-certifi/blob/master/LICENSE
+
+
+Name: six 
+Project: https://github.com/benjaminp/six
+License: MIT License
+
+
+Name: python_dateutil 
+Project: https://github.com/dateutil/dateutil
+License: Apache License, Version 2.0
+
+
+Name: setuptools
+Project: https://github.com/pypa/setuptools
+License: MIT License
+
+
+Name: urllib3
+Project: https://github.com/urllib3/urllib3
+License: MIT License
+
+
+Name: pyjwt
+Project: https://github.com/jpadilla/pyjwt
+License: MIT License 
+
+
+Name: uuid
+Project: https://pypi.org/project/uuid/ 
+License: Unknown (Very old Package)
+
+
