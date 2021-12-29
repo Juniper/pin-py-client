@@ -1,0 +1,4 @@
+[report]
+omit =
+    */jnpr/healthbot/swagger/*
+show_missing = True
