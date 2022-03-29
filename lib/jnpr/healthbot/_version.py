@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
 
 # This file helps to compute a version number in source trees obtained from
 # git-archive tarball (such as those provided by githubs download-from-tag
