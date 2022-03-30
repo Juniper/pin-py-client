@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 class UrlFor(object):
     def __init__(self, hbot):
         self.hbot = hbot
