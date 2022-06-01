@@ -1,5 +1,5 @@
 [![Documentation Status](https://readthedocs.org/projects/hbez/badge/?version=latest)](http://hbez.readthedocs.io)
-[![UnitTest Status](https://travis-ci.org/Juniper/healthbot-py-client.svg?branch=master)](https://travis-ci.org/Juniper/healthbot-py-client)
+[![UnitTest Status](https://travis-ci.org/Juniper/pin-py-client.svg?branch=master)](https://travis-ci.org/Juniper/healthbot-py-client)
 
 # HealthBot Python Client
 
