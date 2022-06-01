@@ -1,6 +1,3 @@
-# Copyright (c) 2022, Juniper Networks, Inc.
-# All rights reserved.
-
 class BaseModule(object):
     def __init__(self, hbot, url=None):
         """

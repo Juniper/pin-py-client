@@ -1,6 +1,3 @@
-# Copyright (c) 2022, Juniper Networks, Inc.
-# All rights reserved.
-
 from jnpr.healthbot.swagger.models.datastore_schema import DatastoreSchema
 from jnpr.healthbot.swagger.models.panel_schema import PanelSchema
 from jnpr.healthbot.swagger.models.panel_data_schema import PanelDataSchema

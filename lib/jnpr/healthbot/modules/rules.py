@@ -1,6 +1,3 @@
-# Copyright (c) 2022, Juniper Networks, Inc.
-# All rights reserved.
-
 from jnpr.healthbot.swagger.models.rule_schema import RuleSchema
 from jnpr.healthbot.swagger.models.topic_schema import TopicSchema
 from jnpr.healthbot.exception import SchemaError, NotFoundError
