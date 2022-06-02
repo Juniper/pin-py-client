@@ -1,6 +1,3 @@
-# Copyright (c) 2022, Juniper Networks, Inc.
-# All rights reserved.
-
 from jnpr.healthbot.swagger.models.ca_profile_schema import CaProfileSchema
 from jnpr.healthbot.swagger.models.local_certificate_schema import LocalCertificateSchema
 from jnpr.healthbot.swagger.models.ssh_key_profile_schema import SshKeyProfileSchema
