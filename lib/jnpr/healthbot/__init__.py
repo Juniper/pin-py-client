@@ -94,4 +94,4 @@ class AutoGenClass(type):
             _addMethod('get', dict)
         return type.__new__(cls, name, bases, dict)
 
-from jnpr.healthbot.healthbot import HealthBotClient
+from jnpr.healthbot.healthbot import PINClient

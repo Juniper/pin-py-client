@@ -47,7 +47,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 logger = logging.getLogger(__file__)
 
 
-class HealthBotClient(object):
+class PINClient(object):
 
     apiopt_candidate = "/?working=true"
 
