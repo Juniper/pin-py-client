@@ -11,7 +11,7 @@ class Rule(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -28,11 +28,11 @@ class Rule(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import RuleSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                rs = RuleSchema(rule_name="hbez-fpc-heap-utilization")
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                rs = RuleSchema(rule_name="pinez-fpc-heap-utilization")
 
                 rs.description = "HealthBot EZ example"
                 rs.synopsis = "Using python client for demo"
@@ -118,7 +118,7 @@ class Rule(BaseModule):
                                         {'term-name': 'heap-memory-utilization-less-than-threshold',
                                          'then': {'status': {'color': 'green'}}}],
                                'trigger-name': 'fpc-heap-memory-utilization'}]
-                hb.rule.add('hbez', schema=rs)
+                pin.rule.add('pinez', schema=rs)
 
         Returns:
             True if action successful
@@ -164,10 +164,10 @@ class Rule(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                hb.rule.delete('linecard.ospf', 'check-ddos-statistics')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pin.rule.delete('linecard.ospf', 'check-ddos-statistics')
 
         """
 
@@ -195,12 +195,12 @@ class Rule(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.rule.get('linecard.ospf', 'check-ddos-statistics')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.rule.get('linecard.ospf', 'check-ddos-statistics')
 
-                print(hb.rule.get('linecard.ospf')
+                print(pin.rule.get('linecard.ospf')
 
         """
         if rule_name is not None:
@@ -237,12 +237,12 @@ class Rule(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.rule.get(topic_name='hbez', rule_name="hbez-fpc-heap-utilization")
-                schemaObj.description = "HbEZ example"
-                hb.rule.update(topic_name='hbez', schemaObj)
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.rule.get(topic_name='pinez', rule_name="pinez-fpc-heap-utilization")
+                schemaObj.description = "PinEZ example"
+                pin.rule.update(topic_name='pinez', schemaObj)
 
         :returns: True when OK
 
@@ -275,7 +275,7 @@ class Topic(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -287,11 +287,11 @@ class Topic(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.topic.get('linecard.ospf'))
-                topics = hb.topic.get()
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.topic.get('linecard.ospf'))
+                topics = pin.topic.get()
                 for topic in topics:
                     print(topic)
 

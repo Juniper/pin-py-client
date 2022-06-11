@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **argument** | [**list[RuleSchemaArgument]**](RuleSchemaArgument.md) |  | [optional] 
+**_return** | [**list[RuleSchemaReturn]**](RuleSchemaReturn.md) |  | [optional] 
 **description** | **str** | Description of the function | [optional] 
 **function_name** | **str** | Name of the function. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]* | 
 **method** | **str** | Function to be called | 

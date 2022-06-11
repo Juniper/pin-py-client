@@ -43,6 +43,7 @@ class WorkflowInstanceSchema(object):
         'argument': 'WorkflowArgumentGroupSchema',
         'cron_options': 'WorkflowCronOptionsSchema',
         'batch': 'int',
+        'pod_gc_strategy': 'str',
         'retry': 'RuleSchemaThenRetry',
         'timeout': 'str',
         'workflow_instance_name': 'str',
@@ -62,13 +63,14 @@ class WorkflowInstanceSchema(object):
         'argument': 'argument',
         'cron_options': 'cron-options',
         'batch': 'batch',
+        'pod_gc_strategy': 'pod-gc-strategy',
         'retry': 'retry',
         'timeout': 'timeout',
         'workflow_instance_name': 'workflow-instance-name',
         'workflow_name': 'workflow-name'
     }
 
-    def __init__(self, description=None, created_at=None, started_at=None, finished_at=None, status=None, message=None, devices=None, device_groups=None, parameters=None, argument=None, cron_options=None, batch=None, retry=None, timeout=None, workflow_instance_name=None, workflow_name=None):  # noqa: E501
+    def __init__(self, description=None, created_at=None, started_at=None, finished_at=None, status=None, message=None, devices=None, device_groups=None, parameters=None, argument=None, cron_options=None, batch=None, pod_gc_strategy=None, retry=None, timeout=None, workflow_instance_name=None, workflow_name=None):  # noqa: E501
         """WorkflowInstanceSchema - a model defined in Swagger"""  # noqa: E501
 
         self._description = None
@@ -83,6 +85,7 @@ class WorkflowInstanceSchema(object):
         self._argument = None
         self._cron_options = None
         self._batch = None
+        self._pod_gc_strategy = None
         self._retry = None
         self._timeout = None
         self._workflow_instance_name = None
@@ -113,6 +116,8 @@ class WorkflowInstanceSchema(object):
             self.cron_options = cron_options
         if batch is not None:
             self.batch = batch
+        if pod_gc_strategy is not None:
+            self.pod_gc_strategy = pod_gc_strategy
         if retry is not None:
             self.retry = retry
         if timeout is not None:
@@ -386,6 +391,29 @@ class WorkflowInstanceSchema(object):
         """
 
         self._batch = batch
+
+    @property
+    def pod_gc_strategy(self):
+        """Gets the pod_gc_strategy of this WorkflowInstanceSchema.  # noqa: E501
+
+        Garbage Collection Strategy for workflow pods  # noqa: E501
+
+        :return: The pod_gc_strategy of this WorkflowInstanceSchema.  # noqa: E501
+        :rtype: str
+        """
+        return self._pod_gc_strategy
+
+    @pod_gc_strategy.setter
+    def pod_gc_strategy(self, pod_gc_strategy):
+        """Sets the pod_gc_strategy of this WorkflowInstanceSchema.
+
+        Garbage Collection Strategy for workflow pods  # noqa: E501
+
+        :param pod_gc_strategy: The pod_gc_strategy of this WorkflowInstanceSchema.  # noqa: E501
+        :type: str
+        """
+
+        self._pod_gc_strategy = pod_gc_strategy
 
     @property
     def retry(self):

@@ -33,6 +33,7 @@ class RuleSchemaSensor1(object):
     swagger_types = {
         'description': 'str',
         'sflow': 'RuleSchemaSflow',
+        'ifa': 'RuleSchemaIfa',
         'flow': 'RuleSchemaFlow',
         'i_agent': 'RuleSchemaIAgent',
         'native_gpb': 'RuleSchemaNativegpb',
@@ -42,6 +43,7 @@ class RuleSchemaSensor1(object):
         'snmp': 'RuleSchemaSnmp',
         'snmp_notification': 'RuleSchemaSnmpnotification',
         'syslog': 'RuleSchemaSyslog',
+        'paragon_active_assurance': 'list[object]',
         'synopsis': 'str',
         'byoi': 'RuleSchemaByoi'
     }
@@ -49,6 +51,7 @@ class RuleSchemaSensor1(object):
     attribute_map = {
         'description': 'description',
         'sflow': 'sflow',
+        'ifa': 'ifa',
         'flow': 'flow',
         'i_agent': 'iAgent',
         'native_gpb': 'native-gpb',
@@ -58,15 +61,17 @@ class RuleSchemaSensor1(object):
         'snmp': 'snmp',
         'snmp_notification': 'snmp-notification',
         'syslog': 'syslog',
+        'paragon_active_assurance': 'paragon-active-assurance',
         'synopsis': 'synopsis',
         'byoi': 'byoi'
     }
 
-    def __init__(self, description=None, sflow=None, flow=None, i_agent=None, native_gpb=None, open_config=None, server_monitoring=None, sensor_name=None, snmp=None, snmp_notification=None, syslog=None, synopsis=None, byoi=None):  # noqa: E501
+    def __init__(self, description=None, sflow=None, ifa=None, flow=None, i_agent=None, native_gpb=None, open_config=None, server_monitoring=None, sensor_name=None, snmp=None, snmp_notification=None, syslog=None, paragon_active_assurance=None, synopsis=None, byoi=None):  # noqa: E501
         """RuleSchemaSensor1 - a model defined in Swagger"""  # noqa: E501
 
         self._description = None
         self._sflow = None
+        self._ifa = None
         self._flow = None
         self._i_agent = None
         self._native_gpb = None
@@ -76,6 +81,7 @@ class RuleSchemaSensor1(object):
         self._snmp = None
         self._snmp_notification = None
         self._syslog = None
+        self._paragon_active_assurance = None
         self._synopsis = None
         self._byoi = None
         self.discriminator = None
@@ -84,6 +90,8 @@ class RuleSchemaSensor1(object):
             self.description = description
         if sflow is not None:
             self.sflow = sflow
+        if ifa is not None:
+            self.ifa = ifa
         if flow is not None:
             self.flow = flow
         if i_agent is not None:
@@ -101,6 +109,8 @@ class RuleSchemaSensor1(object):
             self.snmp_notification = snmp_notification
         if syslog is not None:
             self.syslog = syslog
+        if paragon_active_assurance is not None:
+            self.paragon_active_assurance = paragon_active_assurance
         if synopsis is not None:
             self.synopsis = synopsis
         if byoi is not None:
@@ -149,6 +159,27 @@ class RuleSchemaSensor1(object):
         """
 
         self._sflow = sflow
+
+    @property
+    def ifa(self):
+        """Gets the ifa of this RuleSchemaSensor1.  # noqa: E501
+
+
+        :return: The ifa of this RuleSchemaSensor1.  # noqa: E501
+        :rtype: RuleSchemaIfa
+        """
+        return self._ifa
+
+    @ifa.setter
+    def ifa(self, ifa):
+        """Sets the ifa of this RuleSchemaSensor1.
+
+
+        :param ifa: The ifa of this RuleSchemaSensor1.  # noqa: E501
+        :type: RuleSchemaIfa
+        """
+
+        self._ifa = ifa
 
     @property
     def flow(self):
@@ -280,7 +311,7 @@ class RuleSchemaSensor1(object):
         if sensor_name is not None and len(sensor_name) > 64:
             raise ValueError("Invalid value for `sensor_name`, length must be less than or equal to `64`")  # noqa: E501
         if sensor_name is not None and not re.search(r'^[a-zA-Z][a-zA-Z0-9_-]*$', sensor_name):  # noqa: E501
-            raise ValueError("Invalid value for `sensor_name`, must be a follow pattern or equal to `/^[a-zA-Z][a-zA-Z0-9_-]*$/`")  # noqa: E501
+            raise ValueError(r"Invalid value for `sensor_name`, must be a follow pattern or equal to `/^[a-zA-Z][a-zA-Z0-9_-]*$/`")  # noqa: E501
 
         self._sensor_name = sensor_name
 
@@ -346,6 +377,29 @@ class RuleSchemaSensor1(object):
         """
 
         self._syslog = syslog
+
+    @property
+    def paragon_active_assurance(self):
+        """Gets the paragon_active_assurance of this RuleSchemaSensor1.  # noqa: E501
+
+        Paragon Active Assurance Sensor  # noqa: E501
+
+        :return: The paragon_active_assurance of this RuleSchemaSensor1.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._paragon_active_assurance
+
+    @paragon_active_assurance.setter
+    def paragon_active_assurance(self, paragon_active_assurance):
+        """Sets the paragon_active_assurance of this RuleSchemaSensor1.
+
+        Paragon Active Assurance Sensor  # noqa: E501
+
+        :param paragon_active_assurance: The paragon_active_assurance of this RuleSchemaSensor1.  # noqa: E501
+        :type: list[object]
+        """
+
+        self._paragon_active_assurance = paragon_active_assurance
 
     @property
     def synopsis(self):

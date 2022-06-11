@@ -1,7 +1,7 @@
 import unittest
 from nose.plugins.attrib import attr
 
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from jnpr.healthbot import PlaybookSchema
 from jnpr.healthbot import PlayBookInstanceBuilder
 from mock import patch, PropertyMock
@@ -16,13 +16,13 @@ class TestPlaybooks(unittest.TestCase):
     def setUp(self, mock_user_login, mock_request):
         self.mock_user_login = _mock_user_login
         self.mock_request = mock_request
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.version',
+        with patch('jnpr.healthbot.healthbot.PINClient.version',
                    new_callable=PropertyMock) as mock_ver:
-            with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+            with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                        new_callable=PropertyMock) as mock_cnf:
                 mock_ver.return_value = '4.0.0'
                 mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
-                self.conn = HealthBotClient(
+                self.conn = PINClient(
                     server='1.1.1.1',
                     user='test',
                     password='password123').open()
@@ -33,17 +33,17 @@ class TestPlaybooks(unittest.TestCase):
     def test_add_playbook_using_schema_check_existance(self):
         self.mock_request().get.side_effect = self._mock_manager
         pbs = PlaybookSchema(playbook_name="automation-coredump-pb")
-        pbs.description = "HbEZ Demo Examples"
+        pbs.description = "PinEZ Demo Examples"
         pbs.synopsis = 'fpc status'
-        pbs.rules = ['hbez/hbez-fpc-heap-utilization']
+        pbs.rules = ['pinez/pinez-fpc-heap-utilization']
         ret = self.conn.playbook.add(pbs)
         self.assertTrue(ret)
 
     def test_add_playbook_using_schema(self):
         self.mock_request().get.side_effect = self._mock_manager
         pbs = PlaybookSchema(playbook_name="testing")
-        pbs.description = "HbEZ Demo Examples"
-        pbs.rules = ['hbez/hbez-fpc-heap-utilization']
+        pbs.description = "PinEZ Demo Examples"
+        pbs.rules = ['pinez/pinez-fpc-heap-utilization']
         self.assertTrue(self.conn.playbook.add(pbs))
 
     def test_delete_playbook(self):
@@ -77,7 +77,7 @@ class TestPlaybooks(unittest.TestCase):
     def test_playbook_instance_builder_with_no_variable(self):
         self.mock_request().get.side_effect = self._mock_manager
         pbb = PlayBookInstanceBuilder(
-            self.conn, 'automation-coredump-pb', 'HbEZ-instance',
+            self.conn, 'automation-coredump-pb', 'PinEZ-instance',
             'Core')
         pbb.apply()
         self.assertEqual(self.mock_request().mock_calls[5][0], 'put')
@@ -88,7 +88,7 @@ class TestPlaybooks(unittest.TestCase):
     def test_playbook_instance_builder_delete(self):
         self.mock_request().get.side_effect = self._mock_manager
         pbb = PlayBookInstanceBuilder(
-            self.conn, 'automation-coredump-pb', 'HbEZ-instance',
+            self.conn, 'automation-coredump-pb', 'PinEZ-instance',
             'Core')
         pbb.delete()
         self.assertEqual(self.mock_request().mock_calls[6][0], 'put')
@@ -101,11 +101,11 @@ class TestPlaybooks(unittest.TestCase):
 
     def test_playbook_apply_commit(self):
         self.mock_request().get.side_effect = self._mock_manager
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+        with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                    new_callable=PropertyMock) as mock_cnf:
             mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
             pbb = PlayBookInstanceBuilder(
-                self.conn, 'automation-coredump-pb', 'HbEZ-instance',
+                self.conn, 'automation-coredump-pb', 'PinEZ-instance',
                 'Core')
             pbb.apply(commit=True)
             self.assertEqual(self.mock_request().mock_calls[9][0], 'post')
@@ -125,7 +125,7 @@ class TestPlaybooks(unittest.TestCase):
         pbb = PlayBookInstanceBuilder(
             self.conn,
             'forwarding-table-summary',
-            'HbEZ-instance',
+            'PinEZ-instance',
             'Core')
         routesummary_fib_summary = pbb.rule_variables["protocol.routesummary/check-fib-summary"]
         routesummary_fib_summary.route_count_threshold = 200
@@ -141,7 +141,7 @@ class TestPlaybooks(unittest.TestCase):
         pbb = PlayBookInstanceBuilder(
             self.conn,
             'forwarding-table-summary',
-            'HbEZ-instance',
+            'PinEZ-instance',
             'Core')
         routesummary_fib_summary = pbb.rule_variables["protocol.routesummary/check-fib-summary"]
         routesummary_fib_summary.route_count_threshold = 200
@@ -157,7 +157,7 @@ class TestPlaybooks(unittest.TestCase):
         pbb = PlayBookInstanceBuilder(
             self.conn,
             'forwarding-table-summary',
-            'HbEZ-instance',
+            'PinEZ-instance',
             'Core')
         routesummary_fib_summary = pbb.rule_variables["protocol.routesummary/check-fib-summary"]
         routesummary_fib_summary.route_count_threshold = 200
@@ -169,7 +169,7 @@ class TestPlaybooks(unittest.TestCase):
         pbb = PlayBookInstanceBuilder(
             self.conn,
             'forwarding-table-summary',
-            'HbEZ-instance',
+            'PinEZ-instance',
             'Core')
         routesummary_fib_summary = pbb.rule_variables["protocol.routesummary/check-fib-summary"]
         routesummary_fib_summary.route_count_threshold = 200
@@ -185,7 +185,7 @@ class TestPlaybooks(unittest.TestCase):
         pbb = PlayBookInstanceBuilder(
             self.conn,
             'forwarding-table-summary',
-            'HbEZ-instance',
+            'PinEZ-instance',
             'Core')
         with self.assertRaises(RuntimeError):
             pbb.playbook_schema = 30
@@ -193,7 +193,7 @@ class TestPlaybooks(unittest.TestCase):
     def test_get_playbook_schema_error(self):
         self.mock_request().get.side_effect = self._mock_manager
         self.assertRaises(AttributeError, PlayBookInstanceBuilder, self.conn,
-                          'dummy', 'HbEZ-instance', 'Core')
+                          'dummy', 'PinEZ-instance', 'Core')
 
     def _mock_manager(self, *args):
         class MockResponse(Response):
@@ -478,7 +478,7 @@ class TestPlaybooks(unittest.TestCase):
                                                'automation-coredump-pb'],
                                  "reports": [],
                                  "variable": [{"@": {"changed-seconds": 1564722219},
-                                               "instance-id": "HbEZ-instance",
+                                               "instance-id": "PinEZ-instance",
                                                "playbook": "automation-coredump-pb",
                                                "rule": "x/y",
                                                "variable-value": []}]},
@@ -498,7 +498,7 @@ class TestPlaybooks(unittest.TestCase):
                 },
                 "system-id": "testing",
                 "variable": [{"@": {"changed-seconds": 1564722219},
-                                               "instance-id": "HbEZ-instance",
+                                               "instance-id": "PinEZ-instance",
                                                "playbook": "automation-coredump-pb",
                                                "rule": "x/y",
                                                "variable-value": []}],

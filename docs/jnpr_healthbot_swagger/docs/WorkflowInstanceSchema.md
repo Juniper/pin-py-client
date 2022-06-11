@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **argument** | [**WorkflowArgumentGroupSchema**](WorkflowArgumentGroupSchema.md) |  | [optional] 
 **cron_options** | [**WorkflowCronOptionsSchema**](WorkflowCronOptionsSchema.md) |  | [optional] 
 **batch** | **int** | Maximum parallel steps launched | [optional] 
+**pod_gc_strategy** | **str** | Garbage Collection Strategy for workflow pods | [optional] 
 **retry** | [**RuleSchemaThenRetry**](RuleSchemaThenRetry.md) |  | [optional] 
 **timeout** | **str** | Maximum time to wait for the step completion before bailing out (default 60 seconds) | [optional] 
 **workflow_instance_name** | **str** | Name of the workflow instance | [optional] 

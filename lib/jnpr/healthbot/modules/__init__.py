@@ -1,8 +1,8 @@
 class BaseModule(object):
     def __init__(self, hbot, url=None):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
-        :param str url: either hb.url or hb.config_url. default is hb.url
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
+        :param str url: either pin.url or pin.config_url. default is pin.url
         """
 
         self.hbot = hbot

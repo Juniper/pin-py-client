@@ -33,4 +33,4 @@ test:
 	tox -e unittest
 
 clean:
-	rm -rf build dist docs/_build .tox .coverage lib/hbez.egg-info
+	rm -rf build dist docs/_build .tox .coverage lib/pinez.egg-info

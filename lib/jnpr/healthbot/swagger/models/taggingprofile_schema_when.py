@@ -33,7 +33,7 @@ class TaggingprofileSchemaWhen(object):
     swagger_types = {
         'does_not_match_with': 'list[TaggingprofileSchemaWhenDoesnotmatchwith]',
         'equal_to': 'list[TaggingprofileSchemaWhenEqualto]',
-        'eval': 'list[TopicSchemaWhereEval]',
+        'eval': 'list[TaggingprofileSchemaWhenEval]',
         'exists': 'list[TaggingprofileSchemaWhenExists]',
         'greater_than': 'list[TaggingprofileSchemaWhenEqualto]',
         'greater_than_or_equal_to': 'list[TaggingprofileSchemaWhenEqualto]',
@@ -150,7 +150,7 @@ class TaggingprofileSchemaWhen(object):
 
 
         :return: The eval of this TaggingprofileSchemaWhen.  # noqa: E501
-        :rtype: list[TopicSchemaWhereEval]
+        :rtype: list[TaggingprofileSchemaWhenEval]
         """
         return self._eval
 
@@ -160,7 +160,7 @@ class TaggingprofileSchemaWhen(object):
 
 
         :param eval: The eval of this TaggingprofileSchemaWhen.  # noqa: E501
-        :type: list[TopicSchemaWhereEval]
+        :type: list[TaggingprofileSchemaWhenEval]
         """
 
         self._eval = eval

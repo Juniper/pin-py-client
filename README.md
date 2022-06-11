@@ -1,9 +1,9 @@
-[![Documentation Status](https://readthedocs.org/projects/hbez/badge/?version=latest)](http://hbez.readthedocs.io)
-[![UnitTest Status](https://travis-ci.org/Juniper/healthbot-py-client.svg?branch=master)](https://travis-ci.org/Juniper/healthbot-py-client)
+(Under progress) [![Documentation Status](https://readthedocs.org/projects/pinez/badge/?version=latest)](http://pinez.readthedocs.io)
+(Under progress) [![UnitTest Status](https://travis-ci.org/Juniper/pin-py-client.svg?branch=master)](https://travis-ci.org/Juniper/pin-py-client)
 
-# HealthBot Python Client
+# Paragon Insights Python Client
 
-This repo contains a Python package to control HealthBot
+This repo contains a Python package to control Paragon Insights
 
 The purpose of this package is to provide a Python library that 
 automates the provisioning of the HealthBot server.
@@ -15,34 +15,34 @@ Requires: Python >=3.6
 
 
 
-# Import HbEZ library
+# Import PinEZ library
 
 
 ```python
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from pprint import pprint
 ```
 
 ## Opening connection
 
 ```python
-hb = HealthBotClient('xx.xx.xx.xxx', 'xxxxx', 'xxxxx', port=nnnn)
-hb.open()
+pin = PINClient('xx.xx.xx.xxx', 'xxxxx', 'xxxxx', port=nnnn)
+pin.open()
 ```
 
 ### using Python `with`context manager
 * Takes care of login and logout with access tokens
 
 ```python
-with HealthBotClient('xx.xx.xx.xxx', 'xxxxx', 'xxxxx', port=nnnn) as hb:
-    pprint(hb.device.get_ids())
+with PINClient('xx.xx.xx.xxx', 'xxxxx', 'xxxxx', port=nnnn) as pin:
+    pprint(pin.device.get_ids())
 ```
 
 # Use Case: Device
 
 
 ```python
-pprint(hb.device.get_ids())
+pprint(pin.device.get_ids())
 ```
 
     ['edge', 'srx', 'qfx', 'mx-edge', 'core', 'node', 'demo']
@@ -52,7 +52,7 @@ pprint(hb.device.get_ids())
 
 
 ```python
-help(hb.device.get_ids)
+help(pin.device.get_ids)
 ```
 
     Help on method get_ids in module jnpr.healthbot.modules.devices:
@@ -65,9 +65,9 @@ help(hb.device.get_ids)
         Example:
         ::
         
-            from jnpr.healthbot import HealthBotClient
-            hb = HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx', port=nnnn)
-            print(hb.device.get_ids())
+            from jnpr.healthbot import PINClient
+            pin = PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx', port=nnnn)
+            print(pin.device.get_ids())
     
 
 
@@ -76,7 +76,7 @@ help(hb.device.get_ids)
 
 ```python
 # Get config related to given device-id
-obj = hb.device.get('demo')
+obj = pin.device.get('demo')
 ```
 
 
@@ -104,7 +104,7 @@ pprint(obj)
      'i_agent': None,
      'open_config': None,
      'snmp': None,
-     'system_id': 'test:HbEZ',
+     'system_id': 'test:PinEZ',
      'variable': None,
      'vendor': None}
 
@@ -114,7 +114,7 @@ pprint(obj)
 
 ```python
 # Get device facts of a given device id
-pprint(hb.device.get_facts('demo'))
+pprint(pin.device.get_facts('demo'))
 ```
 
     {'device-id': 'demo',
@@ -146,7 +146,7 @@ from jnpr.healthbot import DeviceSchema
 
 ds = DeviceSchema(device_id='demo', host='xx.xxx.x.xx',
                   authentication={"password": {"password": "xxxx", "username": "xxxx"}})
-print(hb.device.add(schema=ds))
+print(pin.device.add(schema=ds))
 ```
 
     True
@@ -281,7 +281,7 @@ help(DeviceSchema)
 
 
 ```python
-dev = hb.device.get('demo')
+dev = pin.device.get('demo')
 pprint(dev)
 ```
 
@@ -302,7 +302,7 @@ pprint(dev)
 
 
 ```python
-pprint(hb.device.get('demo', uncommitted=False))
+pprint(pin.device.get('demo', uncommitted=False))
 ```
 
     {
@@ -318,7 +318,7 @@ pprint(hb.device.get('demo', uncommitted=False))
     HTTPError                                 Traceback (most recent call last)
 
     <ipython-input-25-13c8b67cdb5c> in <module>
-    ----> 1 pprint(hb.device.get('demo', uncommitted=False))
+    ----> 1 pprint(pin.device.get('demo', uncommitted=False))
     
 
     ~/Coding/git.juniper.net.iceberg/healthbot-py-client/lib/jnpr/healthbot/modules/devices.py in get(self, device_id, uncommitted)
@@ -354,12 +354,12 @@ print (dev.system_id)
 
 ```python
 # Editing system_id
-dev.system_id = "Demo:HbEZ"
+dev.system_id = "Demo:PinEZ"
 ```
 
 
 ```python
-print(hb.device.update(dev))
+print(pin.device.update(dev))
 ```
 
     True
@@ -369,7 +369,7 @@ print(hb.device.update(dev))
 
 
 ```python
-hb.commit()
+pin.commit()
 ```
 
 
@@ -381,7 +381,7 @@ hb.commit()
 
 
 ```python
-dev = hb.device.get('demo')
+dev = pin.device.get('demo')
 pprint(dev)
 ```
 
@@ -393,7 +393,7 @@ pprint(dev)
      'i_agent': None,
      'open_config': None,
      'snmp': None,
-     'system_id': 'Demo:HbEZ',
+     'system_id': 'Demo:PinEZ',
      'variable': None,
      'vendor': None}
 
@@ -403,16 +403,16 @@ pprint(dev)
 print(dev.system_id)
 ```
 
-    Demo:HbEZ
+    Demo:PinEZ
 
 
 
 ```python
 # To delete a device
-hb.device.delete('demo')
+pin.device.delete('demo')
 
 # if a device is part of device group, to make sure we delete it first from device group
-hb.device.delete('demo', force=True)
+pin.device.delete('demo', force=True)
 ```
 
 # Use Case: Devices
@@ -422,7 +422,7 @@ hb.device.delete('demo', force=True)
 
 ```python
 # Get config details of all the device
-obj = hb.device.get()
+obj = pin.device.get()
 ```
 
 
@@ -474,7 +474,7 @@ obj
       'i_agent': None,
       'open_config': None,
       'snmp': None,
-      'system_id': 'Demo:HbEZ',
+      'system_id': 'Demo:PinEZ',
       'variable': None,
       'vendor': None},
      {'authentication': {'password': {'password': 'xxxx',
@@ -517,7 +517,7 @@ obj
 
 
 ```python
-pprint(hb.device.get_facts())
+pprint(pin.device.get_facts())
 ```
 
     [{'device-id': 'edge', 'facts': {}},
@@ -652,7 +652,7 @@ dgs.description="All devices on the edge"
 
 
 ```python
-print(hb.device_group.add(dgs))
+print(pin.device_group.add(dgs))
 ```
 
     True
@@ -753,8 +753,8 @@ dgs.devices = ['demo']
 
 
 ```python
-print(hb.device_group.add(device_group_name="edge", description="All devices on the edge", devices=['demo']))
-hb.commit()
+print(pin.device_group.add(device_group_name="edge", description="All devices on the edge", devices=['demo']))
+pin.commit()
 ```
 
     True
@@ -770,7 +770,7 @@ hb.commit()
 
 ```python
 # Get details for a given device group
-hb.device_group.get('real')
+pin.device_group.get('real')
 ```
 
 
@@ -803,7 +803,7 @@ hb.device_group.get('real')
 
 
 ```python
-hb.device_group.delete('edge', force=True)
+pin.device_group.delete('edge', force=True)
 ```
 
     
@@ -820,7 +820,7 @@ hb.device_group.delete('edge', force=True)
 
 
 ```python
-hb.device_group.add_device_in_group('vmx', 'edge')
+pin.device_group.add_device_in_group('vmx', 'edge')
 ```
 
 
@@ -832,7 +832,7 @@ hb.device_group.add_device_in_group('vmx', 'edge')
 
 
 ```python
-obj = hb.device_group.get('edge')
+obj = pin.device_group.get('edge')
 print (obj)
 ```
 
@@ -847,11 +847,11 @@ print (obj)
      'reports': [],
      'retention_policy': None,
      'variable': [{'@': {'changed-seconds': 1565668543},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'forwarding-table-summary',
                    'rule': 'protocol.routesummary/check-fib-summary'},
                   {'@': {'changed-seconds': 1565669467},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'icmp-probe',
                    'rule': 'protocol.icmp/check-icmp-statistics'}]}
 
@@ -872,7 +872,7 @@ obj.devices
 
 
 ```python
-print(hb.device_group.get())
+print(pin.device_group.get())
 ```
 
     [{'authentication': None,
@@ -939,11 +939,11 @@ print(hb.device_group.get())
      'reports': [],
      'retention_policy': None,
      'variable': [{'@': {'changed-seconds': 1565668543},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'forwarding-table-summary',
                    'rule': 'protocol.routesummary/check-fib-summary'},
                   {'@': {'changed-seconds': 1565669467},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'icmp-probe',
                    'rule': 'protocol.icmp/check-icmp-statistics'}]}, {'authentication': None,
      'description': 'learning',
@@ -1127,7 +1127,7 @@ print(hb.device_group.get())
 
 
 ```python
-print(hb.device_group.get('edge'))
+print(pin.device_group.get('edge'))
 ```
 
     {'authentication': None,
@@ -1141,20 +1141,20 @@ print(hb.device_group.get('edge'))
      'reports': [],
      'retention_policy': None,
      'variable': [{'@': {'changed-seconds': 1565668543},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'forwarding-table-summary',
                    'rule': 'protocol.routesummary/check-fib-summary'},
                   {'@': {'changed-seconds': 1565669467},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'icmp-probe',
                    'rule': 'protocol.icmp/check-icmp-statistics'}]}
 
 
 
 ```python
-dgs = hb.device_group.get('edge')
+dgs = pin.device_group.get('edge')
 dgs.devices.append('vmx')
-hb.device_group.update(dgs)
+pin.device_group.update(dgs)
 ```
 
 
@@ -1167,7 +1167,7 @@ hb.device_group.update(dgs)
 
 ```python
 # Check for devices list
-dgs = hb.device_group.get('edge')
+dgs = pin.device_group.get('edge')
 print(dgs)
 ```
 
@@ -1182,11 +1182,11 @@ print(dgs)
      'reports': [],
      'retention_policy': None,
      'variable': [{'@': {'changed-seconds': 1565668543},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'forwarding-table-summary',
                    'rule': 'protocol.routesummary/check-fib-summary'},
                   {'@': {'changed-seconds': 1565669467},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'icmp-probe',
                    'rule': 'protocol.icmp/check-icmp-statistics'}]}
 
@@ -1194,7 +1194,7 @@ print(dgs)
 
 ```python
 dgs.devices = ['edge']
-hb.device_group.update(dgs)
+pin.device_group.update(dgs)
 ```
 
 
@@ -1206,7 +1206,7 @@ hb.device_group.update(dgs)
 
 
 ```python
-dgs = hb.device_group.get('edge')
+dgs = pin.device_group.get('edge')
 print(dgs)
 ```
 
@@ -1221,11 +1221,11 @@ print(dgs)
      'reports': [],
      'retention_policy': None,
      'variable': [{'@': {'changed-seconds': 1565668543},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'forwarding-table-summary',
                    'rule': 'protocol.routesummary/check-fib-summary'},
                   {'@': {'changed-seconds': 1565669467},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'icmp-probe',
                    'rule': 'protocol.icmp/check-icmp-statistics'}]}
 
@@ -1233,11 +1233,11 @@ print(dgs)
 
 ```python
 # can also update by passing Device Group Schema kwargs
-dgs = hb.device_group.get('edge')
+dgs = pin.device_group.get('edge')
 pprint(dgs)
 from jnpr.healthbot import DevicegroupSchemaLogging
 logSchema = DevicegroupSchemaLogging('warn')
-hb.device_group.update(device_group_name='edge', logging=logSchema)
+pin.device_group.update(device_group_name='edge', logging=logSchema)
 ```
 
     {'authentication': None,
@@ -1251,11 +1251,11 @@ hb.device_group.update(device_group_name='edge', logging=logSchema)
      'reports': [],
      'retention_policy': None,
      'variable': [{'@': {'changed-seconds': 1565668543},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'forwarding-table-summary',
                    'rule': 'protocol.routesummary/check-fib-summary'},
                   {'@': {'changed-seconds': 1565669467},
-                   'instance-id': 'HbEZ-instance',
+                   'instance-id': 'PinEZ-instance',
                    'playbook': 'icmp-probe',
                    'rule': 'protocol.icmp/check-icmp-statistics'}]}
 
@@ -1274,7 +1274,7 @@ hb.device_group.update(device_group_name='edge', logging=logSchema)
 
 
 ```python
-hb.device_group.delete('edge')
+pin.device_group.delete('edge')
 
 ```
 
@@ -1290,7 +1290,7 @@ hb.device_group.delete('edge')
 
 
 ```python
-hb.device.delete('demo')
+pin.device.delete('demo')
 ```
 
 
@@ -1303,7 +1303,7 @@ hb.device.delete('demo')
 
 ```python
 # Lets commit all the changes
-hb.commit()
+pin.commit()
 ```
 
 
@@ -1317,7 +1317,7 @@ hb.commit()
 
 
 ```python
-hb.network_group.add(network_group_name="HbEZ")
+pin.network_group.add(network_group_name="PinEZ")
 ```
 
 
@@ -1329,15 +1329,15 @@ hb.network_group.add(network_group_name="HbEZ")
 
 
 ```python
-print(hb.network_group.get(network_group_name="HbEZ"))
-hb.network_group.delete(network_group_name="HbEZ")
+print(pin.network_group.get(network_group_name="PinEZ"))
+pin.network_group.delete(network_group_name="PinEZ")
 ```
 
     
 
 
     {'description': None,
-     'network_group_name': 'HbEZ',
+     'network_group_name': 'PinEZ',
      'notification': {},
      'playbooks': [],
      'reports': [],
@@ -1360,12 +1360,12 @@ from jnpr.healthbot import NetworkGroupSchema
 
 
 ```python
-ngs = NetworkGroupSchema(network_group_name="HbEZ")
+ngs = NetworkGroupSchema(network_group_name="PinEZ")
 ```
 
 
 ```python
-hb.network_group.add(ngs)
+pin.network_group.add(ngs)
 ```
 
 
@@ -1377,14 +1377,14 @@ hb.network_group.add(ngs)
 
 
 ```python
-hb.network_group.get(network_group_name="HbEZ")
+pin.network_group.get(network_group_name="PinEZ")
 ```
 
 
 
 
     {'description': None,
-     'network_group_name': 'HbEZ',
+     'network_group_name': 'PinEZ',
      'notification': {},
      'playbooks': [],
      'reports': [],
@@ -1396,7 +1396,7 @@ hb.network_group.get(network_group_name="HbEZ")
 
 
 ```python
-hb.rule.get('linecard.ospf', 'check-ddos-statistics')
+pin.rule.get('linecard.ospf', 'check-ddos-statistics')
 ```
 
 
@@ -1539,7 +1539,7 @@ hb.rule.get('linecard.ospf', 'check-ddos-statistics')
 
 ```python
 from jnpr.healthbot.modules.rules import RuleSchema
-rs = RuleSchema(rule_name="hbez-fpc-heap-utilization")
+rs = RuleSchema(rule_name="pinez-fpc-heap-utilization")
 ```
 
 ### setting rule schema params
@@ -1643,7 +1643,7 @@ rs.trigger = [{'description': 'Sets health based on linecard buffer memory',
 
 
 ```python
-hb.rule.add('hbez', schema=rs)
+pin.rule.add('pinez', schema=rs)
 ```
 
 
@@ -1655,14 +1655,14 @@ hb.rule.add('hbez', schema=rs)
 
 
 ```python
-# hb.rules.delete_rule(topic_name='external', rule_name="hbez-fpc-heap-utilization")
+# pin.rules.delete_rule(topic_name='external', rule_name="pinez-fpc-heap-utilization")
 ```
 
 # Use Case: Playbooks
 
 
 ```python
-pprint(hb.playbook.get('linecard-kpis-playbook'))
+pprint(pin.playbook.get('linecard-kpis-playbook'))
 ```
 
     {'description': 'Playbook checks linecard health i.e. cpu, memory and CM '
@@ -1681,23 +1681,23 @@ from jnpr.healthbot.modules.playbooks import PlaybookSchema
 
 
 ```python
-pbs = PlaybookSchema(playbook_name="HbEZ-example")
+pbs = PlaybookSchema(playbook_name="PinEZ-example")
 ```
 
 
 ```python
-pbs.description = "HbEZ Demo Examples"
+pbs.description = "PinEZ Demo Examples"
 pbs.synopsis = 'fpc status'
 ```
 
 
 ```python
-pbs.rules = ['hbez/hbez-fpc-heap-utilization']
+pbs.rules = ['pinez/pinez-fpc-heap-utilization']
 ```
 
 
 ```python
-hb.playbook.add(pbs)
+pin.playbook.add(pbs)
 ```
 
 
@@ -1709,7 +1709,7 @@ hb.playbook.add(pbs)
 
 
 ```python
-hb.playbook.delete(playbook_name="HbEZ-example")
+pin.playbook.delete(playbook_name="PinEZ-example")
 ```
 
     
@@ -1726,7 +1726,7 @@ hb.playbook.delete(playbook_name="HbEZ-example")
 
 
 ```python
-pprint(hb.health.get_device_health('edge'))
+pprint(pin.health.get_device_health('edge'))
 ```
 
     {'children': [{'children': [{'children': [], 'name': 'external'}],
@@ -1739,7 +1739,7 @@ pprint(hb.health.get_device_health('edge'))
 
 
 ```python
-pprint(hb.health.get_device_group_health('real'))
+pprint(pin.health.get_device_group_health('real'))
 ```
 
     {'children': [{'children': [{'children': [], 'name': 'external'}],
@@ -1755,7 +1755,7 @@ pprint(hb.health.get_device_group_health('real'))
 
 
 ```python
-print (hb.tsdb.query("show databases"))
+print (pin.tsdb.query("show databases"))
 ```
 
     ResultSet({'('databases', None)': [{'name': 'health'}, {'name': '_internal'}, {'name': 'Core:vmx'}, {'name': 'real:edge'}, {'name': 'Core:demo'}, {'name': 'EVO_Core:EVO'}, {'name': 'EVO_CORE:EVO'}, {'name': 'vmx_db:vmx_db'}, {'name': 'vmx_db:core_db'}]})
@@ -1763,7 +1763,7 @@ print (hb.tsdb.query("show databases"))
 
 
 ```python
-obj = hb.tsdb.query('select * from "protocol-eventd-host/check-host-traffic/packet-loss" limit 10', database='Core:vmx')
+obj = pin.tsdb.query('select * from "protocol-eventd-host/check-host-traffic/packet-loss" limit 10', database='Core:vmx')
 pprint(obj.raw)
 ```
 
@@ -1772,7 +1772,7 @@ pprint(obj.raw)
 
 
 ```python
-print(hb.version)
+print(pin.version)
 ```
 
     2.0.1
@@ -1785,7 +1785,7 @@ print(hb.version)
 
 
 ```python
-hb.upload_helper_file('/Users/nitinkr/xxx/xyz.rule')
+pin.upload_helper_file('/Users/sharanyab/xxx/xyz.rule')
 
 ```
 
@@ -1797,11 +1797,11 @@ from jnpr.healthbot import NotificationSchema
 from jnpr.healthbot import NotificationSchemaSlack
 
 
-ns = NotificationSchema(notification_name='HbEZ-notification')
+ns = NotificationSchema(notification_name='PinEZ-notification')
 ns.description = "example of adding notification via API"
-nss = NotificationSchemaSlack(channel="HbEZ", url='http://testing')
+nss = NotificationSchemaSlack(channel="PinEZ", url='http://testing')
 ns.slack = nss
-hb.settings.notification.add(ns)
+pin.settings.notification.add(ns)
 ```
 
 
@@ -1813,19 +1813,19 @@ hb.settings.notification.add(ns)
 
 
 ```python
-print(hb.settings.notification.get())
+print(pin.settings.notification.get())
 ```
 
     [{'description': 'example of adding notification via API',
      'http_post': None,
      'kafka_publish': None,
-     'notification_name': 'HbEZ-notification',
-     'slack': {'channel': 'HbEZ', 'url': 'http://testing'}}]
+     'notification_name': 'PinEZ-notification',
+     'slack': {'channel': 'PinEZ', 'url': 'http://testing'}}]
 
 
 
 ```python
-pprint(hb.settings.notification.delete('HbEZ-notification'))
+pprint(pin.settings.notification.delete('PinEZ-notification'))
 ```
 
     
@@ -1840,8 +1840,8 @@ pprint(hb.settings.notification.delete('HbEZ-notification'))
 ```python
 from jnpr.healthbot import RetentionPolicySchema
 
-rps = RetentionPolicySchema(retention_policy_name='HbEZ-testing')
-hb.settings.retention_policy.add(rps)
+rps = RetentionPolicySchema(retention_policy_name='PinEZ-testing')
+pin.settings.retention_policy.add(rps)
 ```
 
 
@@ -1853,29 +1853,29 @@ hb.settings.retention_policy.add(rps)
 
 
 ```python
-print(hb.settings.retention_policy.get())
+print(pin.settings.retention_policy.get())
 ```
 
-    [{'duration': None, 'replication': None, 'retention_policy_name': 'HbEZ-testing'}, {'duration': None,
+    [{'duration': None, 'replication': None, 'retention_policy_name': 'PinEZ-testing'}, {'duration': None,
      'replication': None,
-     'retention_policy_name': 'HbEZ-testing1'}, {'duration': None,
+     'retention_policy_name': 'PinEZ-testing1'}, {'duration': None,
      'replication': None,
-     'retention_policy_name': 'HbEZ-testing2'}]
+     'retention_policy_name': 'PinEZ-testing2'}]
 
 
 
 ```python
 from jnpr.healthbot import SchedulerSchema
-sc = SchedulerSchema(name='HbEZ-schedule', repeat={'every': 'week'}, start_time="2019-07-22T05:32:23Z")
-hb.settings.scheduler.add(sc)
+sc = SchedulerSchema(name='PinEZ-schedule', repeat={'every': 'week'}, start_time="2019-07-22T05:32:23Z")
+pin.settings.scheduler.add(sc)
 
 from jnpr.healthbot import DestinationSchema
-ds = DestinationSchema(name='HbEZ-destination', email={'id': 'nitinkr@juniper.net'})
-hb.settings.destination.add(ds)
+ds = DestinationSchema(name='PinEZ-destination', email={'id': 'sharanyab@juniper.net'})
+pin.settings.destination.add(ds)
 
 from jnpr.healthbot import ReportSchema
-rs = ReportSchema(name="HbEZ-report", destination=['HbEZ-destination'], format="html", schedule=["HbEZ-schedule"])
-hb.settings.report.add(rs)
+rs = ReportSchema(name="PinEZ-report", destination=['PinEZ-destination'], format="html", schedule=["PinEZ-schedule"])
+pin.settings.report.add(rs)
 ```
 
 
@@ -1886,15 +1886,15 @@ hb.settings.report.add(rs)
 
 ```python
 # Adding a loadbalancer IP
-hb.settings.deployment.add(ip="1.1.1.1")
-hb.commit()
+pin.settings.deployment.add(ip="1.1.1.1")
+pin.commit()
 
 # Updating the loadbalancer IP
-hb.settings.deployment.update(ip="1.1.1.2")
-hb.commit()
+pin.settings.deployment.update(ip="1.1.1.2")
+pin.commit()
 
 # Getting the configured loadbalancer IP
-pprint(hb.settings.deployment.get())
+pprint(pin.settings.deployment.get())
 ```
 
 
@@ -1929,11 +1929,11 @@ schema = SnmpNotificationSchema(
                             }
                         ]}
         )))
-hb.settings.snmp_notification.add(schema)
-hb.commit()
+pin.settings.snmp_notification.add(schema)
+pin.commit()
 
 # Getting the configured SNMP notification settings
-pprint(hb.settings.snmp_notification.get())
+pprint(pin.settings.snmp_notification.get())
 
 ```
 
@@ -1952,10 +1952,10 @@ pprint(hb.settings.snmp_notification.get())
 from jnpr.healthbot.modules.playbooks import PlayBookInstanceBuilder
 
 # case where we dont need to set any variable
-pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'HbEZ-instance', 'Core')
+pbb = PlayBookInstanceBuilder(pin, 'forwarding-table-summary', 'PinEZ-instance', 'Core')
 pbb.apply()
 
-#hb.commit()
+#pin.commit()
 ```
 
 
@@ -1971,7 +1971,7 @@ pbb.apply()
 ```python
 from jnpr.healthbot.modules.playbooks import PlayBookInstanceBuilder
 
-pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'HbEZ-instance', 'Core')
+pbb = PlayBookInstanceBuilder(pin, 'forwarding-table-summary', 'PinEZ-instance', 'Core')
 
 variable = pbb.rule_variables["protocol.routesummary/check-fib-summary"]
 
@@ -1991,7 +1991,7 @@ variable.route_count_threshold = 200
 
 pbb.apply()
 
-#hb.commit()
+#pin.commit()
 ```
 
 
@@ -2005,9 +2005,9 @@ pbb.apply()
 ```python
 from jnpr.healthbot.swagger.models.hb_graphs_query import HbGraphsQuery
 from jnpr.healthbot.swagger.models.hb_graphs import HbGraphs
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 
-with HealthBotClient(ip, gui_username, gui_password, port=8080) as hb:
+with PINClient(ip, gui_username, gui_password, port=8080) as pin:
 
     # group_name, device_name, measurement_name, field_name are compulsory fields here
     query1 = HbGraphsQuery(group_name='dg-junos', device_name="d2", measurement_name="system.commit/commit-history",
@@ -2023,8 +2023,8 @@ with HealthBotClient(ip, gui_username, gui_password, port=8080) as hb:
     # Multiple graphs can be present for a canvas 
     
     # Adding a new canvas with a single graph
-    hb.charts.add_canvas(canvas_name="mycanvas", graphs=[graph1])
-    hb.commit()
+    pin.charts.add_canvas(canvas_name="mycanvas", graphs=[graph1])
+    pin.commit()
 
 ```
 

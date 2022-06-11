@@ -32,26 +32,31 @@ class DevicegroupSchemaFlow(object):
     """
     swagger_types = {
         'deploy_nodes': 'list[str]',
+        'ifa': 'DevicegroupSchemaFlowIfa',
         'netflow': 'DevicegroupSchemaFlowNetflow',
         'sflow': 'DevicegroupSchemaFlowSflow'
     }
 
     attribute_map = {
         'deploy_nodes': 'deploy-nodes',
+        'ifa': 'ifa',
         'netflow': 'netflow',
         'sflow': 'sflow'
     }
 
-    def __init__(self, deploy_nodes=None, netflow=None, sflow=None):  # noqa: E501
+    def __init__(self, deploy_nodes=None, ifa=None, netflow=None, sflow=None):  # noqa: E501
         """DevicegroupSchemaFlow - a model defined in Swagger"""  # noqa: E501
 
         self._deploy_nodes = None
+        self._ifa = None
         self._netflow = None
         self._sflow = None
         self.discriminator = None
 
         if deploy_nodes is not None:
             self.deploy_nodes = deploy_nodes
+        if ifa is not None:
+            self.ifa = ifa
         if netflow is not None:
             self.netflow = netflow
         if sflow is not None:
@@ -77,6 +82,27 @@ class DevicegroupSchemaFlow(object):
         """
 
         self._deploy_nodes = deploy_nodes
+
+    @property
+    def ifa(self):
+        """Gets the ifa of this DevicegroupSchemaFlow.  # noqa: E501
+
+
+        :return: The ifa of this DevicegroupSchemaFlow.  # noqa: E501
+        :rtype: DevicegroupSchemaFlowIfa
+        """
+        return self._ifa
+
+    @ifa.setter
+    def ifa(self, ifa):
+        """Sets the ifa of this DevicegroupSchemaFlow.
+
+
+        :param ifa: The ifa of this DevicegroupSchemaFlow.  # noqa: E501
+        :type: DevicegroupSchemaFlowIfa
+        """
+
+        self._ifa = ifa
 
     @property
     def netflow(self):

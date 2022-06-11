@@ -32,7 +32,7 @@ class TopicSchema(object):
     """
     swagger_types = {
         'description': 'str',
-        'resource': 'list[TopicSchemaResource]',
+        'resource': 'list[ResourceSchema]',
         'rule': 'list[RuleSchema]',
         'sub_topics': 'list[str]',
         'synopsis': 'str',
@@ -100,7 +100,7 @@ class TopicSchema(object):
 
 
         :return: The resource of this TopicSchema.  # noqa: E501
-        :rtype: list[TopicSchemaResource]
+        :rtype: list[ResourceSchema]
         """
         return self._resource
 
@@ -110,7 +110,7 @@ class TopicSchema(object):
 
 
         :param resource: The resource of this TopicSchema.  # noqa: E501
-        :type: list[TopicSchemaResource]
+        :type: list[ResourceSchema]
         """
 
         self._resource = resource
@@ -205,7 +205,7 @@ class TopicSchema(object):
         if topic_name is not None and len(topic_name) > 64:
             raise ValueError("Invalid value for `topic_name`, length must be less than or equal to `64`")  # noqa: E501
         if topic_name is not None and not re.search(r'^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*$', topic_name):  # noqa: E501
-            raise ValueError("Invalid value for `topic_name`, must be a follow pattern or equal to `/^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*$/`")  # noqa: E501
+            raise ValueError(r"Invalid value for `topic_name`, must be a follow pattern or equal to `/^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*$/`")  # noqa: E501
 
         self._topic_name = topic_name
 

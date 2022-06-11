@@ -7168,6 +7168,228 @@ class ConfigurationApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def remove_iceberg_devices_from_group(self, device_group_name, devices, **kwargs):  # noqa: E501
+        """Remove devices from group.  # noqa: E501
+
+        Remove the list of devices from the device group  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.remove_iceberg_devices_from_group(device_group_name, devices, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str device_group_name: ID of group (required)
+        :param Devices devices: device list (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.remove_iceberg_devices_from_group_with_http_info(device_group_name, devices, **kwargs)  # noqa: E501
+        else:
+            (data) = self.remove_iceberg_devices_from_group_with_http_info(device_group_name, devices, **kwargs)  # noqa: E501
+            return data
+
+    def remove_iceberg_devices_from_group_with_http_info(self, device_group_name, devices, **kwargs):  # noqa: E501
+        """Remove devices from group.  # noqa: E501
+
+        Remove the list of devices from the device group  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.remove_iceberg_devices_from_group_with_http_info(device_group_name, devices, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str device_group_name: ID of group (required)
+        :param Devices devices: device list (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['device_group_name', 'devices', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method remove_iceberg_devices_from_group" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'device_group_name' is set
+        if ('device_group_name' not in params or
+                params['device_group_name'] is None):
+            raise ValueError("Missing the required parameter `device_group_name` when calling `remove_iceberg_devices_from_group`")  # noqa: E501
+        # verify the required parameter 'devices' is set
+        if ('devices' not in params or
+                params['devices'] is None):
+            raise ValueError("Missing the required parameter `devices` when calling `remove_iceberg_devices_from_group`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'device_group_name' in params:
+            path_params['device_group_name'] = params['device_group_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'devices' in params:
+            body_params = params['devices']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json', 'multipart/form-data'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/device-group/{device_group_name}/device/', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def remove_iceberg_network_group_network_group_by_id(self, network_group_name, network_variable, **kwargs):  # noqa: E501
+        """Overwrite a network-group.  # noqa: E501
+
+        Overwrite a network-group by the `network-group-name`. The `network-group-name` specified in the URL and the request body must match.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.remove_iceberg_network_group_network_group_by_id(network_group_name, network_variable, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str network_group_name: ID of network-group-name (required)
+        :param list[NetworkVariableSchema] network_variable: network_groupbody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.remove_iceberg_network_group_network_group_by_id_with_http_info(network_group_name, network_variable, **kwargs)  # noqa: E501
+        else:
+            (data) = self.remove_iceberg_network_group_network_group_by_id_with_http_info(network_group_name, network_variable, **kwargs)  # noqa: E501
+            return data
+
+    def remove_iceberg_network_group_network_group_by_id_with_http_info(self, network_group_name, network_variable, **kwargs):  # noqa: E501
+        """Overwrite a network-group.  # noqa: E501
+
+        Overwrite a network-group by the `network-group-name`. The `network-group-name` specified in the URL and the request body must match.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.remove_iceberg_network_group_network_group_by_id_with_http_info(network_group_name, network_variable, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str network_group_name: ID of network-group-name (required)
+        :param list[NetworkVariableSchema] network_variable: network_groupbody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['network_group_name', 'network_variable', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method remove_iceberg_network_group_network_group_by_id" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'network_group_name' is set
+        if ('network_group_name' not in params or
+                params['network_group_name'] is None):
+            raise ValueError("Missing the required parameter `network_group_name` when calling `remove_iceberg_network_group_network_group_by_id`")  # noqa: E501
+        # verify the required parameter 'network_variable' is set
+        if ('network_variable' not in params or
+                params['network_variable'] is None):
+            raise ValueError("Missing the required parameter `network_variable` when calling `remove_iceberg_network_group_network_group_by_id`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'network_group_name' in params:
+            path_params['network_group_name'] = params['network_group_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'network_variable' in params:
+            body_params = params['network_variable']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/network-group/{network_group_name}/variable/', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def retrieve_affected_groups(self, **kwargs):  # noqa: E501
         """Get all groups affected by un-committed configuration changes.  # noqa: E501
 
@@ -7455,6 +7677,109 @@ class ConfigurationApi(object):
 
         return self.api_client.call_api(
             '/device-group/{device_group_name}/trigger_info/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TriggerSchema',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def retrieve_device_trigger_info(self, device_id, **kwargs):  # noqa: E501
+        """Get trigger info for device-groups containing the device.  # noqa: E501
+
+        Get information about the triggers in device-groups having the provided device.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_device_trigger_info(device_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str device_id: Name of device (required)
+        :param str x_iam_token: authentication header object
+        :return: TriggerSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.retrieve_device_trigger_info_with_http_info(device_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.retrieve_device_trigger_info_with_http_info(device_id, **kwargs)  # noqa: E501
+            return data
+
+    def retrieve_device_trigger_info_with_http_info(self, device_id, **kwargs):  # noqa: E501
+        """Get trigger info for device-groups containing the device.  # noqa: E501
+
+        Get information about the triggers in device-groups having the provided device.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_device_trigger_info_with_http_info(device_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str device_id: Name of device (required)
+        :param str x_iam_token: authentication header object
+        :return: TriggerSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['device_id', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method retrieve_device_trigger_info" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'device_id' is set
+        if ('device_id' not in params or
+                params['device_id'] is None):
+            raise ValueError("Missing the required parameter `device_id` when calling `retrieve_device_trigger_info`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'device_id' in params:
+            path_params['device_id'] = params['device_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json', 'application/octet-stream'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json', 'multipart/form-data'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/device/{device_id}/trigger_info/', 'GET',
             path_params,
             query_params,
             header_params,

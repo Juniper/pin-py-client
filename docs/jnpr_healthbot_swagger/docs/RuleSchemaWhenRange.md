@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **all** | **list[object]** | With this flag, result is set to True only if all the data matches the given condition | [optional] 
 **any** | **list[object]** | With this flag, result is set to True if any one of the data matches the condition | [optional] 
+**latest** | **list[object]** | With this flag, result is set to True if the latest data matches the condition | [optional] 
 **field_name** | **str** | Field name on which range should be applied | 
 **max** | **float** | Maximum value in the range | 
 **min** | **float** | Minumum value in the range | 

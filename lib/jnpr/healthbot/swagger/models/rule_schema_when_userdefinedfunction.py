@@ -33,6 +33,7 @@ class RuleSchemaWhenUserdefinedfunction(object):
     swagger_types = {
         'all': 'list[object]',
         'any': 'list[object]',
+        'latest': 'list[object]',
         'argument': 'list[RuleSchemaThenArgument]',
         'function_name': 'str',
         'time_range': 'str'
@@ -41,16 +42,18 @@ class RuleSchemaWhenUserdefinedfunction(object):
     attribute_map = {
         'all': 'all',
         'any': 'any',
+        'latest': 'latest',
         'argument': 'argument',
         'function_name': 'function-name',
         'time_range': 'time-range'
     }
 
-    def __init__(self, all=None, any=None, argument=None, function_name=None, time_range=None):  # noqa: E501
+    def __init__(self, all=None, any=None, latest=None, argument=None, function_name=None, time_range=None):  # noqa: E501
         """RuleSchemaWhenUserdefinedfunction - a model defined in Swagger"""  # noqa: E501
 
         self._all = None
         self._any = None
+        self._latest = None
         self._argument = None
         self._function_name = None
         self._time_range = None
@@ -60,6 +63,8 @@ class RuleSchemaWhenUserdefinedfunction(object):
             self.all = all
         if any is not None:
             self.any = any
+        if latest is not None:
+            self.latest = latest
         if argument is not None:
             self.argument = argument
         self.function_name = function_name
@@ -113,6 +118,29 @@ class RuleSchemaWhenUserdefinedfunction(object):
         self._any = any
 
     @property
+    def latest(self):
+        """Gets the latest of this RuleSchemaWhenUserdefinedfunction.  # noqa: E501
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :return: The latest of this RuleSchemaWhenUserdefinedfunction.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._latest
+
+    @latest.setter
+    def latest(self, latest):
+        """Sets the latest of this RuleSchemaWhenUserdefinedfunction.
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :param latest: The latest of this RuleSchemaWhenUserdefinedfunction.  # noqa: E501
+        :type: list[object]
+        """
+
+        self._latest = latest
+
+    @property
     def argument(self):
         """Gets the argument of this RuleSchemaWhenUserdefinedfunction.  # noqa: E501
 
@@ -158,7 +186,7 @@ class RuleSchemaWhenUserdefinedfunction(object):
         if function_name is not None and len(function_name) > 64:
             raise ValueError("Invalid value for `function_name`, length must be less than or equal to `64`")  # noqa: E501
         if function_name is not None and not re.search(r'^[a-zA-Z][a-zA-Z0-9_-]*$', function_name):  # noqa: E501
-            raise ValueError("Invalid value for `function_name`, must be a follow pattern or equal to `/^[a-zA-Z][a-zA-Z0-9_-]*$/`")  # noqa: E501
+            raise ValueError(r"Invalid value for `function_name`, must be a follow pattern or equal to `/^[a-zA-Z][a-zA-Z0-9_-]*$/`")  # noqa: E501
 
         self._function_name = function_name
 
@@ -183,7 +211,7 @@ class RuleSchemaWhenUserdefinedfunction(object):
         :type: str
         """
         if time_range is not None and not re.search(r'^[1-9][0-9]*(\\.[0-9]+)?(o|s|m|h|d|w|y|offset)$', time_range):  # noqa: E501
-            raise ValueError("Invalid value for `time_range`, must be a follow pattern or equal to `/^[1-9][0-9]*(\\.[0-9]+)?(o|s|m|h|d|w|y|offset)$/`")  # noqa: E501
+            raise ValueError(r"Invalid value for `time_range`, must be a follow pattern or equal to `/^[1-9][0-9]*(\\.[0-9]+)?(o|s|m|h|d|w|y|offset)$/`")  # noqa: E501
 
         self._time_range = time_range
 

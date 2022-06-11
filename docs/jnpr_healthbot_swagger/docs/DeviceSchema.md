@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **authentication** | [**DevicegroupSchemaAuthentication**](DevicegroupSchemaAuthentication.md) |  | [optional] 
 **description** | **str** | Description about the device | [optional] 
+**name** | **str** | Name for the device. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]* | [optional] 
 **device_id** | **str** | Identifier for the device. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]* | 
 **uuid** | **str** | EMS: uuid of the EMS-advertised device | [optional] 
 **flow** | [**DeviceSchemaFlow**](DeviceSchemaFlow.md) |  | [optional] 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **use_ingest_receive_time** | **list[object]** | Enable using ingest receive time in formulas like elapsed-time and rate-of-change | [optional] 
 **variable** | [**list[DeviceSchemaVariable]**](DeviceSchemaVariable.md) | Playbook variable configuration | [optional] 
 **vendor** | [**DeviceSchemaVendor**](DeviceSchemaVendor.md) |  | [optional] 
+**marked_for_delete** | **bool** | Mark device for deletion | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

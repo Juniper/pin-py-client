@@ -32,7 +32,7 @@ class TopicSchema(object):
     """
     swagger_types = {
         'description': 'str',
-        'resource': 'list[TopicSchemaResource]',
+        'resource': 'list[ResourceSchema]',
         'rule': 'list[RuleSchema]',
         'sub_topics': 'list[str]',
         'synopsis': 'str',
@@ -100,7 +100,7 @@ class TopicSchema(object):
 
 
         :return: The resource of this TopicSchema.  # noqa: E501
-        :rtype: list[TopicSchemaResource]
+        :rtype: list[ResourceSchema]
         """
         return self._resource
 
@@ -110,7 +110,7 @@ class TopicSchema(object):
 
 
         :param resource: The resource of this TopicSchema.  # noqa: E501
-        :type: list[TopicSchemaResource]
+        :type: list[ResourceSchema]
         """
 
         self._resource = resource

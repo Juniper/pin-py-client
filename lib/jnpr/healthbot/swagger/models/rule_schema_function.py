@@ -32,6 +32,7 @@ class RuleSchemaFunction(object):
     """
     swagger_types = {
         'argument': 'list[RuleSchemaArgument]',
+        '_return': 'list[RuleSchemaReturn]',
         'description': 'str',
         'function_name': 'str',
         'method': 'str',
@@ -40,16 +41,18 @@ class RuleSchemaFunction(object):
 
     attribute_map = {
         'argument': 'argument',
+        '_return': 'return',
         'description': 'description',
         'function_name': 'function-name',
         'method': 'method',
         'path': 'path'
     }
 
-    def __init__(self, argument=None, description=None, function_name=None, method=None, path=None):  # noqa: E501
+    def __init__(self, argument=None, _return=None, description=None, function_name=None, method=None, path=None):  # noqa: E501
         """RuleSchemaFunction - a model defined in Swagger"""  # noqa: E501
 
         self._argument = None
+        self.__return = None
         self._description = None
         self._function_name = None
         self._method = None
@@ -58,6 +61,8 @@ class RuleSchemaFunction(object):
 
         if argument is not None:
             self.argument = argument
+        if _return is not None:
+            self._return = _return
         if description is not None:
             self.description = description
         self.function_name = function_name
@@ -84,6 +89,27 @@ class RuleSchemaFunction(object):
         """
 
         self._argument = argument
+
+    @property
+    def _return(self):
+        """Gets the _return of this RuleSchemaFunction.  # noqa: E501
+
+
+        :return: The _return of this RuleSchemaFunction.  # noqa: E501
+        :rtype: list[RuleSchemaReturn]
+        """
+        return self.__return
+
+    @_return.setter
+    def _return(self, _return):
+        """Sets the _return of this RuleSchemaFunction.
+
+
+        :param _return: The _return of this RuleSchemaFunction.  # noqa: E501
+        :type: list[RuleSchemaReturn]
+        """
+
+        self.__return = _return
 
     @property
     def description(self):
@@ -133,7 +159,7 @@ class RuleSchemaFunction(object):
         if function_name is not None and len(function_name) > 64:
             raise ValueError("Invalid value for `function_name`, length must be less than or equal to `64`")  # noqa: E501
         if function_name is not None and not re.search(r'^[a-zA-Z][a-zA-Z0-9_-]*$', function_name):  # noqa: E501
-            raise ValueError("Invalid value for `function_name`, must be a follow pattern or equal to `/^[a-zA-Z][a-zA-Z0-9_-]*$/`")  # noqa: E501
+            raise ValueError(r"Invalid value for `function_name`, must be a follow pattern or equal to `/^[a-zA-Z][a-zA-Z0-9_-]*$/`")  # noqa: E501
 
         self._function_name = function_name
 

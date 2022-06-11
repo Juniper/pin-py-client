@@ -68,25 +68,25 @@ class PINClient(object):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from pprint import pprint
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx', port=8000) as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx', port=8000) as pin:
 
                 # Get list of all existing devices
-                print(hb.device.get_ids())
+                print(pin.device.get_ids())
 
                 # Get config details of a given device id
-                pprint(hb.device.get('core-01'))
+                pprint(pin.device.get('core-01'))
 
                 # Get config details of all the device
-                pprint(hb.device.get())
+                pprint(pin.device.get())
 
                 # Get device facts of a given device id
-                pprint(hb.device.get_facts('avro'))
+                pprint(pin.device.get_facts('avro'))
 
                 # Get device facts for all the devices in HB
-                pprint(hb.device.get_facts())
+                pprint(pin.device.get_facts())
 
                 # Add a device
                 from jnpr.healthbot import DeviceSchema
@@ -94,20 +94,20 @@ class PINClient(object):
                       authentication={"password": {"password": "xxxxx", "username": "xxxxx"}})
 
                 # we can also later assign values like this
-                ds.description = "HbEZ testing"
+                ds.description = "PinEZ testing"
 
                 # This will add device in candidate DB
-                hb.device.add(schema=ds)
+                pin.device.add(schema=ds)
 
                 # Add device group
-                print(hb.device_group.add(device_group_name="edge",
+                print(pin.device_group.add(device_group_name="edge",
                 description="All devices on the edge", devices=['demo']))
 
                 # commit changes to master DB
-                hb.commit()
+                pin.commit()
 
                 # get details of a given topic/rule
-                pprint(hb.rule.get('linecard.ospf', 'check-ddos-statistics'))
+                pprint(pin.rule.get('linecard.ospf', 'check-ddos-statistics'))
 
         """
         self.server = server
@@ -332,21 +332,21 @@ class PINClient(object):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import DeviceSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
                 ds = DeviceSchema(device_id='xyz', host='xx.xxx.xxx.xxx',
                       authentication={"password": {"password": "xxxxx", "username": "xxxxx"}})
 
                 # we can also later assign values like this
-                ds.description = "HbEZ testing"
+                ds.description = "PinEZ testing"
 
                 # This will add device in candidate DB
-                hb.device.add(schema=ds)
+                pin.device.add(schema=ds)
 
                 # commit changes to master DB
-                hb.commit()
+                pin.commit()
 
         :raises: Any requests exception
 
@@ -366,14 +366,14 @@ class PINClient(object):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
                 # This will delete device in candidate DB
-                hb.device.delete('xyz')
+                pin.device.delete('xyz')
 
                 # rollback candidate configuration
-                hb.rollback()
+                pin.rollback()
 
         :raises: Any requests exception
 
@@ -497,9 +497,9 @@ class PINClient(object):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.health())
+            from jnpr.healthbot import PINClient
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.health())
 
         :return: `HealthSchema <jnpr.healthbot.swagger.models.html#healthschema>`_
         """

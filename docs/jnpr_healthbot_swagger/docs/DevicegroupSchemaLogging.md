@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **resource_discovery** | [**DevicegroupSchemaLoggingResourcediscovery**](DevicegroupSchemaLoggingResourcediscovery.md) |  | [optional] 
 **flow** | [**DevicegroupSchemaLoggingFlow**](DevicegroupSchemaLoggingFlow.md) |  | [optional] 
 **sflow** | [**DevicegroupSchemaLoggingSflow**](DevicegroupSchemaLoggingSflow.md) |  | [optional] 
+**ifa** | [**DevicegroupSchemaLoggingIfa**](DevicegroupSchemaLoggingIfa.md) |  | [optional] 
 **byoi** | [**DevicegroupSchemaLoggingByoi**](DevicegroupSchemaLoggingByoi.md) |  | [optional] 
 **snmp_notification** | [**DevicegroupSchemaLoggingSnmpnotification**](DevicegroupSchemaLoggingSnmpnotification.md) |  | [optional] 
 **syslog** | [**DevicegroupSchemaLoggingSyslog**](DevicegroupSchemaLoggingSyslog.md) |  | [optional] 

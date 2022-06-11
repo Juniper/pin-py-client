@@ -17,6 +17,7 @@ from swagger_client.api.logs_api import LogsApi
 from swagger_client.api.organization_api import OrganizationApi
 from swagger_client.api.services_api import ServicesApi
 from swagger_client.api.system_api import SystemApi
+from swagger_client.api.utility_api import UtilityApi
 from swagger_client.api.workflow_api import WorkflowApi
 from swagger_client.api.workflow_instance_api import WorkflowInstanceApi
 from swagger_client.api.workflow_statistics_api import WorkflowStatisticsApi

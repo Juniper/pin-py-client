@@ -17,7 +17,7 @@ class Playbook(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
 
         super().__init__(hbot)
@@ -34,20 +34,20 @@ class Playbook(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                hb.playbook.add(playbook_name="HbEZ-example",
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pin.playbook.add(playbook_name="PinEZ-example",
                         rules = ['protocol.infra/check-task-momory-usage'])
 
             # or
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import PlaybookSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                pbs = PlaybookSchema(playbook_name="HbEZ-example",
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pbs = PlaybookSchema(playbook_name="PinEZ-example",
                         rules = ['protocol.infra/check-task-momory-usage'])
-                hb.playbook.add(pbs)
+                pin.playbook.add(pbs)
 
         Returns:
             True if action successful
@@ -76,10 +76,10 @@ class Playbook(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                hb.playbook.delete('linecard-kpis-playbook')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pin.playbook.delete('linecard-kpis-playbook')
 
         """
 
@@ -101,13 +101,13 @@ class Playbook(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.playbook.get('linecard-kpis-playbook'))
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.playbook.get('linecard-kpis-playbook'))
 
                 # for all
-                print(hb.playbook.get())
+                print(pin.playbook.get())
 
         """
         if playbook_name is not None:
@@ -153,12 +153,12 @@ class Playbook(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.playbook.get('xyz')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.playbook.get('xyz')
                 schemaObj.description = 'changed description'
-                hb.playbook.update(schemaObj)
+                pin.playbook.update(schemaObj)
 
         :returns: True when OK
         """
@@ -216,19 +216,19 @@ class PlayBookInstanceBuilder(Playbook):
         """
         Help in building and applying playbook instance
 
-        :param hbot: HealthBOtClient instance
+        :param hbot: PINClient instance
         :param playbook: Playbook name for which instance need to be created
         :param instance: Playbook instance name
         :param device_group_name: Device group which will be associated with instance
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
 
                 from jnpr.healthbot import PlayBookInstanceBuilder
-                pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'HbEZ-instance', 'Core')
+                pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'PinEZ-instance', 'Core')
 
                 variable = pbb.rule_variables["protocol.routesummary/check-fib-summary"]
                 variable.route_address_family = 'pqr'
@@ -246,7 +246,7 @@ class PlayBookInstanceBuilder(Playbook):
 
                 pbb.apply()
 
-                hb.commit()
+                pin.commit()
         """
         Playbook.__init__(self, hbot)
         self.hbot = hbot
@@ -268,7 +268,7 @@ class PlayBookInstanceBuilder(Playbook):
         ::
 
             from jnpr.healthbot import PlayBookInstanceBuilder
-            pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'HbEZ-instance', 'Core')
+            pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'PinEZ-instance', 'Core')
             pbb.apply()
 
         :return: True if all OK
@@ -342,7 +342,7 @@ class PlayBookInstanceBuilder(Playbook):
         ::
 
             from jnpr.healthbot import PlayBookInstanceBuilder
-            pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'HbEZ-instance', 'Core')
+            pbb = PlayBookInstanceBuilder(hb, 'forwarding-table-summary', 'PinEZ-instance', 'Core')
             pbb.delete()
 
         :return: True if success

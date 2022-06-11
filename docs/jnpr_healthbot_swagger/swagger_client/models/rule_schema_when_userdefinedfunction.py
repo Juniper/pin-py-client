@@ -33,6 +33,7 @@ class RuleSchemaWhenUserdefinedfunction(object):
     swagger_types = {
         'all': 'list[object]',
         'any': 'list[object]',
+        'latest': 'list[object]',
         'argument': 'list[RuleSchemaThenArgument]',
         'function_name': 'str',
         'time_range': 'str'
@@ -41,16 +42,18 @@ class RuleSchemaWhenUserdefinedfunction(object):
     attribute_map = {
         'all': 'all',
         'any': 'any',
+        'latest': 'latest',
         'argument': 'argument',
         'function_name': 'function-name',
         'time_range': 'time-range'
     }
 
-    def __init__(self, all=None, any=None, argument=None, function_name=None, time_range=None):  # noqa: E501
+    def __init__(self, all=None, any=None, latest=None, argument=None, function_name=None, time_range=None):  # noqa: E501
         """RuleSchemaWhenUserdefinedfunction - a model defined in Swagger"""  # noqa: E501
 
         self._all = None
         self._any = None
+        self._latest = None
         self._argument = None
         self._function_name = None
         self._time_range = None
@@ -60,6 +63,8 @@ class RuleSchemaWhenUserdefinedfunction(object):
             self.all = all
         if any is not None:
             self.any = any
+        if latest is not None:
+            self.latest = latest
         if argument is not None:
             self.argument = argument
         self.function_name = function_name
@@ -111,6 +116,29 @@ class RuleSchemaWhenUserdefinedfunction(object):
         """
 
         self._any = any
+
+    @property
+    def latest(self):
+        """Gets the latest of this RuleSchemaWhenUserdefinedfunction.  # noqa: E501
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :return: The latest of this RuleSchemaWhenUserdefinedfunction.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._latest
+
+    @latest.setter
+    def latest(self, latest):
+        """Sets the latest of this RuleSchemaWhenUserdefinedfunction.
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :param latest: The latest of this RuleSchemaWhenUserdefinedfunction.  # noqa: E501
+        :type: list[object]
+        """
+
+        self._latest = latest
 
     @property
     def argument(self):

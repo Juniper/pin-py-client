@@ -13,7 +13,7 @@ class Profile(object):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
 
         self._hbot = hbot
@@ -25,7 +25,7 @@ class Security(object):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
 
         self._hbot = hbot
@@ -38,7 +38,7 @@ class CaProfile(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -53,13 +53,13 @@ class CaProfile(BaseModule):
 
         Example:
             ::
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.security.ca_profile.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.security.ca_profile.get('xyz')
 
                     # for all
-                    print(hb.settings.security.ca_profile.get()
+                    print(pin.settings.security.ca_profile.get()
 
         :return: `CaProfileSchema(s) <jnpr.healthbot.swagger.models.html#caprofileschema>`_
         """
@@ -94,7 +94,7 @@ class CaProfile(BaseModule):
         """
         Add ca profile to HealthBot.
         The onus of uploading helper file certificate_authority_crt is on user.
-        They should use hb.upload_helper_file API to make sure these crt file
+        They should use pin.upload_helper_file API to make sure these crt file
         are uploaded in system.
         We don't do that validation as user can also upload these file after
         configuring profiles.
@@ -108,12 +108,12 @@ class CaProfile(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import CaProfileSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                ca_prof_schema = CaProfileSchema(certificate_authority_crt='abc.crt', name='hbez')
-                hb.settings.security.ca_profile.add(ca_prof_schema)
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                ca_prof_schema = CaProfileSchema(certificate_authority_crt='abc.crt', name='pinez')
+                pin.settings.security.ca_profile.add(ca_prof_schema)
 
         :returns: True when OK
 
@@ -136,8 +136,8 @@ class CaProfile(BaseModule):
 
         Example:
         ::
-            hb.settings.security.ca_profile.delete('xyz')
-            hb.commit()
+            pin.settings.security.ca_profile.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -166,12 +166,12 @@ class CaProfile(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.security.ca_profile.get('xyz')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.security.ca_profile.get('xyz')
                 schemaObj.certificate_authority_crt = 'pqr.crt'
-                hb.settings.security.ca_profile.update(schemaObj)
+                pin.settings.security.ca_profile.update(schemaObj)
 
         :returns: True when OK
         """
@@ -196,7 +196,7 @@ class LocalCertificate(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -211,13 +211,13 @@ class LocalCertificate(BaseModule):
 
         Example:
             ::
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.security.local_certificate.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.security.local_certificate.get('xyz')
 
                     # for all
-                    print(hb.settings.security.local_certificate.get()
+                    print(pin.settings.security.local_certificate.get()
 
         :return: `LocalCertificateSchema(s) <jnpr.healthbot.swagger.models.html#localcertificateschema>`_
         """
@@ -252,7 +252,7 @@ class LocalCertificate(BaseModule):
         """
         Add local certificate to security settings of HealthBot.
         The onus of uploading helper file (cert and key) is on user.
-        They should use hb.upload_helper_file API to make sure these crt/key
+        They should use pin.upload_helper_file API to make sure these crt/key
         file are uploaded in system.
         We don't do that validation as user can also upload these file after
         configuring profiles.
@@ -266,12 +266,12 @@ class LocalCertificate(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import LocalCertificateSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                local_cert_schema = LocalCertificateSchema(client_crt='abc.crt', client_key='pqr.key', name='hbez')
-                hb.settings.security.local_certificate.add(local_cert_schema)
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                local_cert_schema = LocalCertificateSchema(client_crt='abc.crt', client_key='pqr.key', name='pinez')
+                pin.settings.security.local_certificate.add(local_cert_schema)
 
         :returns: True when OK
 
@@ -294,8 +294,8 @@ class LocalCertificate(BaseModule):
 
         Example:
         ::
-            hb.settings.security.local_certificate.delete('xyz')
-            hb.commit()
+            pin.settings.security.local_certificate.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -324,12 +324,12 @@ class LocalCertificate(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.security.local_certificate.get('xyz')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.security.local_certificate.get('xyz')
                 schemaObj.client_key = 'xyz.key'
-                hb.settings.security.local_certificate.update(schemaObj)
+                pin.settings.security.local_certificate.update(schemaObj)
 
         :returns: True when OK
         """
@@ -354,7 +354,7 @@ class SshKeyProfile(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -369,13 +369,13 @@ class SshKeyProfile(BaseModule):
 
         Example:
             ::
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.security.ssh_key_profile.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.security.ssh_key_profile.get('xyz')
 
                     # for all
-                    print(hb.settings.security.ssh_key_profile.get()
+                    print(pin.settings.security.ssh_key_profile.get()
 
         :return: `SshKeyProfileSchema(s) <jnpr.healthbot.swagger.models.html#sshkeyprofileschema>`_
         """
@@ -408,9 +408,9 @@ class SshKeyProfile(BaseModule):
 
     def add(self, schema: SshKeyProfileSchema = None, **kwargs):
         """
-        Add ssh key profile to HealthBot.
+        Add ssh key profile to Paragon Insights.
         The onus of uploading helper file ssh_private_key_file is on user.
-        They should use hb.upload_helper_file API to make sure these key file
+        They should use pin.upload_helper_file API to make sure these key file
         are uploaded in system.
         We don't do that validation as user can also upload these file after
         configuring profiles.
@@ -424,13 +424,13 @@ class SshKeyProfile(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import SshKeyProfileSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                ssh_key_prof_schema = SshKeyProfileSchema(name='hbez', ssh_private_key_file='abc.crt',
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                ssh_key_prof_schema = SshKeyProfileSchema(name='pinez', ssh_private_key_file='abc.crt',
                     ssh_private_key_passphrase='%$#@#')
-                hb.settings.security.ssh_key_profile.add(ssh_key_prof_schema)
+                pin.settings.security.ssh_key_profile.add(ssh_key_prof_schema)
 
         :returns: True when OK
 
@@ -453,8 +453,8 @@ class SshKeyProfile(BaseModule):
 
         Example:
         ::
-            hb.settings.security.ssh_key_profile.delete('xyz')
-            hb.commit()
+            pin.settings.security.ssh_key_profile.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -483,12 +483,12 @@ class SshKeyProfile(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.security.ssh_key_profile.get('xyz')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.security.ssh_key_profile.get('xyz')
                 schemaObj.certificate_authority_crt = 'pqr.crt'
-                hb.settings.security.ssh_key_profile.update(schemaObj)
+                pin.settings.security.ssh_key_profile.update(schemaObj)
 
         :returns: True when OK
         """
@@ -513,7 +513,7 @@ class DataSummarization(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
         self.raw = Raw(hbot)
@@ -523,7 +523,7 @@ class Raw(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 

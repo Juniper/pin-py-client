@@ -3,7 +3,7 @@ from nose.plugins.attrib import attr
 
 from mock import patch, PropertyMock
 
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from jnpr.healthbot.modules.rules import RuleSchema
 from requests.models import Response
 from . import _mock_user_login
@@ -16,13 +16,13 @@ class TestRules(unittest.TestCase):
     def setUp(self, mock_user_login, mock_request):
         self.mock_user_login = _mock_user_login
         self.mock_request = mock_request
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.version',
+        with patch('jnpr.healthbot.healthbot.PINClient.version',
                    new_callable=PropertyMock) as mock_ver:
-            with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+            with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                        new_callable=PropertyMock) as mock_cnf:
                 mock_ver.return_value = '4.0.0'
                 mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
-                self.conn = HealthBotClient(
+                self.conn = PINClient(
                     server='1.1.1.1',
                     user='test',
                     password='password123').open()
@@ -32,7 +32,7 @@ class TestRules(unittest.TestCase):
 
     def test_add_rule(self):
         self.mock_request().get.side_effect = self._mock_manager
-        rs = RuleSchema(rule_name="hbez-fpc-heap-utilization")
+        rs = RuleSchema(rule_name="pinez-fpc-heap-utilization")
         rs.description = "HealthBot EZ example"
         rs.synopsis = "Using python client for demo"
         rs.sensor = [
@@ -117,20 +117,20 @@ class TestRules(unittest.TestCase):
     def test_add_rule_without_schema(self):
         self.assertTrue(
             self.conn.rule.add(
-                rule_name="hbez-fpc-heap-utilization",
+                rule_name="pinez-fpc-heap-utilization",
                 topic_name='test'))
 
     def test_schema_check(self):
         self.assertTrue(
             self.conn.rule.add(
-                rule_name="hbez-fpc-heap-utilization",
+                rule_name="pinez-fpc-heap-utilization",
                 topic_name='test'))
 
     def test_get_rule(self):
         self.mock_request().get.side_effect = self._mock_manager
         ret = self.conn.rule.get(
             topic_name='external',
-            rule_name="hbez-fpc-heap-utilization")
+            rule_name="pinez-fpc-heap-utilization")
         self.assertEqual(ret.description, 'HealthBot EZ example')
 
     def test_get_rules(self):
@@ -142,7 +142,7 @@ class TestRules(unittest.TestCase):
     def test_delete_rule(self):
         ret = self.conn.rule.delete(
             topic_name='external',
-            rule_name="hbez-fpc-heap-utilization")
+            rule_name="pinez-fpc-heap-utilization")
         self.assertTrue(ret)
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
@@ -151,7 +151,7 @@ class TestRules(unittest.TestCase):
         self.mock_request().get.side_effect = self._mock_manager
         ret = self.conn.rule.get(
             topic_name='external',
-            rule_name="hbez-fpc-heap-utilization")
+            rule_name="pinez-fpc-heap-utilization")
         ret.keys = ['slot']
         self.conn.rule.update(topic_name='external', schema=ret)
         self.assertEqual(
@@ -239,7 +239,7 @@ class TestRules(unittest.TestCase):
                 "topic-name": "external"
             }, 200)
             return obj
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/topic/external/rule/hbez-fpc-heap-utilization/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/topic/external/rule/pinez-fpc-heap-utilization/?working=true':
             obj = MockResponse({"description": "HealthBot EZ example",
                                 "field": [{"constant": {"value": "{{fpc-buffer-usage-threshold}}"},
                                            "description": "This field is for buffer usage threshold",
@@ -249,7 +249,7 @@ class TestRules(unittest.TestCase):
                                            "field-name": "linecard-cpu-usage-threshold"},
                                           ],
                                 "keys": ["slot"],
-                                "rule-name": "hbez-fpc-heap-utilization",
+                                "rule-name": "pinez-fpc-heap-utilization",
                                 "sensor": [{"description": "Monitors FPC buffer, heap and cpu utilization",
                                             "iAgent": {"file": "fpc-utilization.yml",
                                                        "frequency": "30s",
@@ -286,7 +286,7 @@ class TestRules(unittest.TestCase):
                                              "field-name": "linecard-cpu-usage-threshold"},
                                             ],
                                   "keys": ["slot"],
-                                  "rule-name": "hbez-fpc-heap-utilization",
+                                  "rule-name": "pinez-fpc-heap-utilization",
                                   "sensor": [{"description": "Monitors FPC buffer, heap and cpu utilization",
                                               "iAgent": {"file": "fpc-utilization.yml",
                                                          "frequency": "30s",

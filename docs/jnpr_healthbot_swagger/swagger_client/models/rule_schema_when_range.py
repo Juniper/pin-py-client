@@ -33,6 +33,7 @@ class RuleSchemaWhenRange(object):
     swagger_types = {
         'all': 'list[object]',
         'any': 'list[object]',
+        'latest': 'list[object]',
         'field_name': 'str',
         'max': 'float',
         'min': 'float',
@@ -42,17 +43,19 @@ class RuleSchemaWhenRange(object):
     attribute_map = {
         'all': 'all',
         'any': 'any',
+        'latest': 'latest',
         'field_name': 'field-name',
         'max': 'max',
         'min': 'min',
         'time_range': 'time-range'
     }
 
-    def __init__(self, all=None, any=None, field_name=None, max=None, min=None, time_range=None):  # noqa: E501
+    def __init__(self, all=None, any=None, latest=None, field_name=None, max=None, min=None, time_range=None):  # noqa: E501
         """RuleSchemaWhenRange - a model defined in Swagger"""  # noqa: E501
 
         self._all = None
         self._any = None
+        self._latest = None
         self._field_name = None
         self._max = None
         self._min = None
@@ -63,6 +66,8 @@ class RuleSchemaWhenRange(object):
             self.all = all
         if any is not None:
             self.any = any
+        if latest is not None:
+            self.latest = latest
         self.field_name = field_name
         self.max = max
         self.min = min
@@ -114,6 +119,29 @@ class RuleSchemaWhenRange(object):
         """
 
         self._any = any
+
+    @property
+    def latest(self):
+        """Gets the latest of this RuleSchemaWhenRange.  # noqa: E501
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :return: The latest of this RuleSchemaWhenRange.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._latest
+
+    @latest.setter
+    def latest(self, latest):
+        """Sets the latest of this RuleSchemaWhenRange.
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :param latest: The latest of this RuleSchemaWhenRange.  # noqa: E501
+        :type: list[object]
+        """
+
+        self._latest = latest
 
     @property
     def field_name(self):

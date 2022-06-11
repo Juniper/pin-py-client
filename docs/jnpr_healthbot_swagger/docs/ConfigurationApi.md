@@ -73,9 +73,12 @@ Method | HTTP request | Description
 [**delete_iceberg_topics_topics_by_id**](ConfigurationApi.md#delete_iceberg_topics_topics_by_id) | **DELETE** /config/topics/ | Delete all topics.
 [**first_login**](ConfigurationApi.md#first_login) | **POST** /first-login/ | Change password after first login
 [**initialize**](ConfigurationApi.md#initialize) | **POST** /config/initialize/ | Initialize config-server
+[**remove_iceberg_devices_from_group**](ConfigurationApi.md#remove_iceberg_devices_from_group) | **DELETE** /config/device-group/{device_group_name}/device/ | Remove devices from group.
+[**remove_iceberg_network_group_network_group_by_id**](ConfigurationApi.md#remove_iceberg_network_group_network_group_by_id) | **DELETE** /config/network-group/{network_group_name}/variable/ | Overwrite a network-group.
 [**retrieve_affected_groups**](ConfigurationApi.md#retrieve_affected_groups) | **GET** /config/configuration/ | Get all groups affected by un-committed configuration changes.
 [**retrieve_device_group_status**](ConfigurationApi.md#retrieve_device_group_status) | **GET** /device-group/{device_group_name}/status/ | Get device-group&#39;s status.
 [**retrieve_device_group_trigger_info**](ConfigurationApi.md#retrieve_device_group_trigger_info) | **GET** /device-group/{device_group_name}/trigger_info/ | Get device-group&#39;s trigger info.
+[**retrieve_device_trigger_info**](ConfigurationApi.md#retrieve_device_trigger_info) | **GET** /device/{device_id}/trigger_info/ | Get trigger info for device-groups containing the device.
 [**retrieve_healthbot_organizations_organizations**](ConfigurationApi.md#retrieve_healthbot_organizations_organizations) | **GET** /config/organizations/ | Get all organizations&#39; configuration.
 [**retrieve_iceberg_device_device**](ConfigurationApi.md#retrieve_iceberg_device_device) | **GET** /config/device/ | List all device-ids.
 [**retrieve_iceberg_device_device_by_id**](ConfigurationApi.md#retrieve_iceberg_device_device_by_id) | **GET** /config/device/{device_id}/ | Get a device&#39;s configuration.
@@ -3548,6 +3551,108 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **remove_iceberg_devices_from_group**
+> remove_iceberg_devices_from_group(device_group_name, devices, x_iam_token=x_iam_token)
+
+Remove devices from group.
+
+Remove the list of devices from the device group
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ConfigurationApi()
+device_group_name = 'device_group_name_example' # str | ID of group
+devices = swagger_client.Devices() # Devices | device list
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Remove devices from group.
+    api_instance.remove_iceberg_devices_from_group(device_group_name, devices, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling ConfigurationApi->remove_iceberg_devices_from_group: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_group_name** | **str**| ID of group | 
+ **devices** | [**Devices**](Devices.md)| device list | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **remove_iceberg_network_group_network_group_by_id**
+> remove_iceberg_network_group_network_group_by_id(network_group_name, network_variable, x_iam_token=x_iam_token)
+
+Overwrite a network-group.
+
+Overwrite a network-group by the `network-group-name`. The `network-group-name` specified in the URL and the request body must match.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ConfigurationApi()
+network_group_name = 'network_group_name_example' # str | ID of network-group-name
+network_variable = [swagger_client.NetworkVariableSchema()] # list[NetworkVariableSchema] | network_groupbody object
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Overwrite a network-group.
+    api_instance.remove_iceberg_network_group_network_group_by_id(network_group_name, network_variable, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling ConfigurationApi->remove_iceberg_network_group_network_group_by_id: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **network_group_name** | **str**| ID of network-group-name | 
+ **network_variable** | [**list[NetworkVariableSchema]**](NetworkVariableSchema.md)| network_groupbody object | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **retrieve_affected_groups**
 > AffectedGroups retrieve_affected_groups(x_iam_token=x_iam_token)
 
@@ -3679,6 +3784,56 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **device_group_name** | **str**| Name of device-group | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+[**TriggerSchema**](TriggerSchema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, multipart/form-data
+ - **Accept**: application/json, application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_device_trigger_info**
+> TriggerSchema retrieve_device_trigger_info(device_id, x_iam_token=x_iam_token)
+
+Get trigger info for device-groups containing the device.
+
+Get information about the triggers in device-groups having the provided device.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ConfigurationApi()
+device_id = 'device_id_example' # str | Name of device
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Get trigger info for device-groups containing the device.
+    api_response = api_instance.retrieve_device_trigger_info(device_id, x_iam_token=x_iam_token)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ConfigurationApi->retrieve_device_trigger_info: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_id** | **str**| Name of device | 
  **x_iam_token** | **str**| authentication header object | [optional] 
 
 ### Return type

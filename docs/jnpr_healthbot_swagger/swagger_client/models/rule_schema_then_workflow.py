@@ -33,6 +33,7 @@ class RuleSchemaThenWorkflow(object):
     swagger_types = {
         'argument': 'WorkflowArgumentGroupSchema',
         'batch': 'int',
+        'log_level': 'str',
         'retry': 'RuleSchemaThenRetry',
         'timeout': 'str',
         'workflow_name': 'str'
@@ -41,16 +42,18 @@ class RuleSchemaThenWorkflow(object):
     attribute_map = {
         'argument': 'argument',
         'batch': 'batch',
+        'log_level': 'log-level',
         'retry': 'retry',
         'timeout': 'timeout',
         'workflow_name': 'workflow-name'
     }
 
-    def __init__(self, argument=None, batch=None, retry=None, timeout=None, workflow_name=None):  # noqa: E501
+    def __init__(self, argument=None, batch=None, log_level=None, retry=None, timeout=None, workflow_name=None):  # noqa: E501
         """RuleSchemaThenWorkflow - a model defined in Swagger"""  # noqa: E501
 
         self._argument = None
         self._batch = None
+        self._log_level = None
         self._retry = None
         self._timeout = None
         self._workflow_name = None
@@ -60,6 +63,8 @@ class RuleSchemaThenWorkflow(object):
             self.argument = argument
         if batch is not None:
             self.batch = batch
+        if log_level is not None:
+            self.log_level = log_level
         if retry is not None:
             self.retry = retry
         if timeout is not None:
@@ -109,6 +114,35 @@ class RuleSchemaThenWorkflow(object):
         """
 
         self._batch = batch
+
+    @property
+    def log_level(self):
+        """Gets the log_level of this RuleSchemaThenWorkflow.  # noqa: E501
+
+        Logging level of workflow  # noqa: E501
+
+        :return: The log_level of this RuleSchemaThenWorkflow.  # noqa: E501
+        :rtype: str
+        """
+        return self._log_level
+
+    @log_level.setter
+    def log_level(self, log_level):
+        """Sets the log_level of this RuleSchemaThenWorkflow.
+
+        Logging level of workflow  # noqa: E501
+
+        :param log_level: The log_level of this RuleSchemaThenWorkflow.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["info", "debug", "error"]  # noqa: E501
+        if log_level not in allowed_values:
+            raise ValueError(
+                "Invalid value for `log_level` ({0}), must be one of {1}"  # noqa: E501
+                .format(log_level, allowed_values)
+            )
+
+        self._log_level = log_level
 
     @property
     def retry(self):

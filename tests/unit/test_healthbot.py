@@ -1,7 +1,7 @@
 import unittest
 from nose.plugins.attrib import attr
 
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from jnpr.healthbot.modules.devices import Device
 from jnpr.healthbot.modules.playbooks import Playbook
 from jnpr.healthbot.modules.rules import Rule
@@ -19,17 +19,17 @@ class TestHealthBotClient(unittest.TestCase):
     def setUp(self, mock_user_login, mock_request):
         self.mock_user_login = _mock_user_login
         self.mock_request = mock_request
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.version',
+        with patch('jnpr.healthbot.healthbot.PINClient.version',
                    new_callable=PropertyMock) as mock_ver:
-            with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+            with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                        new_callable=PropertyMock) as mock_cnf:
-                with patch('jnpr.healthbot.healthbot.HealthBotClient.tenant',
+                with patch('jnpr.healthbot.healthbot.PINClient.tenant',
                            new_callable=PropertyMock) as mock_tenant:
 
                     mock_ver.return_value = '4.0.0'
                     mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
                     mock_tenant.return_value = "default"
-                    self.conn = HealthBotClient(
+                    self.conn = PINClient(
                         server='1.1.1.1',
                         user='test',
                         password='password123').open()
@@ -42,19 +42,19 @@ class TestHealthBotClient(unittest.TestCase):
     def test_check_mandatory_params(self):
         self.assertRaises(
             ValueError,
-            HealthBotClient,
+            PINClient,
             server="",
             user='test',
             password='password123')
         self.assertRaises(
             ValueError,
-            HealthBotClient,
+            PINClient,
             server="1.1.1.1",
             user="",
             password='password123')
         self.assertRaises(
             ValueError,
-            HealthBotClient,
+            PINClient,
             server="1.1.1.1",
             user="test",
             password="")
@@ -71,13 +71,13 @@ class TestHealthBotClient(unittest.TestCase):
     @patch('jnpr.healthbot.swagger.api.authentication_api.AuthenticationApi.user_logout')
     def test_context_manager(self, mock_user_logout, mock_user_login, mock_request):
         self.mock_user_login = _mock_user_login
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.version',
+        with patch('jnpr.healthbot.healthbot.PINClient.version',
                    new_callable=PropertyMock) as mock_ver:
-            with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+            with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                        new_callable=PropertyMock) as mock_cnf:
                 mock_ver.return_value = '2.0.1'
                 mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
-                with HealthBotClient(server='1.1.1.1', user='test',
+                with PINClient(server='1.1.1.1', user='test',
                                      password='password123') as conn:
                     self.assertEqual(conn.version, '2.0.1')
 
@@ -87,7 +87,7 @@ class TestHealthBotClient(unittest.TestCase):
                          'delete')
 
     def test_commit(self):
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+        with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                    new_callable=PropertyMock) as mock_cnf:
             mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
             self.conn.commit()
@@ -106,7 +106,7 @@ class TestHealthBotClient(unittest.TestCase):
     def test_get_health(self):
         self.mock_request().get.side_effect = self._mock_manager
         health = self.conn.health()
-        self.assertEqual(health.network_health, {'HbEZ': 'gray'})
+        self.assertEqual(health.network_health, {'PinEZ': 'gray'})
 
     def _mock_manager(self, *args, **kwargs):
         class MockResponse(Response):
@@ -159,7 +159,7 @@ class TestHealthBotClient(unittest.TestCase):
                     }
                 },
                 "network-health": {
-                    "HbEZ": "gray"
+                    "PinEZ": "gray"
                 }
             }, 200)
         return MockResponse(None, 404)
