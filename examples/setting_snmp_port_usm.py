@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # Settings --> Ingest --> Snmp Notification
 from jnpr.healthbot.swagger.models.snmp_notification_schema import SnmpNotificationSchema
 from jnpr.healthbot.swagger.models.snmpnotification_schema_snmpnotification import SnmpnotificationSchemaSnmpnotification

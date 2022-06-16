@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 from pprint import pprint
 from jnpr.healthbot.swagger.models.hb_graphs_query import HbGraphsQuery
 from jnpr.healthbot.swagger.models.hb_graphs import HbGraphs

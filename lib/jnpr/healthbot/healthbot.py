@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 import requests
 from requests.models import Response
 from requests.exceptions import HTTPError

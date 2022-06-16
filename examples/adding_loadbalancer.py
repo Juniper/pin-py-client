@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # Settings --> Deployment --> Loadbalancer
 # Equivalant to GUI: https://<IP>:8080/deployment-management/deploy
 
