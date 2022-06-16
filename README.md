@@ -6,7 +6,7 @@
 This repo contains a Python package to control Paragon Insights
 
 The purpose of this package is to provide a Python library that 
-automates the provisioning of the HealthBot server.
+automates the provisioning of the Paragon Insights server.
 
 Requires: Python >=3.6
 
@@ -2037,6 +2037,13 @@ with PINClient(ip, gui_username, gui_password, port=8080) as pin:
         
 # VERSIONS
 
+Paragon Insights 4.0.0 and above and Paragon Automation 22.1 and above are supported by <release TBD>
+
+For support for Paragon Automation 21.x series a workaround needs to applied.
+Please follow the following steps for the workaround :
+* TBD
+
+Also,
 Healthbot versions upto 3.2.0 are supported by `https://pypi.org/project/hbez/2.0.0/`
 
 Healthbot/Paragon Insights 4.0.0 and above will be supported by `https://pypi.org/project/hbez/4.0.0/` and above
@@ -2051,7 +2058,4 @@ Juniper Networks is actively contributing to and maintaining this repo. Please c
 
 *Contributors:*
 
-* v1.0.0: [Nitin Kumar](https://github.com/vnitinv)
-* v2.0.0: [Nitin Kumar](https://github.com/vnitinv)
-* v4.0.0: [Sharanya Bhat](https://github.com/sharanyabhat)
-* v4.1.0: [Sharanya Bhat](https://github.com/sharanyabhat)
+* v1.0.0: [Sharanya Bhat](https://github.com/sharanyabhat)
