@@ -360,6 +360,33 @@ class Device(BaseModule):
         return self.hbot._create_schema(resp, DeviceHealthTree)
 
 
+class EMSDevice(BaseModule):
+
+    def __init__(self, hbot):
+        """
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
+        """
+
+        super().__init__(hbot)
+
+    def add(self, device_id: str = None, host: str = None,
+            username: str = None, password: str = None,
+            schema: DeviceSchema = None, **kwargs):
+        print('TBD')
+
+    def delete(self, device_id: str, force: bool = False):
+        print("TBD")
+
+    def get_ids(self):
+        print("TBD")
+
+    def get(self, device_id: str = None, uncommitted: bool = True):
+        print("TBD")
+
+    def update(self, schema: DeviceSchema = None, **kwargs):
+        print("TBD")
+
+
 class DeviceGroup(BaseModule):
 
     def __init__(self, hbot):

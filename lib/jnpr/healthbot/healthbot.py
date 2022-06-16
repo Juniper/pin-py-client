@@ -115,7 +115,9 @@ class PINClient(object):
         self.password = password
         self._version = ""
 
-        self.port = kwargs.get('port', 8080)
+        self.port = int(kwargs.get('port', 8080))
+        if self.port not in [443, 8080]:
+            raise ValueError("Invalid Port! Port has to be either 8080(Paragon Insights) or 443(Paragon Automation)")
 
         if server is None or server == "":
             raise ValueError("You must provide 'server' of HealthBot")
@@ -162,7 +164,10 @@ class PINClient(object):
 
         self._version = self.version
         self.urlfor = UrlFor(self)
-        self.device = devices.Device(self)
+        if self.port == 443:
+            self.device = devices.EMSDevice(self)
+        else:
+            self.device = devices.Device(self)
         self.device_group = devices.DeviceGroup(self)
         self.network_group = devices.NetworkGroup(self)
         self.rule = rules.Rule(self)
