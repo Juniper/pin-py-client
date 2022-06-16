@@ -1,9 +1,12 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 import unittest
 from nose.plugins.attrib import attr
 
 from mock import patch, PropertyMock
 
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from jnpr.healthbot import CaProfileSchema
 from jnpr.healthbot import LocalCertificateSchema
 from jnpr.healthbot import SshKeyProfileSchema
@@ -18,13 +21,13 @@ class TestProfiles(unittest.TestCase):
     def setUp(self, mock_user_login, mock_request):
         self.mock_user_login = _mock_user_login
         self.mock_request = mock_request
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.version',
+        with patch('jnpr.healthbot.healthbot.PINClient.version',
                    new_callable=PropertyMock) as mock_ver:
-            with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+            with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                        new_callable=PropertyMock) as mock_cnf:
                 mock_ver.return_value = '4.0.0'
                 mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
-                self.conn = HealthBotClient(
+                self.conn = PINClient(
                     server='1.1.1.1',
                     user='test',
                     password='password123').open()
@@ -34,75 +37,75 @@ class TestProfiles(unittest.TestCase):
 
     def test_add_caprofile(self):
         ca_prof_schema = CaProfileSchema(
-            certificate_authority_crt='abc.crt', name='hbez')
+            certificate_authority_crt='abc.crt', name='pinez')
         self.assertTrue(
             self.conn.settings.security.ca_profile.add(ca_prof_schema))
         self.assertTrue(
             self.conn.settings.security.ca_profile.add(
                 certificate_authority_crt='abc.crt',
-                name='hbez'))
+                name='pinez'))
 
     def test_get_caprofile(self):
         self.mock_request().get.side_effect = self._mock_manager
         ret = self.conn.profile.security.ca_profile.get()
         self.assertEqual(ret[0].certificate_authority_crt, "test.crt")
-        ret = self.conn.profile.security.ca_profile.get("hbez")
+        ret = self.conn.profile.security.ca_profile.get("pinez")
         self.assertEqual(ret.certificate_authority_crt, "test.crt")
 
     def test_update_caprofile(self):
         self.mock_request().get.side_effect = self._mock_manager
-        ret = self.conn.profile.security.ca_profile.get("hbez")
+        ret = self.conn.profile.security.ca_profile.get("pinez")
         ret.certificate_authority_crt = "changed.crt"
         self.assertTrue(self.conn.profile.security.ca_profile.update(ret))
         self.assertTrue(self.conn.profile.security.ca_profile.update(
-            certificate_authority_crt='changed.crt', name='hbez'))
+            certificate_authority_crt='changed.crt', name='pinez'))
 
     def test_delete_caprofile(self):
         self.mock_request().get.side_effect = self._mock_manager
-        self.conn.profile.security.ca_profile.delete("hbez")
+        self.conn.profile.security.ca_profile.delete("pinez")
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
     def test_add_local_certificate(self):
         local_cert_schema = LocalCertificateSchema(
-            client_crt='abc.crt', client_key='pqr.key', name='hbez')
+            client_crt='abc.crt', client_key='pqr.key', name='pinez')
         self.assertTrue(
             self.conn.settings.security.local_certificate.add(local_cert_schema))
         self.assertTrue(self.conn.settings.security.local_certificate.add(
-            client_crt='abc.crt', client_key='pqr.key', name='hbez'))
+            client_crt='abc.crt', client_key='pqr.key', name='pinez'))
 
     def test_get_local_certificate(self):
         self.mock_request().get.side_effect = self._mock_manager
         ret = self.conn.profile.security.local_certificate.get()
         self.assertEqual(ret[0].client_crt, "test.crt")
-        ret = self.conn.profile.security.local_certificate.get("hbez")
+        ret = self.conn.profile.security.local_certificate.get("pinez")
         self.assertEqual(ret.client_crt, "test.crt")
 
     def test_update_local_certificate(self):
         self.mock_request().get.side_effect = self._mock_manager
-        ret = self.conn.profile.security.local_certificate.get("hbez")
+        ret = self.conn.profile.security.local_certificate.get("pinez")
         ret.client_crt = "changed.crt"
         self.assertTrue(
             self.conn.profile.security.local_certificate.update(ret))
         self.assertTrue(self.conn.profile.security.local_certificate.update(
-            client_crt='changed.crt', client_key='pqr.key', name='hbez'))
+            client_crt='changed.crt', client_key='pqr.key', name='pinez'))
 
     def test_delete_local_certificate(self):
         self.mock_request().get.side_effect = self._mock_manager
-        self.conn.profile.security.local_certificate.delete("hbez")
+        self.conn.profile.security.local_certificate.delete("pinez")
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
     def test_add_ssh_key_profile(self):
         ssh_key_prof_schema = SshKeyProfileSchema(
-            name='hbez',
+            name='pinez',
             ssh_private_key_file='abc.crt',
             ssh_private_key_passphrase='%$#@#')
         self.assertTrue(
             self.conn.settings.security.ssh_key_profile.add(ssh_key_prof_schema))
         self.assertTrue(
             self.conn.settings.security.ssh_key_profile.add(
-                name='hbez',
+                name='pinez',
                 ssh_private_key_file='abc.crt',
                 ssh_private_key_passphrase='%$#@#'))
 
@@ -110,24 +113,24 @@ class TestProfiles(unittest.TestCase):
         self.mock_request().get.side_effect = self._mock_manager
         ret = self.conn.profile.security.ssh_key_profile.get()
         self.assertEqual(ret[0].ssh_private_key_file, "test.key")
-        ret = self.conn.profile.security.ssh_key_profile.get("hbez")
+        ret = self.conn.profile.security.ssh_key_profile.get("pinez")
         self.assertEqual(ret.ssh_private_key_file, "test.key")
 
     def test_update_ssh_key_profile(self):
         self.mock_request().get.side_effect = self._mock_manager
-        ret = self.conn.profile.security.ssh_key_profile.get("hbez")
+        ret = self.conn.profile.security.ssh_key_profile.get("pinez")
         ret.ssh_private_key_file = "changed.crt"
         self.assertTrue(
             self.conn.profile.security.ssh_key_profile.update(ret))
         self.assertTrue(
             self.conn.profile.security.ssh_key_profile.update(
-                name='hbez',
+                name='pinez',
                 ssh_private_key_file='changed.crt',
                 ssh_private_key_passphrase='%$#@#'))
 
     def test_delete_ssh_key_profile(self):
         self.mock_request().get.side_effect = self._mock_manager
-        self.conn.profile.security.ssh_key_profile.delete("hbez")
+        self.conn.profile.security.ssh_key_profile.delete("pinez")
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
@@ -155,14 +158,14 @@ class TestProfiles(unittest.TestCase):
                 "ca-profile": [
                     {
                         "certificate-authority-crt": "test.crt",
-                        "name": "hbez"
+                        "name": "pinez"
                     }
                 ]
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/ca-profile/hbez/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/ca-profile/pinez/?working=true':
             return MockResponse({
                 "certificate-authority-crt": "test.crt",
-                "name": "hbez"
+                "name": "pinez"
             }, 200)
         elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/local-certificates/?working=true':
             return MockResponse({
@@ -170,29 +173,29 @@ class TestProfiles(unittest.TestCase):
                     {
                         "client-crt": "test.crt",
                         "client-key": "test.key",
-                        "name": "hbez"
+                        "name": "pinez"
                     }
                 ]
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/local-certificate/hbez/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/local-certificate/pinez/?working=true':
             return MockResponse({
                 "client-crt": "test.crt",
                 "client-key": "test.key",
-                "name": "hbez"
+                "name": "pinez"
             }, 200)
         elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/ssh-key-profiles/?working=true':
             return MockResponse({
                 "ssh-key-profile": [
                     {
-                        "name": "hbez",
+                        "name": "pinez",
                         "ssh-private-key-file": "test.key",
                         "ssh-private-key-passphrase": "$9$AQhzt1heK87dsWLZUiHmP1RE"
                     }
                 ]
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/ssh-key-profile/hbez/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/profile/security/ssh-key-profile/pinez/?working=true':
             return MockResponse({
-                "name": "hbez",
+                "name": "pinez",
                 "ssh-private-key-file": "test.key",
                 "ssh-private-key-passphrase": "$9$AQhzt1heK87dsWLZUiHmP1RE"
             }, 200)

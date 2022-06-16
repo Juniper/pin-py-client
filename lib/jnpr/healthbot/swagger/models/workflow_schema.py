@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -34,9 +37,11 @@ class WorkflowSchema(object):
         'description': 'str',
         'entry_task': 'str',
         'exit_task': 'str',
+        'log_level': 'str',
         'argument': 'WorkflowArgumentGroupSchema',
         'cron_options': 'WorkflowCronOptionsSchema',
         'batch': 'int',
+        'pod_gc_strategy': 'str',
         'retry': 'RuleSchemaThenRetry',
         'timeout': 'str',
         'task': 'list[WorkflowSchemaTask1]',
@@ -47,24 +52,28 @@ class WorkflowSchema(object):
         'description': 'description',
         'entry_task': 'entry-task',
         'exit_task': 'exit-task',
+        'log_level': 'log-level',
         'argument': 'argument',
         'cron_options': 'cron-options',
         'batch': 'batch',
+        'pod_gc_strategy': 'pod-gc-strategy',
         'retry': 'retry',
         'timeout': 'timeout',
         'task': 'task',
         'workflow_name': 'workflow-name'
     }
 
-    def __init__(self, description=None, entry_task=None, exit_task=None, argument=None, cron_options=None, batch=None, retry=None, timeout=None, task=None, workflow_name=None):  # noqa: E501
+    def __init__(self, description=None, entry_task=None, exit_task=None, log_level=None, argument=None, cron_options=None, batch=None, pod_gc_strategy=None, retry=None, timeout=None, task=None, workflow_name=None):  # noqa: E501
         """WorkflowSchema - a model defined in Swagger"""  # noqa: E501
 
         self._description = None
         self._entry_task = None
         self._exit_task = None
+        self._log_level = None
         self._argument = None
         self._cron_options = None
         self._batch = None
+        self._pod_gc_strategy = None
         self._retry = None
         self._timeout = None
         self._task = None
@@ -77,12 +86,16 @@ class WorkflowSchema(object):
             self.entry_task = entry_task
         if exit_task is not None:
             self.exit_task = exit_task
+        if log_level is not None:
+            self.log_level = log_level
         if argument is not None:
             self.argument = argument
         if cron_options is not None:
             self.cron_options = cron_options
         if batch is not None:
             self.batch = batch
+        if pod_gc_strategy is not None:
+            self.pod_gc_strategy = pod_gc_strategy
         if retry is not None:
             self.retry = retry
         if timeout is not None:
@@ -173,6 +186,35 @@ class WorkflowSchema(object):
         self._exit_task = exit_task
 
     @property
+    def log_level(self):
+        """Gets the log_level of this WorkflowSchema.  # noqa: E501
+
+        Logging level of workflow  # noqa: E501
+
+        :return: The log_level of this WorkflowSchema.  # noqa: E501
+        :rtype: str
+        """
+        return self._log_level
+
+    @log_level.setter
+    def log_level(self, log_level):
+        """Sets the log_level of this WorkflowSchema.
+
+        Logging level of workflow  # noqa: E501
+
+        :param log_level: The log_level of this WorkflowSchema.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["info", "debug", "error"]  # noqa: E501
+        if log_level not in allowed_values:
+            raise ValueError(
+                "Invalid value for `log_level` ({0}), must be one of {1}"  # noqa: E501
+                .format(log_level, allowed_values)
+            )
+
+        self._log_level = log_level
+
+    @property
     def argument(self):
         """Gets the argument of this WorkflowSchema.  # noqa: E501
 
@@ -236,6 +278,29 @@ class WorkflowSchema(object):
         """
 
         self._batch = batch
+
+    @property
+    def pod_gc_strategy(self):
+        """Gets the pod_gc_strategy of this WorkflowSchema.  # noqa: E501
+
+        Garbage Collection Strategy for workflow pods  # noqa: E501
+
+        :return: The pod_gc_strategy of this WorkflowSchema.  # noqa: E501
+        :rtype: str
+        """
+        return self._pod_gc_strategy
+
+    @pod_gc_strategy.setter
+    def pod_gc_strategy(self, pod_gc_strategy):
+        """Sets the pod_gc_strategy of this WorkflowSchema.
+
+        Garbage Collection Strategy for workflow pods  # noqa: E501
+
+        :param pod_gc_strategy: The pod_gc_strategy of this WorkflowSchema.  # noqa: E501
+        :type: str
+        """
+
+        self._pod_gc_strategy = pod_gc_strategy
 
     @property
     def retry(self):

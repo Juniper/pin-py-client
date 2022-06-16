@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -32,6 +35,7 @@ class RuleSchemaFunction(object):
     """
     swagger_types = {
         'argument': 'list[RuleSchemaArgument]',
+        '_return': 'list[RuleSchemaReturn]',
         'description': 'str',
         'function_name': 'str',
         'method': 'str',
@@ -40,16 +44,18 @@ class RuleSchemaFunction(object):
 
     attribute_map = {
         'argument': 'argument',
+        '_return': 'return',
         'description': 'description',
         'function_name': 'function-name',
         'method': 'method',
         'path': 'path'
     }
 
-    def __init__(self, argument=None, description=None, function_name=None, method=None, path=None):  # noqa: E501
+    def __init__(self, argument=None, _return=None, description=None, function_name=None, method=None, path=None):  # noqa: E501
         """RuleSchemaFunction - a model defined in Swagger"""  # noqa: E501
 
         self._argument = None
+        self.__return = None
         self._description = None
         self._function_name = None
         self._method = None
@@ -58,6 +64,8 @@ class RuleSchemaFunction(object):
 
         if argument is not None:
             self.argument = argument
+        if _return is not None:
+            self._return = _return
         if description is not None:
             self.description = description
         self.function_name = function_name
@@ -84,6 +92,27 @@ class RuleSchemaFunction(object):
         """
 
         self._argument = argument
+
+    @property
+    def _return(self):
+        """Gets the _return of this RuleSchemaFunction.  # noqa: E501
+
+
+        :return: The _return of this RuleSchemaFunction.  # noqa: E501
+        :rtype: list[RuleSchemaReturn]
+        """
+        return self.__return
+
+    @_return.setter
+    def _return(self, _return):
+        """Sets the _return of this RuleSchemaFunction.
+
+
+        :param _return: The _return of this RuleSchemaFunction.  # noqa: E501
+        :type: list[RuleSchemaReturn]
+        """
+
+        self.__return = _return
 
     @property
     def description(self):

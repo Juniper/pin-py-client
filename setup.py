@@ -1,5 +1,8 @@
-__author__ = "Nitin Kumar"
-__author_email__ = "nitinkr@juniper.net"
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
+__author__ = "Sharanya Bhat"
+__author_email__ = "sharanyab@juniper.net"
 __licence__ = "Apache 2.0"
 
 from setuptools import setup, find_packages
@@ -18,7 +21,7 @@ with open("README.md", "r") as fh:
 install_requires = requirements()
 
 setup(
-    name='hbez',
+    name='pinez',
     version=versioneer.get_version(),
     description='Healthbot Python Client',
     long_description=long_description,
@@ -29,11 +32,9 @@ setup(
     install_requires=install_requires,
     include_package_data=True,
     license=__licence__,
-    keywords=['Juniper HealthBot'],
-    python_requires='>=3.4',
+    keywords=['Juniper HealthBot Paragon Insights Automation'],
+    python_requires='>=3.6',
     classifiers=[
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',

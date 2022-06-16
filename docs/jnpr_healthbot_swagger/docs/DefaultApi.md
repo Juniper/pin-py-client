@@ -15,6 +15,8 @@ Method | HTTP request | Description
 [**create_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id**](DefaultApi.md#create_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id) | **POST** /config/ingest/byoi/default-plugin/tlive-kafka-oc/{name}/ | Create tlive-kafka-oc by ID
 [**create_healthbot_ingest_byoi_ingest_mapping_by_id**](DefaultApi.md#create_healthbot_ingest_byoi_ingest_mapping_by_id) | **POST** /config/ingest/byoi/ingest-mapping/{name}/ | Create ingest-mapping by ID
 [**create_healthbot_ingest_frequency_profile_by_id**](DefaultApi.md#create_healthbot_ingest_frequency_profile_by_id) | **POST** /config/ingest/frequency-profile/{name}/ | Create frequency-profile by ID
+[**create_healthbot_ingest_ifa**](DefaultApi.md#create_healthbot_ingest_ifa) | **POST** /config/ingest/ifa/ | Create ifa by ID
+[**create_healthbot_ingest_ifa_device_by_id**](DefaultApi.md#create_healthbot_ingest_ifa_device_by_id) | **POST** /config/ingest/ifa/device/{id}/ | Create device by ID
 [**create_healthbot_ingest_outbound_ssh**](DefaultApi.md#create_healthbot_ingest_outbound_ssh) | **POST** /config/ingest/outbound-ssh/ | Create outbound-ssh by ID
 [**create_healthbot_ingest_settings_byoi_custom_plugin_by_id**](DefaultApi.md#create_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **POST** /config/ingest-settings/byoi/custom-plugin/{name}/ | Create custom-plugin by ID
 [**create_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](DefaultApi.md#create_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **POST** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Create tlive-kafka-oc by ID
@@ -54,6 +56,7 @@ Method | HTTP request | Description
 [**create_iceberg_profile_security_local_certificate_by_id**](DefaultApi.md#create_iceberg_profile_security_local_certificate_by_id) | **POST** /config/profile/security/local-certificate/{name}/ | Create local-certificate by ID
 [**create_iceberg_profile_security_ssh_key_profile_by_id**](DefaultApi.md#create_iceberg_profile_security_ssh_key_profile_by_id) | **POST** /config/profile/security/ssh-key-profile/{name}/ | Create ssh-key-profile by ID
 [**create_iceberg_profiles**](DefaultApi.md#create_iceberg_profiles) | **POST** /config/profiles/ | Create profile by ID
+[**create_ingest_paa_by_paa_name**](DefaultApi.md#create_ingest_paa_by_paa_name) | **POST** /config/ingest/paa/{paa_name}/ | Update paa by paa name
 [**delete_dynamic_tagging_by_key**](DefaultApi.md#delete_dynamic_tagging_by_key) | **DELETE** /config/dynamic-tagging/key/ | Delete Dynamic-tagging key-value
 [**delete_files_certificates_by_file_name**](DefaultApi.md#delete_files_certificates_by_file_name) | **DELETE** /config/files/certificates/{file_name}/ | Delete a certificate-file.
 [**delete_files_helper_files_by_file_name**](DefaultApi.md#delete_files_helper_files_by_file_name) | **DELETE** /config/files/helper-files/{file_name}/ | Delete a helper-file.
@@ -63,7 +66,10 @@ Method | HTTP request | Description
 [**delete_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id**](DefaultApi.md#delete_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id) | **DELETE** /config/ingest/byoi/default-plugin/tlive-kafka-oc/{name}/ | Delete tlive-kafka-oc by ID
 [**delete_healthbot_ingest_byoi_ingest_mapping_by_id**](DefaultApi.md#delete_healthbot_ingest_byoi_ingest_mapping_by_id) | **DELETE** /config/ingest/byoi/ingest-mapping/{name}/ | Delete ingest-mapping by ID
 [**delete_healthbot_ingest_frequency_profile_by_id**](DefaultApi.md#delete_healthbot_ingest_frequency_profile_by_id) | **DELETE** /config/ingest/frequency-profile/{name}/ | Delete frequency-profile by ID
+[**delete_healthbot_ingest_ifa**](DefaultApi.md#delete_healthbot_ingest_ifa) | **DELETE** /config/ingest/ifa/ | Delete ifa by ID
+[**delete_healthbot_ingest_ifa_device_by_id**](DefaultApi.md#delete_healthbot_ingest_ifa_device_by_id) | **DELETE** /config/ingest/ifa/device/{id}/ | Delete device by ID
 [**delete_healthbot_ingest_outbound_ssh**](DefaultApi.md#delete_healthbot_ingest_outbound_ssh) | **DELETE** /config/ingest/outbound-ssh/ | Delete outbound-ssh by ID
+[**delete_healthbot_ingest_paa_by_paa_name**](DefaultApi.md#delete_healthbot_ingest_paa_by_paa_name) | **DELETE** /config/ingest/paa/{paa_name}/ | Delete paa setup by paa name
 [**delete_healthbot_ingest_settings_byoi_custom_plugin_by_id**](DefaultApi.md#delete_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **DELETE** /config/ingest-settings/byoi/custom-plugin/{name}/ | Delete custom-plugin by ID
 [**delete_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](DefaultApi.md#delete_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **DELETE** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Delete tlive-kafka-oc by ID
 [**delete_healthbot_ingest_settings_byoi_ingest_mapping_by_id**](DefaultApi.md#delete_healthbot_ingest_settings_byoi_ingest_mapping_by_id) | **DELETE** /config/ingest-settings/byoi/ingest-mapping/{name}/ | Delete ingest-mapping by ID
@@ -138,7 +144,12 @@ Method | HTTP request | Description
 [**retrieve_healthbot_ingest_byoi_ingest_mappings**](DefaultApi.md#retrieve_healthbot_ingest_byoi_ingest_mappings) | **GET** /config/ingest/byoi/ingest-mappings/ | Retrieve ingest-mapping
 [**retrieve_healthbot_ingest_frequency_profile**](DefaultApi.md#retrieve_healthbot_ingest_frequency_profile) | **GET** /config/ingest/frequency-profiles/ | Retrieve frequency-profile
 [**retrieve_healthbot_ingest_frequency_profile_by_id**](DefaultApi.md#retrieve_healthbot_ingest_frequency_profile_by_id) | **GET** /config/ingest/frequency-profile/{name}/ | Retrieve frequency-profile by ID
+[**retrieve_healthbot_ingest_ifa**](DefaultApi.md#retrieve_healthbot_ingest_ifa) | **GET** /config/ingest/ifa/ | Retrieve ifa
+[**retrieve_healthbot_ingest_ifa_device_by_id**](DefaultApi.md#retrieve_healthbot_ingest_ifa_device_by_id) | **GET** /config/ingest/ifa/device/{id}/ | Retrieve device by ID
+[**retrieve_healthbot_ingest_ifa_device_ids**](DefaultApi.md#retrieve_healthbot_ingest_ifa_device_ids) | **GET** /config/ingest/ifa/device/ | Retrieve device
+[**retrieve_healthbot_ingest_ifa_devices**](DefaultApi.md#retrieve_healthbot_ingest_ifa_devices) | **GET** /config/ingest/ifa/devices/ | Retrieve devices
 [**retrieve_healthbot_ingest_outbound_ssh**](DefaultApi.md#retrieve_healthbot_ingest_outbound_ssh) | **GET** /config/ingest/outbound-ssh/ | Retrieve outbound-ssh
+[**retrieve_healthbot_ingest_paa_by_paa_name**](DefaultApi.md#retrieve_healthbot_ingest_paa_by_paa_name) | **GET** /config/ingest/paa/{paa_name}/ | Retrieve paa setup config by paa name
 [**retrieve_healthbot_ingest_settings_byoi_custom_plugin_by_id**](DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **GET** /config/ingest-settings/byoi/custom-plugin/{name}/ | Retrieve custom-plugin by ID
 [**retrieve_healthbot_ingest_settings_byoi_custom_plugins**](DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_custom_plugins) | **GET** /config/ingest-settings/byoi/custom-plugins/ | Retrieve custom-plugin by ID
 [**retrieve_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **GET** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Retrieve tlive-kafka-oc by ID
@@ -147,6 +158,7 @@ Method | HTTP request | Description
 [**retrieve_healthbot_ingest_settings_byoi_ingest_mappings**](DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_ingest_mappings) | **GET** /config/ingest-settings/byoi/ingest-mappings/ | Retrieve ingest-mapping
 [**retrieve_healthbot_ingest_settings_frequency_profile**](DefaultApi.md#retrieve_healthbot_ingest_settings_frequency_profile) | **GET** /config/ingest-settings/frequency-profiles/ | Retrieve frequency-profile
 [**retrieve_healthbot_ingest_settings_frequency_profile_by_id**](DefaultApi.md#retrieve_healthbot_ingest_settings_frequency_profile_by_id) | **GET** /config/ingest-settings/frequency-profile/{name}/ | Retrieve frequency-profile by ID
+[**retrieve_healthbot_ingest_settings_paa**](DefaultApi.md#retrieve_healthbot_ingest_settings_paa) | **GET** /config/ingest/paa/ | Retrieve paas
 [**retrieve_healthbot_ingest_settings_tagging_profile_by_id**](DefaultApi.md#retrieve_healthbot_ingest_settings_tagging_profile_by_id) | **GET** /config/ingest-settings/data-enrichment/tagging-profile/{name}/ | Retrieve tagging-profile by ID
 [**retrieve_healthbot_ingest_settings_tagging_profiles**](DefaultApi.md#retrieve_healthbot_ingest_settings_tagging_profiles) | **GET** /config/ingest-settings/data-enrichment/tagging-profiles/ | Retrieve tagging-profile by ID
 [**retrieve_healthbot_ingest_sflow**](DefaultApi.md#retrieve_healthbot_ingest_sflow) | **GET** /config/ingest/sflow/ | Retrieve sflow
@@ -211,6 +223,8 @@ Method | HTTP request | Description
 [**update_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id**](DefaultApi.md#update_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id) | **PUT** /config/ingest/byoi/default-plugin/tlive-kafka-oc/{name}/ | Update tlive-kafka-oc by ID
 [**update_healthbot_ingest_byoi_ingest_mapping_by_id**](DefaultApi.md#update_healthbot_ingest_byoi_ingest_mapping_by_id) | **PUT** /config/ingest/byoi/ingest-mapping/{name}/ | Update ingest-mapping by ID
 [**update_healthbot_ingest_frequency_profile_by_id**](DefaultApi.md#update_healthbot_ingest_frequency_profile_by_id) | **PUT** /config/ingest/frequency-profile/{name}/ | Update frequency-profile by ID
+[**update_healthbot_ingest_ifa**](DefaultApi.md#update_healthbot_ingest_ifa) | **PUT** /config/ingest/ifa/ | Update ifa by ID
+[**update_healthbot_ingest_ifa_device_by_id**](DefaultApi.md#update_healthbot_ingest_ifa_device_by_id) | **PUT** /config/ingest/ifa/device/{id}/ | Update device by ID
 [**update_healthbot_ingest_outbound_ssh**](DefaultApi.md#update_healthbot_ingest_outbound_ssh) | **PUT** /config/ingest/outbound-ssh/ | Update outbound-ssh by ID
 [**update_healthbot_ingest_settings_byoi_custom_plugin_by_id**](DefaultApi.md#update_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **PUT** /config/ingest-settings/byoi/custom-plugin/{name}/ | Update custom-plugin by ID
 [**update_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](DefaultApi.md#update_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **PUT** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Update tlive-kafka-oc by ID
@@ -250,6 +264,7 @@ Method | HTTP request | Description
 [**update_iceberg_profile_security_local_certificate_by_id**](DefaultApi.md#update_iceberg_profile_security_local_certificate_by_id) | **PUT** /config/profile/security/local-certificate/{name}/ | Update local-certificate by ID
 [**update_iceberg_profile_security_ssh_key_profile_by_id**](DefaultApi.md#update_iceberg_profile_security_ssh_key_profile_by_id) | **PUT** /config/profile/security/ssh-key-profile/{name}/ | Update ssh-key-profile by ID
 [**update_iceberg_profiles**](DefaultApi.md#update_iceberg_profiles) | **PUT** /config/profiles/ | Update profile by ID
+[**update_ingest_paa_by_paa_name**](DefaultApi.md#update_ingest_paa_by_paa_name) | **PUT** /config/ingest/paa/{paa_name}/ | Update paa by paa name
 
 
 # **backup_grafana**
@@ -791,6 +806,106 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| ID of name | 
  **frequency_profile** | [**FrequencyProfileSchema**](FrequencyProfileSchema.md)| frequency_profilebody object | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_healthbot_ingest_ifa**
+> create_healthbot_ingest_ifa(ifa, x_iam_token=x_iam_token)
+
+Create ifa by ID
+
+Create operation of resource: ifa
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+ifa = swagger_client.IfaSchema() # IfaSchema | ifabody object
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Create ifa by ID
+    api_instance.create_healthbot_ingest_ifa(ifa, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->create_healthbot_ingest_ifa: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ifa** | [**IfaSchema**](IfaSchema.md)| ifabody object | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_healthbot_ingest_ifa_device_by_id**
+> create_healthbot_ingest_ifa_device_by_id(id, device, x_iam_token=x_iam_token)
+
+Create device by ID
+
+Create operation of resource: device
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+id = 56 # int | ID of ifa device
+device = swagger_client.IfaDeviceSchema() # IfaDeviceSchema | devicebody object
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Create device by ID
+    api_instance.create_healthbot_ingest_ifa_device_by_id(id, device, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->create_healthbot_ingest_ifa_device_by_id: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| ID of ifa device | 
+ **device** | [**IfaDeviceSchema**](IfaDeviceSchema.md)| devicebody object | 
  **x_iam_token** | **str**| authentication header object | [optional] 
 
 ### Return type
@@ -2767,6 +2882,57 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_ingest_paa_by_paa_name**
+> create_ingest_paa_by_paa_name(paa_name, paa_setup, x_iam_token=x_iam_token)
+
+Update paa by paa name
+
+Create operation of resource: paa by paa_name
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+paa_name = 'paa_name_example' # str | name of paa setup
+paa_setup = swagger_client.PaaSetupSchema() # PaaSetupSchema | paa body object
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Update paa by paa name
+    api_instance.create_ingest_paa_by_paa_name(paa_name, paa_setup, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->create_ingest_paa_by_paa_name: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **paa_name** | **str**| name of paa setup | 
+ **paa_setup** | [**PaaSetupSchema**](PaaSetupSchema.md)| paa body object | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_dynamic_tagging_by_key**
 > delete_dynamic_tagging_by_key(key_name, x_iam_token=x_iam_token)
 
@@ -3210,6 +3376,102 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_healthbot_ingest_ifa**
+> delete_healthbot_ingest_ifa(x_iam_token=x_iam_token)
+
+Delete ifa by ID
+
+Delete operation of resource: ifa
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Delete ifa by ID
+    api_instance.delete_healthbot_ingest_ifa(x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->delete_healthbot_ingest_ifa: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_healthbot_ingest_ifa_device_by_id**
+> delete_healthbot_ingest_ifa_device_by_id(id, x_iam_token=x_iam_token)
+
+Delete device by ID
+
+Delete operation of resource: device
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+id = 56 # int | ID of ifa device
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Delete device by ID
+    api_instance.delete_healthbot_ingest_ifa_device_by_id(id, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->delete_healthbot_ingest_ifa_device_by_id: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| ID of ifa device | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_healthbot_ingest_outbound_ssh**
 > delete_healthbot_ingest_outbound_ssh(x_iam_token=x_iam_token)
 
@@ -3240,6 +3502,55 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_healthbot_ingest_paa_by_paa_name**
+> delete_healthbot_ingest_paa_by_paa_name(paa_name, x_iam_token=x_iam_token)
+
+Delete paa setup by paa name
+
+Delete operation of resource: paa by paa name
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+paa_name = 'paa_name_example' # str | name of paa setup
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Delete paa setup by paa name
+    api_instance.delete_healthbot_ingest_paa_by_paa_name(paa_name, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->delete_healthbot_ingest_paa_by_paa_name: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **paa_name** | **str**| name of paa setup | 
  **x_iam_token** | **str**| authentication header object | [optional] 
 
 ### Return type
@@ -6987,6 +7298,208 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **retrieve_healthbot_ingest_ifa**
+> IfaSchema retrieve_healthbot_ingest_ifa(x_iam_token=x_iam_token, working=working)
+
+Retrieve ifa
+
+Retrieve operation of resource: ifa
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+working = true # bool | true queries undeployed configuration (optional)
+
+try:
+    # Retrieve ifa
+    api_response = api_instance.retrieve_healthbot_ingest_ifa(x_iam_token=x_iam_token, working=working)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->retrieve_healthbot_ingest_ifa: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_iam_token** | **str**| authentication header object | [optional] 
+ **working** | **bool**| true queries undeployed configuration | [optional] 
+
+### Return type
+
+[**IfaSchema**](IfaSchema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_healthbot_ingest_ifa_device_by_id**
+> IfaDeviceSchema retrieve_healthbot_ingest_ifa_device_by_id(id, x_iam_token=x_iam_token, working=working)
+
+Retrieve device by ID
+
+Retrieve operation of resource: device
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+id = 56 # int | ID of ifa device
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+working = true # bool | true queries undeployed configuration (optional)
+
+try:
+    # Retrieve device by ID
+    api_response = api_instance.retrieve_healthbot_ingest_ifa_device_by_id(id, x_iam_token=x_iam_token, working=working)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->retrieve_healthbot_ingest_ifa_device_by_id: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| ID of ifa device | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+ **working** | **bool**| true queries undeployed configuration | [optional] 
+
+### Return type
+
+[**IfaDeviceSchema**](IfaDeviceSchema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_healthbot_ingest_ifa_device_ids**
+> list[str] retrieve_healthbot_ingest_ifa_device_ids(x_iam_token=x_iam_token, working=working)
+
+Retrieve device
+
+Retrieve operation of resource: device
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+working = true # bool | true queries undeployed configuration (optional)
+
+try:
+    # Retrieve device
+    api_response = api_instance.retrieve_healthbot_ingest_ifa_device_ids(x_iam_token=x_iam_token, working=working)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->retrieve_healthbot_ingest_ifa_device_ids: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_iam_token** | **str**| authentication header object | [optional] 
+ **working** | **bool**| true queries undeployed configuration | [optional] 
+
+### Return type
+
+**list[str]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_healthbot_ingest_ifa_devices**
+> list[IfaDeviceSchema] retrieve_healthbot_ingest_ifa_devices(x_iam_token=x_iam_token, working=working)
+
+Retrieve devices
+
+Retrieve operation of resource: device
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+working = true # bool | true queries undeployed configuration (optional)
+
+try:
+    # Retrieve devices
+    api_response = api_instance.retrieve_healthbot_ingest_ifa_devices(x_iam_token=x_iam_token, working=working)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->retrieve_healthbot_ingest_ifa_devices: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_iam_token** | **str**| authentication header object | [optional] 
+ **working** | **bool**| true queries undeployed configuration | [optional] 
+
+### Return type
+
+[**list[IfaDeviceSchema]**](IfaDeviceSchema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **retrieve_healthbot_ingest_outbound_ssh**
 > OutboundSshSchema retrieve_healthbot_ingest_outbound_ssh(working=working, x_iam_token=x_iam_token)
 
@@ -7025,6 +7538,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OutboundSshSchema**](OutboundSshSchema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_healthbot_ingest_paa_by_paa_name**
+> PaaSetupSchema retrieve_healthbot_ingest_paa_by_paa_name(paa_name, x_iam_token=x_iam_token, working=working)
+
+Retrieve paa setup config by paa name
+
+Retrieve operation of resource: paa by paa_name
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+paa_name = 'paa_name_example' # str | name of paa setup
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+working = true # bool | true queries undeployed configuration (optional)
+
+try:
+    # Retrieve paa setup config by paa name
+    api_response = api_instance.retrieve_healthbot_ingest_paa_by_paa_name(paa_name, x_iam_token=x_iam_token, working=working)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->retrieve_healthbot_ingest_paa_by_paa_name: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **paa_name** | **str**| name of paa setup | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+ **working** | **bool**| true queries undeployed configuration | [optional] 
+
+### Return type
+
+[**PaaSetupSchema**](PaaSetupSchema.md)
 
 ### Authorization
 
@@ -7433,6 +7998,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FrequencyProfileSchema**](FrequencyProfileSchema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_healthbot_ingest_settings_paa**
+> PaaSetupSchemas retrieve_healthbot_ingest_settings_paa(x_iam_token=x_iam_token, working=working)
+
+Retrieve paas
+
+Retrieve operation of resource: paa
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+working = true # bool | true queries undeployed configuration (optional)
+
+try:
+    # Retrieve paas
+    api_response = api_instance.retrieve_healthbot_ingest_settings_paa(x_iam_token=x_iam_token, working=working)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->retrieve_healthbot_ingest_settings_paa: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_iam_token** | **str**| authentication header object | [optional] 
+ **working** | **bool**| true queries undeployed configuration | [optional] 
+
+### Return type
+
+[**PaaSetupSchemas**](PaaSetupSchemas.md)
 
 ### Authorization
 
@@ -10699,6 +11314,106 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_healthbot_ingest_ifa**
+> update_healthbot_ingest_ifa(ifa, x_iam_token=x_iam_token)
+
+Update ifa by ID
+
+Update operation of resource: ifa
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+ifa = swagger_client.IfaSchema() # IfaSchema | ifabody object
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Update ifa by ID
+    api_instance.update_healthbot_ingest_ifa(ifa, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->update_healthbot_ingest_ifa: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ifa** | [**IfaSchema**](IfaSchema.md)| ifabody object | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_healthbot_ingest_ifa_device_by_id**
+> update_healthbot_ingest_ifa_device_by_id(id, device, x_iam_token=x_iam_token)
+
+Update device by ID
+
+Update operation of resource: device
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+id = 'id_example' # str | ID of ifa device
+device = swagger_client.IfaDeviceSchema() # IfaDeviceSchema | devicebody object
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Update device by ID
+    api_instance.update_healthbot_ingest_ifa_device_by_id(id, device, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->update_healthbot_ingest_ifa_device_by_id: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| ID of ifa device | 
+ **device** | [**IfaDeviceSchema**](IfaDeviceSchema.md)| devicebody object | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_healthbot_ingest_outbound_ssh**
 > update_healthbot_ingest_outbound_ssh(outbound_ssh, x_iam_token=x_iam_token)
 
@@ -12641,6 +13356,57 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **profile** | [**ProfilesSchema**](ProfilesSchema.md)| profilebody object | 
+ **x_iam_token** | **str**| authentication header object | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_ingest_paa_by_paa_name**
+> update_ingest_paa_by_paa_name(paa_name, paa_setup, x_iam_token=x_iam_token)
+
+Update paa by paa name
+
+Update operation of resource: paa by paa_name
+
+### Example
+```python
+from __future__ import print_function
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.DefaultApi()
+paa_name = 'paa_name_example' # str | name of paa setup
+paa_setup = swagger_client.PaaSetupSchema() # PaaSetupSchema | paa body object
+x_iam_token = 'x_iam_token_example' # str | authentication header object (optional)
+
+try:
+    # Update paa by paa name
+    api_instance.update_ingest_paa_by_paa_name(paa_name, paa_setup, x_iam_token=x_iam_token)
+except ApiException as e:
+    print("Exception when calling DefaultApi->update_ingest_paa_by_paa_name: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **paa_name** | **str**| name of paa setup | 
+ **paa_setup** | [**PaaSetupSchema**](PaaSetupSchema.md)| paa body object | 
  **x_iam_token** | **str**| authentication header object | [optional] 
 
 ### Return type

@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 from __future__ import absolute_import
 
 # flake8: noqa
@@ -17,6 +20,7 @@ from jnpr.healthbot.swagger.api.logs_api import LogsApi
 from jnpr.healthbot.swagger.api.organization_api import OrganizationApi
 from jnpr.healthbot.swagger.api.services_api import ServicesApi
 from jnpr.healthbot.swagger.api.system_api import SystemApi
+from jnpr.healthbot.swagger.api.utility_api import UtilityApi
 from jnpr.healthbot.swagger.api.workflow_api import WorkflowApi
 from jnpr.healthbot.swagger.api.workflow_instance_api import WorkflowInstanceApi
 from jnpr.healthbot.swagger.api.workflow_statistics_api import WorkflowStatisticsApi

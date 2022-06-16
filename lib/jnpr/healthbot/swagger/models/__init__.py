@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 # flake8: noqa
@@ -35,6 +38,8 @@ from jnpr.healthbot.swagger.models.customplugin_schema_parameters import Customp
 from jnpr.healthbot.swagger.models.customplugin_schema_securityparameters import CustompluginSchemaSecurityparameters
 from jnpr.healthbot.swagger.models.customplugin_schema_securityparameters_tls import CustompluginSchemaSecurityparametersTls
 from jnpr.healthbot.swagger.models.customplugin_schema_securityparameters_userauthentication import CustompluginSchemaSecurityparametersUserauthentication
+from jnpr.healthbot.swagger.models.data import Data
+from jnpr.healthbot.swagger.models.data1 import Data1
 from jnpr.healthbot.swagger.models.datastore_schema import DatastoreSchema
 from jnpr.healthbot.swagger.models.debug_arguments_schema import DebugArgumentsSchema
 from jnpr.healthbot.swagger.models.debug_job_response_schema import DebugJobResponseSchema
@@ -83,6 +88,7 @@ from jnpr.healthbot.swagger.models.devicegroup_schema_authentication_ssl import 
 from jnpr.healthbot.swagger.models.devicegroup_schema_fielddata import DevicegroupSchemaFielddata
 from jnpr.healthbot.swagger.models.devicegroup_schema_fielddata_rollup import DevicegroupSchemaFielddataRollup
 from jnpr.healthbot.swagger.models.devicegroup_schema_flow import DevicegroupSchemaFlow
+from jnpr.healthbot.swagger.models.devicegroup_schema_flow_ifa import DevicegroupSchemaFlowIfa
 from jnpr.healthbot.swagger.models.devicegroup_schema_flow_netflow import DevicegroupSchemaFlowNetflow
 from jnpr.healthbot.swagger.models.devicegroup_schema_flow_sflow import DevicegroupSchemaFlowSflow
 from jnpr.healthbot.swagger.models.devicegroup_schema_logging import DevicegroupSchemaLogging
@@ -90,6 +96,7 @@ from jnpr.healthbot.swagger.models.devicegroup_schema_logging_byoi import Device
 from jnpr.healthbot.swagger.models.devicegroup_schema_logging_byoi_service import DevicegroupSchemaLoggingByoiService
 from jnpr.healthbot.swagger.models.devicegroup_schema_logging_flow import DevicegroupSchemaLoggingFlow
 from jnpr.healthbot.swagger.models.devicegroup_schema_logging_i_agent import DevicegroupSchemaLoggingIAgent
+from jnpr.healthbot.swagger.models.devicegroup_schema_logging_ifa import DevicegroupSchemaLoggingIfa
 from jnpr.healthbot.swagger.models.devicegroup_schema_logging_m_lmodelbuilder import DevicegroupSchemaLoggingMLmodelbuilder
 from jnpr.healthbot.swagger.models.devicegroup_schema_logging_nativegpb import DevicegroupSchemaLoggingNativegpb
 from jnpr.healthbot.swagger.models.devicegroup_schema_logging_nonsensorrules import DevicegroupSchemaLoggingNonsensorrules
@@ -107,6 +114,7 @@ from jnpr.healthbot.swagger.models.devicegroup_schema_notification import Device
 from jnpr.healthbot.swagger.models.devicegroup_schema_openconfig import DevicegroupSchemaOpenconfig
 from jnpr.healthbot.swagger.models.devicegroup_schema_openconfig_gnmi import DevicegroupSchemaOpenconfigGnmi
 from jnpr.healthbot.swagger.models.devicegroup_schema_outboundssh import DevicegroupSchemaOutboundssh
+from jnpr.healthbot.swagger.models.devicegroup_schema_paragonactiveassurance import DevicegroupSchemaParagonactiveassurance
 from jnpr.healthbot.swagger.models.devicegroup_schema_publish import DevicegroupSchemaPublish
 from jnpr.healthbot.swagger.models.devicegroup_schema_rawdata import DevicegroupSchemaRawdata
 from jnpr.healthbot.swagger.models.devicegroup_schema_rawdata_summarize import DevicegroupSchemaRawdataSummarize
@@ -120,6 +128,7 @@ from jnpr.healthbot.swagger.models.devicegroup_schema_snmp_v3_usm_snmpproxyforwa
 from jnpr.healthbot.swagger.models.devicegroup_schema_syslog import DevicegroupSchemaSyslog
 from jnpr.healthbot.swagger.models.devicegroup_schema_variable import DevicegroupSchemaVariable
 from jnpr.healthbot.swagger.models.devicegroup_schema_variablevalue import DevicegroupSchemaVariablevalue
+from jnpr.healthbot.swagger.models.devices import Devices
 from jnpr.healthbot.swagger.models.devices_schema import DevicesSchema
 from jnpr.healthbot.swagger.models.dynamic_tagging_schema_object import DynamicTaggingSchemaObject
 from jnpr.healthbot.swagger.models.dynamic_taggings_schema_object import DynamicTaggingsSchemaObject
@@ -137,13 +146,12 @@ from jnpr.healthbot.swagger.models.frequency_profile_schema import FrequencyProf
 from jnpr.healthbot.swagger.models.frequencyprofile_schema_nonsensor import FrequencyprofileSchemaNonsensor
 from jnpr.healthbot.swagger.models.frequencyprofile_schema_sensor import FrequencyprofileSchemaSensor
 from jnpr.healthbot.swagger.models.group_health_schema import GroupHealthSchema
-from jnpr.healthbot.swagger.models.hb_graphs import HbGraphs
-from jnpr.healthbot.swagger.models.hb_graphs_query import HbGraphsQuery
-from jnpr.healthbot.swagger.models.hb_graphs_query_where import HbGraphsQueryWhere
-from jnpr.healthbot.swagger.models.hb_graphs_query_where_where_clause import HbGraphsQueryWhereWhereClause
 from jnpr.healthbot.swagger.models.header_pattern_schema import HeaderPatternSchema
 from jnpr.healthbot.swagger.models.headerpattern_schema_field import HeaderpatternSchemaField
 from jnpr.healthbot.swagger.models.health_schema import HealthSchema
+from jnpr.healthbot.swagger.models.ifa_device_schema import IfaDeviceSchema
+from jnpr.healthbot.swagger.models.ifa_schema import IfaSchema
+from jnpr.healthbot.swagger.models.ifa_schema_device import IfaSchemaDevice
 from jnpr.healthbot.swagger.models.ingest_mapping_schema import IngestMappingSchema
 from jnpr.healthbot.swagger.models.ingest_mappings_schema import IngestMappingsSchema
 from jnpr.healthbot.swagger.models.ingest_settings_schema import IngestSettingsSchema
@@ -173,6 +181,7 @@ from jnpr.healthbot.swagger.models.nativegpb_schema_nativegpb import NativegpbSc
 from jnpr.healthbot.swagger.models.network_group_schema import NetworkGroupSchema
 from jnpr.healthbot.swagger.models.network_groups_schema import NetworkGroupsSchema
 from jnpr.healthbot.swagger.models.network_health_tree import NetworkHealthTree
+from jnpr.healthbot.swagger.models.network_variable_schema import NetworkVariableSchema
 from jnpr.healthbot.swagger.models.networkgroup_schema_logging import NetworkgroupSchemaLogging
 from jnpr.healthbot.swagger.models.networkgroup_schema_notification import NetworkgroupSchemaNotification
 from jnpr.healthbot.swagger.models.networkgroup_schema_publish import NetworkgroupSchemaPublish
@@ -192,6 +201,10 @@ from jnpr.healthbot.swagger.models.organization_schema import OrganizationSchema
 from jnpr.healthbot.swagger.models.organizations_schema import OrganizationsSchema
 from jnpr.healthbot.swagger.models.outbound_ssh_schema import OutboundSshSchema
 from jnpr.healthbot.swagger.models.outboundssh_schema_outboundssh import OutboundsshSchemaOutboundssh
+from jnpr.healthbot.swagger.models.paa_setup_schema import PaaSetupSchema
+from jnpr.healthbot.swagger.models.paa_setup_schemas import PaaSetupSchemas
+from jnpr.healthbot.swagger.models.paasetup_schema_security import PaasetupSchemaSecurity
+from jnpr.healthbot.swagger.models.paasetup_schema_security_sasl import PaasetupSchemaSecuritySasl
 from jnpr.healthbot.swagger.models.panel_data_schema import PanelDataSchema
 from jnpr.healthbot.swagger.models.panel_data_schema_add_group_by_tag import PanelDataSchemaAddGroupByTag
 from jnpr.healthbot.swagger.models.panel_data_schema_add_where_condition import PanelDataSchemaAddWhereCondition
@@ -218,6 +231,10 @@ from jnpr.healthbot.swagger.models.pattern_schema import PatternSchema
 from jnpr.healthbot.swagger.models.pattern_schema_constant import PatternSchemaConstant
 from jnpr.healthbot.swagger.models.pattern_schema_field import PatternSchemaField
 from jnpr.healthbot.swagger.models.pattern_set_schema import PatternSetSchema
+from jnpr.healthbot.swagger.models.pin_graphs import PinGraphs
+from jnpr.healthbot.swagger.models.pin_graphs_query import PinGraphsQuery
+from jnpr.healthbot.swagger.models.pin_graphs_query_where import PinGraphsQueryWhere
+from jnpr.healthbot.swagger.models.pin_graphs_query_where_where_clause import PinGraphsQueryWhereWhereClause
 from jnpr.healthbot.swagger.models.playbook_schema import PlaybookSchema
 from jnpr.healthbot.swagger.models.playbooks_schema import PlaybooksSchema
 from jnpr.healthbot.swagger.models.profile_schema import ProfileSchema
@@ -240,6 +257,25 @@ from jnpr.healthbot.swagger.models.report_schema_canvaspanel import ReportSchema
 from jnpr.healthbot.swagger.models.report_schema_graphcanvas import ReportSchemaGraphcanvas
 from jnpr.healthbot.swagger.models.reports_schema import ReportsSchema
 from jnpr.healthbot.swagger.models.resource_schema import ResourceSchema
+from jnpr.healthbot.swagger.models.resource_schema_argument import ResourceSchemaArgument
+from jnpr.healthbot.swagger.models.resource_schema_dependson import ResourceSchemaDependson
+from jnpr.healthbot.swagger.models.resource_schema_field import ResourceSchemaField
+from jnpr.healthbot.swagger.models.resource_schema_foreverydevice import ResourceSchemaForeverydevice
+from jnpr.healthbot.swagger.models.resource_schema_foreverynetworkgroup import ResourceSchemaForeverynetworkgroup
+from jnpr.healthbot.swagger.models.resource_schema_function import ResourceSchemaFunction
+from jnpr.healthbot.swagger.models.resource_schema_getdependenciesfromcache import ResourceSchemaGetdependenciesfromcache
+from jnpr.healthbot.swagger.models.resource_schema_locateresource import ResourceSchemaLocateresource
+from jnpr.healthbot.swagger.models.resource_schema_source import ResourceSchemaSource
+from jnpr.healthbot.swagger.models.resource_schema_source_rule import ResourceSchemaSourceRule
+from jnpr.healthbot.swagger.models.resource_schema_term import ResourceSchemaTerm
+from jnpr.healthbot.swagger.models.resource_schema_userdefinedfunction import ResourceSchemaUserdefinedfunction
+from jnpr.healthbot.swagger.models.resource_schema_where import ResourceSchemaWhere
+from jnpr.healthbot.swagger.models.resource_schema_where_argument import ResourceSchemaWhereArgument
+from jnpr.healthbot.swagger.models.resource_schema_where_doesnotmatchwith import ResourceSchemaWhereDoesnotmatchwith
+from jnpr.healthbot.swagger.models.resource_schema_where_equalto import ResourceSchemaWhereEqualto
+from jnpr.healthbot.swagger.models.resource_schema_where_matcheswith import ResourceSchemaWhereMatcheswith
+from jnpr.healthbot.swagger.models.resource_schema_where_userdefinedfunction import ResourceSchemaWhereUserdefinedfunction
+from jnpr.healthbot.swagger.models.resource_schema_withcapturegroup import ResourceSchemaWithcapturegroup
 from jnpr.healthbot.swagger.models.retention_policies_schema import RetentionPoliciesSchema
 from jnpr.healthbot.swagger.models.retention_policy_schema import RetentionPolicySchema
 from jnpr.healthbot.swagger.models.role_schema import RoleSchema
@@ -293,13 +329,18 @@ from jnpr.healthbot.swagger.models.rule_schema_formula_valuedifference import Ru
 from jnpr.healthbot.swagger.models.rule_schema_function import RuleSchemaFunction
 from jnpr.healthbot.swagger.models.rule_schema_i_agent import RuleSchemaIAgent
 from jnpr.healthbot.swagger.models.rule_schema_i_agent_args import RuleSchemaIAgentArgs
+from jnpr.healthbot.swagger.models.rule_schema_ifa import RuleSchemaIfa
 from jnpr.healthbot.swagger.models.rule_schema_nativegpb import RuleSchemaNativegpb
 from jnpr.healthbot.swagger.models.rule_schema_openconfig import RuleSchemaOpenconfig
+from jnpr.healthbot.swagger.models.rule_schema_prehook import RuleSchemaPrehook
+from jnpr.healthbot.swagger.models.rule_schema_redirectto import RuleSchemaRedirectto
 from jnpr.healthbot.swagger.models.rule_schema_reference import RuleSchemaReference
 from jnpr.healthbot.swagger.models.rule_schema_reference_dataifmissing import RuleSchemaReferenceDataifmissing
+from jnpr.healthbot.swagger.models.rule_schema_return import RuleSchemaReturn
 from jnpr.healthbot.swagger.models.rule_schema_ruleproperties import RuleSchemaRuleproperties
 from jnpr.healthbot.swagger.models.rule_schema_ruleproperties_catalogue import RuleSchemaRulepropertiesCatalogue
 from jnpr.healthbot.swagger.models.rule_schema_ruleproperties_helperfiles import RuleSchemaRulepropertiesHelperfiles
+from jnpr.healthbot.swagger.models.rule_schema_ruleproperties_isscalingrule import RuleSchemaRulepropertiesIsscalingrule
 from jnpr.healthbot.swagger.models.rule_schema_ruleproperties_supporteddevices import RuleSchemaRulepropertiesSupporteddevices
 from jnpr.healthbot.swagger.models.rule_schema_ruleproperties_supporteddevices_juniper import RuleSchemaRulepropertiesSupporteddevicesJuniper
 from jnpr.healthbot.swagger.models.rule_schema_ruleproperties_supporteddevices_juniper_operatingsystem import RuleSchemaRulepropertiesSupporteddevicesJuniperOperatingsystem
@@ -335,6 +376,7 @@ from jnpr.healthbot.swagger.models.rule_schema_when_equalto import RuleSchemaWhe
 from jnpr.healthbot.swagger.models.rule_schema_when_exists import RuleSchemaWhenExists
 from jnpr.healthbot.swagger.models.rule_schema_when_increasingatleastbyrate import RuleSchemaWhenIncreasingatleastbyrate
 from jnpr.healthbot.swagger.models.rule_schema_when_increasingatleastbyvalue import RuleSchemaWhenIncreasingatleastbyvalue
+from jnpr.healthbot.swagger.models.rule_schema_when_matcheswithprevious import RuleSchemaWhenMatcheswithprevious
 from jnpr.healthbot.swagger.models.rule_schema_when_maxrateofincrease import RuleSchemaWhenMaxrateofincrease
 from jnpr.healthbot.swagger.models.rule_schema_when_range import RuleSchemaWhenRange
 from jnpr.healthbot.swagger.models.rule_schema_when_userdefinedfunction import RuleSchemaWhenUserdefinedfunction
@@ -380,6 +422,7 @@ from jnpr.healthbot.swagger.models.taggingprofile_schema_then_addkey import Tagg
 from jnpr.healthbot.swagger.models.taggingprofile_schema_when import TaggingprofileSchemaWhen
 from jnpr.healthbot.swagger.models.taggingprofile_schema_when_doesnotmatchwith import TaggingprofileSchemaWhenDoesnotmatchwith
 from jnpr.healthbot.swagger.models.taggingprofile_schema_when_equalto import TaggingprofileSchemaWhenEqualto
+from jnpr.healthbot.swagger.models.taggingprofile_schema_when_eval import TaggingprofileSchemaWhenEval
 from jnpr.healthbot.swagger.models.taggingprofile_schema_when_exists import TaggingprofileSchemaWhenExists
 from jnpr.healthbot.swagger.models.taggingprofile_schema_when_matcheswithscheduler import TaggingprofileSchemaWhenMatcheswithscheduler
 from jnpr.healthbot.swagger.models.template_schema import TemplateSchema
@@ -391,28 +434,6 @@ from jnpr.healthbot.swagger.models.tlivekafkaoc_schema_security_sasl import Tliv
 from jnpr.healthbot.swagger.models.token import Token
 from jnpr.healthbot.swagger.models.topic_field_capture_schema import TopicFieldCaptureSchema
 from jnpr.healthbot.swagger.models.topic_schema import TopicSchema
-from jnpr.healthbot.swagger.models.topic_schema_argument import TopicSchemaArgument
-from jnpr.healthbot.swagger.models.topic_schema_dependson import TopicSchemaDependson
-from jnpr.healthbot.swagger.models.topic_schema_field import TopicSchemaField
-from jnpr.healthbot.swagger.models.topic_schema_foreverydevice import TopicSchemaForeverydevice
-from jnpr.healthbot.swagger.models.topic_schema_foreverynetworkgroup import TopicSchemaForeverynetworkgroup
-from jnpr.healthbot.swagger.models.topic_schema_function import TopicSchemaFunction
-from jnpr.healthbot.swagger.models.topic_schema_getdependenciesfromcache import TopicSchemaGetdependenciesfromcache
-from jnpr.healthbot.swagger.models.topic_schema_locateresource import TopicSchemaLocateresource
-from jnpr.healthbot.swagger.models.topic_schema_resource import TopicSchemaResource
-from jnpr.healthbot.swagger.models.topic_schema_source import TopicSchemaSource
-from jnpr.healthbot.swagger.models.topic_schema_source_rule import TopicSchemaSourceRule
-from jnpr.healthbot.swagger.models.topic_schema_term import TopicSchemaTerm
-from jnpr.healthbot.swagger.models.topic_schema_userdefinedfunction import TopicSchemaUserdefinedfunction
-from jnpr.healthbot.swagger.models.topic_schema_variable import TopicSchemaVariable
-from jnpr.healthbot.swagger.models.topic_schema_where import TopicSchemaWhere
-from jnpr.healthbot.swagger.models.topic_schema_where_argument import TopicSchemaWhereArgument
-from jnpr.healthbot.swagger.models.topic_schema_where_doesnotmatchwith import TopicSchemaWhereDoesnotmatchwith
-from jnpr.healthbot.swagger.models.topic_schema_where_equalto import TopicSchemaWhereEqualto
-from jnpr.healthbot.swagger.models.topic_schema_where_eval import TopicSchemaWhereEval
-from jnpr.healthbot.swagger.models.topic_schema_where_matcheswith import TopicSchemaWhereMatcheswith
-from jnpr.healthbot.swagger.models.topic_schema_where_userdefinedfunction import TopicSchemaWhereUserdefinedfunction
-from jnpr.healthbot.swagger.models.topic_schema_withcapturegroup import TopicSchemaWithcapturegroup
 from jnpr.healthbot.swagger.models.topics_schema import TopicsSchema
 from jnpr.healthbot.swagger.models.trigger_action_schema import TriggerActionSchema
 from jnpr.healthbot.swagger.models.trigger_schema import TriggerSchema

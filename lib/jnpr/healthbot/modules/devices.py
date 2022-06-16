@@ -22,7 +22,7 @@ class Device(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
 
         super().__init__(hbot)
@@ -42,21 +42,21 @@ class Device(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import DeviceSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
                 ds = DeviceSchema(device_id='xyz', host='xx.xxx.xxx.xxx',
                       authentication={"password": {"password": "xxxxx", "username": "xxxxx"}})
 
                 # we can also later assign values like this
-                ds.description = "HbEZ testing"
+                ds.description = "PinEZ testing"
 
                 # This will add device in candidate DB
-                hb.device.add(schema=ds)
+                pin.device.add(schema=ds)
 
                 # commit changes to master DB
-                hb.commit()
+                pin.commit()
 
         """
         def _add_device(device_id=None):
@@ -136,14 +136,14 @@ class Device(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
                 # This will delete device in candidate DB
-                hb.device.delete('xyz')
+                pin.device.delete('xyz')
 
                 # commit changes to master DB
-                hb.commit()
+                pin.commit()
 
         :returns: True when OK
 
@@ -186,9 +186,9 @@ class Device(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.device.get_ids())
+            from jnpr.healthbot import PINClient
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.device.get_ids())
         """
         devices_list_url = self.hbot.urlfor.device()
         resp = self.api.get(devices_list_url)
@@ -211,13 +211,13 @@ class Device(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                device = hb.device.get('vmx')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                device = pin.device.get('vmx')
                 print(device)
 
-                devices = hb.device.get()
+                devices = pin.device.get()
                 for device in devices:
                     print(device)
 
@@ -268,14 +268,14 @@ class Device(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.device.get('xyz')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.device.get('xyz')
                 schemaObj.description = 'changed description'
-                hb.device.update(schemaObj)
+                pin.device.update(schemaObj)
 
-                hb.device.update(device_id="xyz", host='xx.xxx.x.xx', system_id="xxxx")
+                pin.device.update(device_id="xyz", host='xx.xxx.x.xx', system_id="xxxx")
 
         :returns: True when OK
         """
@@ -308,13 +308,13 @@ class Device(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from pprint import pprint
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                facts = hb.device.get_facts('vmx')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                facts = pin.device.get_facts('vmx')
                 pprint(facts)
-                facts = hb.device.get_facts()
+                facts = pin.device.get_facts()
                 pprint(facts)
 
         :return: Single/List of dicts of facts
@@ -347,10 +347,10 @@ class Device(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.device.health('core'))
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.device.health('core'))
 
         :return: `DeviceHealthTree <jnpr.healthbot.swagger.models.html#deviceheathtree>`_
         """
@@ -363,11 +363,38 @@ class Device(BaseModule):
         return self.hbot._create_schema(resp, DeviceHealthTree)
 
 
+class EMSDevice(BaseModule):
+
+    def __init__(self, hbot):
+        """
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
+        """
+
+        super().__init__(hbot)
+
+    def add(self, device_id: str = None, host: str = None,
+            username: str = None, password: str = None,
+            schema: DeviceSchema = None, **kwargs):
+        print('TBD')
+
+    def delete(self, device_id: str, force: bool = False):
+        print("TBD")
+
+    def get_ids(self):
+        print("TBD")
+
+    def get(self, device_id: str = None, uncommitted: bool = True):
+        print("TBD")
+
+    def update(self, schema: DeviceSchema = None, **kwargs):
+        print("TBD")
+
+
 class DeviceGroup(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
 
         super().__init__(hbot)
@@ -385,24 +412,24 @@ class DeviceGroup(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import DeviceSchema
             from jnpr.healthbot import DeviceGroupSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
                 ds = DeviceSchema(device_id='xyz', host='xx.xxx.xxx.xxx',
                       authentication={"password": {"password": "xxxxx", "username": "xxxxx"}})
 
                 # This will add device in candidate DB
-                hb.device.add(schema=ds)
+                pin.device.add(schema=ds)
 
                 dgs = DeviceGroupSchema(device_group_name="edge",
                                                 description="All devices on the edge",
                                                 devices=['xyz'])
-                hb.device_group.add(dgs)
+                pin.device_group.add(dgs)
 
                 # commit changes to master DB
-                hb.commit()
+                pin.commit()
 
         :returns: True when OK
 
@@ -431,8 +458,8 @@ class DeviceGroup(BaseModule):
 
         Example:
         ::
-            hb.devices.delete('edge')
-            hb.commit()
+            pin.devices.delete('edge')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -466,9 +493,9 @@ class DeviceGroup(BaseModule):
 
         Example:
         ::
-            device_group_schema = hb.device_group.get('edge')
+            device_group_schema = pin.device_group.get('edge')
 
-            groups = hb.device_group.get()
+            groups = pin.device_group.get()
             for group in groups:
                 print(group)
 
@@ -525,12 +552,12 @@ class DeviceGroup(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.device_group.get('Core')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.device_group.get('Core')
                 schemaObj.description = "Changed"
-                hb.device_group.update(schemaObj)
+                pin.device_group.update(schemaObj)
 
         :returns: True when OK
 
@@ -560,10 +587,10 @@ class DeviceGroup(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.device_group.check_device_in_group('vmx', 'QFabric'))
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.device_group.check_device_in_group('vmx', 'QFabric'))
 
         Returns:
             True if action successful
@@ -587,10 +614,10 @@ class DeviceGroup(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                hb.device_group.add_device_in_group('vmx', 'QFabric')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pin.device_group.add_device_in_group('vmx', 'QFabric')
 
         Raises:
             HTTPError: When error making changes via the HBOT API
@@ -625,10 +652,10 @@ class DeviceGroup(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.device_group.health('edge'))
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.device_group.health('edge'))
 
         :return: `DeviceGroupHealthTree <jnpr.healthbot.swagger.models.html#devicegroupheathtree>`_
         """
@@ -646,7 +673,7 @@ class NetworkGroup(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
 
         super().__init__(hbot)
@@ -663,18 +690,18 @@ class NetworkGroup(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                hb.devices.add_network_group(network_group_name="HbEZ")
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pin.devices.add_network_group(network_group_name="PinEZ")
 
             # or
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import NetworkGroupSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                ngs = NetworkGroupSchema(network_group_name="HbEZ")
-                hb.network_group.add(schema = ngs)
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                ngs = NetworkGroupSchema(network_group_name="PinEZ")
+                pin.network_group.add(schema = ngs)
 
         """
         if schema is None:
@@ -707,10 +734,10 @@ class NetworkGroup(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                hb.network_group.delete(network_group_name="HbEZ")
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pin.network_group.delete(network_group_name="PinEZ")
         """
 
         payload = {'network-group-name': network_group_name}
@@ -731,12 +758,12 @@ class NetworkGroup(BaseModule):
 
         Example:
         ::
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.network_group.get(network_group_name="HbEZ"))
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.network_group.get(network_group_name="PinEZ"))
                 # for all network groups
-                print(hb.network_group.get())
+                print(pin.network_group.get())
 
         """
         if network_group_name is not None:
@@ -783,12 +810,12 @@ class NetworkGroup(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.network_group.get("HbEZ")
-                schemaObj.description = "HbEZ example"
-                hb.network_group.update(schemaObj)
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.network_group.get("PinEZ")
+                schemaObj.description = "PinEZ example"
+                pin.network_group.update(schemaObj)
 
         :returns: True when OK
 
@@ -818,10 +845,10 @@ class NetworkGroup(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                print(hb.network_group.health('core'))
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.network_group.health('core'))
 
         :return: `NetworkHealthTree <jnpr.healthbot.swagger.models.html#networkheathtree>`_
         """

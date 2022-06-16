@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deploy_nodes** | **list[str]** |  | [optional] 
+**ifa** | [**DevicegroupSchemaFlowIfa**](DevicegroupSchemaFlowIfa.md) |  | [optional] 
 **netflow** | [**DevicegroupSchemaFlowNetflow**](DevicegroupSchemaFlowNetflow.md) |  | [optional] 
 **sflow** | [**DevicegroupSchemaFlowSflow**](DevicegroupSchemaFlowSflow.md) |  | [optional] 
 

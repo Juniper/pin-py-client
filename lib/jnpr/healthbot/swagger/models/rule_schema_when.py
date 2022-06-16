@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -34,6 +37,8 @@ class RuleSchemaWhen(object):
         'does_not_match_with': 'list[RuleSchemaWhenDoesnotmatchwith]',
         'equal_to': 'list[RuleSchemaWhenEqualto]',
         'exists': 'list[RuleSchemaWhenExists]',
+        'matches_with_previous': 'list[RuleSchemaWhenMatcheswithprevious]',
+        'does_not_match_with_previous': 'list[RuleSchemaWhenMatcheswithprevious]',
         'greater_than': 'list[RuleSchemaWhenEqualto]',
         'greater_than_or_equal_to': 'list[RuleSchemaWhenEqualto]',
         'increasing_at_least_by_rate': 'list[RuleSchemaWhenIncreasingatleastbyrate]',
@@ -54,6 +59,8 @@ class RuleSchemaWhen(object):
         'does_not_match_with': 'does-not-match-with',
         'equal_to': 'equal-to',
         'exists': 'exists',
+        'matches_with_previous': 'matches-with-previous',
+        'does_not_match_with_previous': 'does-not-match-with-previous',
         'greater_than': 'greater-than',
         'greater_than_or_equal_to': 'greater-than-or-equal-to',
         'increasing_at_least_by_rate': 'increasing-at-least-by-rate',
@@ -70,12 +77,14 @@ class RuleSchemaWhen(object):
         'user_defined_function': 'user-defined-function'
     }
 
-    def __init__(self, does_not_match_with=None, equal_to=None, exists=None, greater_than=None, greater_than_or_equal_to=None, increasing_at_least_by_rate=None, increasing_at_least_by_value=None, increasing_at_most_by_rate=None, increasing_at_most_by_value=None, less_than=None, less_than_or_equal_to=None, matches_with=None, max_rate_of_increase=None, min_rate_of_increase=None, not_equal_to=None, range=None, user_defined_function=None):  # noqa: E501
+    def __init__(self, does_not_match_with=None, equal_to=None, exists=None, matches_with_previous=None, does_not_match_with_previous=None, greater_than=None, greater_than_or_equal_to=None, increasing_at_least_by_rate=None, increasing_at_least_by_value=None, increasing_at_most_by_rate=None, increasing_at_most_by_value=None, less_than=None, less_than_or_equal_to=None, matches_with=None, max_rate_of_increase=None, min_rate_of_increase=None, not_equal_to=None, range=None, user_defined_function=None):  # noqa: E501
         """RuleSchemaWhen - a model defined in Swagger"""  # noqa: E501
 
         self._does_not_match_with = None
         self._equal_to = None
         self._exists = None
+        self._matches_with_previous = None
+        self._does_not_match_with_previous = None
         self._greater_than = None
         self._greater_than_or_equal_to = None
         self._increasing_at_least_by_rate = None
@@ -98,6 +107,10 @@ class RuleSchemaWhen(object):
             self.equal_to = equal_to
         if exists is not None:
             self.exists = exists
+        if matches_with_previous is not None:
+            self.matches_with_previous = matches_with_previous
+        if does_not_match_with_previous is not None:
+            self.does_not_match_with_previous = does_not_match_with_previous
         if greater_than is not None:
             self.greater_than = greater_than
         if greater_than_or_equal_to is not None:
@@ -189,6 +202,48 @@ class RuleSchemaWhen(object):
         """
 
         self._exists = exists
+
+    @property
+    def matches_with_previous(self):
+        """Gets the matches_with_previous of this RuleSchemaWhen.  # noqa: E501
+
+
+        :return: The matches_with_previous of this RuleSchemaWhen.  # noqa: E501
+        :rtype: list[RuleSchemaWhenMatcheswithprevious]
+        """
+        return self._matches_with_previous
+
+    @matches_with_previous.setter
+    def matches_with_previous(self, matches_with_previous):
+        """Sets the matches_with_previous of this RuleSchemaWhen.
+
+
+        :param matches_with_previous: The matches_with_previous of this RuleSchemaWhen.  # noqa: E501
+        :type: list[RuleSchemaWhenMatcheswithprevious]
+        """
+
+        self._matches_with_previous = matches_with_previous
+
+    @property
+    def does_not_match_with_previous(self):
+        """Gets the does_not_match_with_previous of this RuleSchemaWhen.  # noqa: E501
+
+
+        :return: The does_not_match_with_previous of this RuleSchemaWhen.  # noqa: E501
+        :rtype: list[RuleSchemaWhenMatcheswithprevious]
+        """
+        return self._does_not_match_with_previous
+
+    @does_not_match_with_previous.setter
+    def does_not_match_with_previous(self, does_not_match_with_previous):
+        """Sets the does_not_match_with_previous of this RuleSchemaWhen.
+
+
+        :param does_not_match_with_previous: The does_not_match_with_previous of this RuleSchemaWhen.  # noqa: E501
+        :type: list[RuleSchemaWhenMatcheswithprevious]
+        """
+
+        self._does_not_match_with_previous = does_not_match_with_previous
 
     @property
     def greater_than(self):

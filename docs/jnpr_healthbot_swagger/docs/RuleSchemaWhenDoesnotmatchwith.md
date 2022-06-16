@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **all** | **list[object]** | With this flag, result is set to True only if all the data matches the given condition | [optional] 
 **any** | **list[object]** | With this flag, result is set to True if any one of the data matches the condition | [optional] 
+**latest** | **list[object]** | With this flag, result is set to True if the latest data matches the condition | [optional] 
 **ignore_case** | **list[object]** | Flag to ignore case while matching the string | [optional] 
 **left_operand** | **str** | Left operand. This is the string in which we have to match the expression. | 
 **right_operand** | **str** | Right operand. This is the match expression. | 

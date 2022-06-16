@@ -9,6 +9,12 @@ from jnpr.healthbot.swagger.models.scheduler_schema import SchedulerSchema
 from jnpr.healthbot.swagger.models.report_schema import ReportSchema
 from jnpr.healthbot.swagger.models.destination_schema import DestinationSchema
 from jnpr.healthbot.swagger.api.license_api import LicenseApi
+from jnpr.healthbot.swagger.models.deployment_schema import DeploymentSchema
+from jnpr.healthbot.swagger.models.deployment_schema_deployment import DeploymentSchemaDeployment
+from jnpr.healthbot.swagger.models.deployment_schema_deployment_kubernetes import DeploymentSchemaDeploymentKubernetes
+from jnpr.healthbot.swagger.models.deployment_schema_deployment_kubernetes_loadbalancer import DeploymentSchemaDeploymentKubernetesLoadbalancer
+from jnpr.healthbot.swagger.models.deployment_schema_deployment_kubernetes_loadbalancer_snmpproxy import DeploymentSchemaDeploymentKubernetesLoadbalancerSnmpproxy
+from jnpr.healthbot.swagger.models.snmp_notification_schema import SnmpNotificationSchema
 from jnpr.healthbot.exception import SchemaError, NotFoundError
 
 from jnpr.healthbot.modules import BaseModule
@@ -22,7 +28,7 @@ class Settings(object):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient client instance
         """
 
         self._hbot = hbot
@@ -33,13 +39,14 @@ class Settings(object):
         self.destination = Destination(hbot)
         self.security = Security(hbot)
         self.license = LicenseKeyManagement(hbot)
-
+        self.deployment = Deployment(hbot)
+        self.snmp_notification = SnmpNotification(hbot)
 
 class Notification(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -55,10 +62,10 @@ class Notification(BaseModule):
         Example:
         ::
 
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.notification.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.notification.get('xyz')
 
         :return: `NotificationSchema(s) <jnpr.healthbot.swagger.models.html#notificationschema>`_
         """
@@ -102,14 +109,14 @@ class Notification(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import NotificationSchema, NotificationSchemaSlack
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                ns = NotificationSchema(notification_name='HbEZ-notification')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                ns = NotificationSchema(notification_name='PinEZ-notification')
                 ns.description = "example of adding notification via API"
-                ns.slack = NotificationSchemaSlack(channel="HbEZ", url='http://testing')
-                hb.settings.notification.add(ns)
+                ns.slack = NotificationSchemaSlack(channel="PinEZ", url='http://testing')
+                pin.settings.notification.add(ns)
 
         :returns: True when OK
 
@@ -133,8 +140,8 @@ class Notification(BaseModule):
 
         Example:
         ::
-            hb.settings.notification.delete('xyz')
-            hb.commit()
+            pin.settings.notification.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -163,11 +170,11 @@ class Notification(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.notification.get('xyz')
+            from jnpr.healthbot import PINClient
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.notification.get('xyz')
                 schemaObj.description = 'changed description'
-                hb.settings.notification.update(schemaObj)
+                pin.settings.notification.update(schemaObj)
 
         :returns: True when OK
         """
@@ -192,7 +199,7 @@ class RetentionPolicy(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -210,13 +217,13 @@ class RetentionPolicy(BaseModule):
 
         Example:
         ::
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.retention_policy.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.retention_policy.get('xyz')
 
                     # for all
-                    print(hb.settings.retention_policy.get()
+                    print(pin.settings.retention_policy.get()
 
         :return: `RetentionPolicySchema(s) <jnpr.healthbot.swagger.models.html#retentionpolicyschema>`_
         """
@@ -264,12 +271,12 @@ class RetentionPolicy(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import RetentionPolicySchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                rps = RetentionPolicySchema(retention_policy_name='HbEZ-rentention-policy')
-                hb.settings.retention_policy.add(rps)
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                rps = RetentionPolicySchema(retention_policy_name='PinEZ-rentention-policy')
+                pin.settings.retention_policy.add(rps)
 
         :returns: True when OK
 
@@ -293,8 +300,8 @@ class RetentionPolicy(BaseModule):
 
         Example:
         ::
-            hb.settings.retention_policy.delete('xyz')
-            hb.commit()
+            pin.settings.retention_policy.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -324,12 +331,12 @@ class RetentionPolicy(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.retention_policy.get('xyz')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.retention_policy.get('xyz')
                 schemaObj.description = 'changed description'
-                hb.settings.retention_policy.update(schemaObj)
+                pin.settings.retention_policy.update(schemaObj)
 
         :returns: True when OK
         """
@@ -354,7 +361,7 @@ class Scheduler(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -369,13 +376,13 @@ class Scheduler(BaseModule):
 
         Example:
         ::
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.scheduler.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.scheduler.get('xyz')
 
                     # for all
-                    print(hb.settings.scheduler.get()
+                    print(pin.settings.scheduler.get()
 
         :return: `SchedulerSchema(s) <jnpr.healthbot.swagger.models.html#schedulerschema>`_
         """
@@ -418,13 +425,13 @@ class Scheduler(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import SchedulerSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                sc = SchedulerSchema(name='HbEZ', repeat={'every': 'week'},
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                sc = SchedulerSchema(name='PinEZ', repeat={'every': 'week'},
                         start_time="2019-07-22T05:32:23Z")
-                hb.settings.scheduler.add(sc)
+                pin.settings.scheduler.add(sc)
 
         :returns: True when OK
 
@@ -447,8 +454,8 @@ class Scheduler(BaseModule):
 
         Example:
         ::
-            hb.settings.scheduler.delete('xyz')
-            hb.commit()
+            pin.settings.scheduler.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -477,11 +484,11 @@ class Scheduler(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.scheduler.get('xyz')
+            from jnpr.healthbot import PINClient
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.scheduler.get('xyz')
                 schemaObj.description = 'changed description'
-                hb.settings.scheduler.update(schemaObj)
+                pin.settings.scheduler.update(schemaObj)
 
         :returns: True when OK
         """
@@ -506,7 +513,7 @@ class Destination(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -522,13 +529,13 @@ class Destination(BaseModule):
         Example:
         ::
 
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.destination.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.destination.get('xyz')
 
                     # for all
-                    print(hb.settings.destination.get()
+                    print(pin.settings.destination.get()
 
         :return: `DestinationSchema(s) <jnpr.healthbot.swagger.models.html#destinationschema>`_
         """
@@ -572,12 +579,12 @@ class Destination(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import DestinationSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                ds = DestinationSchema(name='HbEZ-destination')
-                hb.settings.destination.add(ds)
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                ds = DestinationSchema(name='PinEZ-destination')
+                pin.settings.destination.add(ds)
 
         :returns: True when OK
 
@@ -600,8 +607,8 @@ class Destination(BaseModule):
 
         Example:
         ::
-            hb.settings.destination.delete('xyz')
-            hb.commit()
+            pin.settings.destination.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -630,11 +637,11 @@ class Destination(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.destination.get('xyz')
+            from jnpr.healthbot import PINClient
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.destination.get('xyz')
                 schemaObj.description = 'changed description'
-                hb.settings.destination.update(schemaObj)
+                pin.settings.destination.update(schemaObj)
 
         :returns: True when OK
         """
@@ -659,7 +666,7 @@ class Report(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 
@@ -675,13 +682,13 @@ class Report(BaseModule):
         Example:
         ::
 
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.report.get('xyz')
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.report.get('xyz')
 
                     # for all
-                    print(hb.settings.report.get()
+                    print(pin.settings.report.get()
 
         :return: `ReportSchema(s) <jnpr.healthbot.swagger.models.html#reportschema>`_
         """
@@ -725,25 +732,25 @@ class Report(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
             from jnpr.healthbot import ReportSchema
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
 
                 from jnpr.healthbot import SchedulerSchema
-                sc = SchedulerSchema(name='HbEZ-schedule', repeat={'every': 'week'},
+                sc = SchedulerSchema(name='PinEZ-schedule', repeat={'every': 'week'},
                                 start_time="2019-07-22T05:32:23Z")
-                hb.settings.scheduler.add(sc)
+                pin.settings.scheduler.add(sc)
 
                 from jnpr.healthbot import DestinationSchema
-                ds = DestinationSchema(name='HbEZ-destination',
-                                email={'id': 'nitinkr@juniper.net'})
-                hb.settings.destination.add(ds)
+                ds = DestinationSchema(name='PinEZ-destination',
+                                email={'id': 'sharanyab@juniper.net'})
+                pin.settings.destination.add(ds)
 
                 from jnpr.healthbot import ReportSchema
-                rs = ReportSchema(name="HbEZ-report", destination=['HbEZ-destination'],
-                                format="html", schedule=["HbEZ-schedule"])
-                hb.settings.report.add(rs)
+                rs = ReportSchema(name="PinEZ-report", destination=['PinEZ-destination'],
+                                format="html", schedule=["PinEZ-schedule"])
+                pin.settings.report.add(rs)
 
         :returns: True when OK
 
@@ -767,8 +774,8 @@ class Report(BaseModule):
         Example:
         ::
 
-            hb.settings.report.delete('xyz')
-            hb.commit()
+            pin.settings.report.delete('xyz')
+            pin.commit()
 
         :returns: True when OK
         """
@@ -797,11 +804,11 @@ class Report(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                schemaObj = hb.settings.report.get('xyz')
+            from jnpr.healthbot import PINClient
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                schemaObj = pin.settings.report.get('xyz')
                 schemaObj.description = 'changed description'
-                hb.settings.report.update(schemaObj)
+                pin.settings.report.update(schemaObj)
 
         :returns: True when OK
         """
@@ -826,7 +833,7 @@ class LicenseKeyManagement(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
         self._license_api = LicenseApi(hbot.api_client)
@@ -841,10 +848,10 @@ class LicenseKeyManagement(BaseModule):
         Example:
         ::
 
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.license.get_features()
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.license.get_features()
 
         :return: `LicenseFeatureSchema(s) <jnpr.healthbot.swagger.models.html#licensefeatureschema>`_
 
@@ -860,11 +867,11 @@ class LicenseKeyManagement(BaseModule):
         Example:
         ::
 
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
                     # print all existing licence ids
-                    print(hb.settings.license.get()
+                    print(pin.settings.license.get()
         :return: `List of license ids`
 
         """
@@ -881,13 +888,13 @@ class LicenseKeyManagement(BaseModule):
         Example:
         ::
 
-                from jnpr.healthbot import HealthBotClient
+                from jnpr.healthbot import PINClient
 
-                with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                    print(hb.settings.license.get()
+                with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                    print(pin.settings.license.get()
 
                     # for given licence id
-                    print(hb.settings.report.get('xxxxx')
+                    print(pin.settings.report.get('xxxxx')
 
         :return: `LicenseKeySchema(s) <jnpr.healthbot.swagger.models.html#licensekeyschema>`_
         """
@@ -908,10 +915,10 @@ class LicenseKeyManagement(BaseModule):
         Example:
         ::
 
-            from jnpr.healthbot import HealthBotClient
+            from jnpr.healthbot import PINClient
 
-            with HealthBotClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as hb:
-                hb.settings.license.add(license_file='/var/tmp/xyz')
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                pin.settings.license.add(license_file='/var/tmp/xyz')
 
         :returns: license_id if OK
 
@@ -929,7 +936,7 @@ class LicenseKeyManagement(BaseModule):
         Example:
         ::
 
-            hb.settings.license.delete('xx-xxx-xxx-xxx-xx')
+            pin.settings.license.delete('xx-xxx-xxx-xxx-xx')
 
         :returns: True when OK
         """
@@ -938,3 +945,128 @@ class LicenseKeyManagement(BaseModule):
             license_id, x_iam_token=self.authorization)
 
         return True
+
+
+class Deployment(BaseModule):
+    def __init__(self, hbot):
+        """
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
+        """
+        super().__init__(hbot)
+
+    def add(self, schema: DeploymentSchema = None, ip=None):
+        if schema is None:
+            if ip is not None:
+                schema = DeploymentSchema(
+                    deployment=DeploymentSchemaDeployment(
+                        kubernetes=DeploymentSchemaDeploymentKubernetes(
+                            loadbalancer=DeploymentSchemaDeploymentKubernetesLoadbalancer(
+                                snmp_proxy=DeploymentSchemaDeploymentKubernetesLoadbalancerSnmpproxy(
+                                    virtual_ip_address=ip)))))
+            else:
+                logger.error("Please configure IP address or pass the DeploymentSchema")
+
+        payload = self.hbot._create_payload(schema)
+        deployment_url = self.hbot.urlfor.deployment()
+        # TODO, change it to post once IAM roles are added for post endpoint of /deployment
+        response = self.api.put(deployment_url, json=payload)
+        if response.status_code != 200:
+            logger.error(response.text)
+        response.raise_for_status()
+        return True
+
+    def get(self, uncommitted: bool = True):
+        deployment_url = self.hbot.urlfor.deployment()
+        if uncommitted:
+            deployment_url += self.hbot.apiopt_candidate
+        response = self.api.get(deployment_url)
+        response_json = response.json()
+        if response.status_code != 200:
+            logger.error(response.text)
+            raise NotFoundError(response_json)
+        return  response_json
+
+    def delete(self):
+        # Delete end point for deployment works from PI 5.0.0 onwards
+        deployment_url = self.hbot.urlfor.deployment()
+        response = self.api.delete(deployment_url)
+        if response.status_code != 200:
+            logger.error(response.text)
+        response.raise_for_status()
+        return True
+
+    def update(self, schema: DeploymentSchema = None, ip=None):
+        if schema is None:
+            if ip is not None:
+                schema = DeploymentSchema(
+                    deployment=DeploymentSchemaDeployment(
+                        kubernetes=DeploymentSchemaDeploymentKubernetes(
+                            loadbalancer=DeploymentSchemaDeploymentKubernetesLoadbalancer(
+                                snmp_proxy=DeploymentSchemaDeploymentKubernetesLoadbalancerSnmpproxy(
+                                    virtual_ip_address=ip)))))
+            else:
+                logger.error("Please configure IP address or pass the DeploymentSchema")
+
+        payload = self.hbot._create_payload(schema)
+        deployment_url = self.hbot.urlfor.deployment()
+        response = self.api.put(deployment_url, json=payload)
+        if response.status_code != 200:
+            logger.error(response.text)
+        response.raise_for_status()
+        return True
+
+
+class SnmpNotification(BaseModule):
+    def __init__(self, hbot):
+        """
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
+        """
+        super().__init__(hbot)
+
+    def add(self, schema: SnmpNotificationSchema = None, **kwargs):
+        if kwargs:
+            if schema is not None:
+                raise SystemError("schema and kwargs are mutually exclusive")
+            else:
+                schema = SnmpNotificationSchema(**kwargs)
+        payload = self.hbot._create_payload(schema)
+        snmp_notifications_url = self.hbot.urlfor.snmp_notifications()
+        response = self.api.post(snmp_notifications_url, json=payload)
+        if response.status_code != 200:
+            logger.error(response.text)
+        response.raise_for_status()
+        return True
+
+    def update(self, schema: SnmpNotificationSchema = None, **kwargs):
+        if kwargs:
+            if schema is not None:
+                raise SystemError("schema and kwargs are mutually exclusive")
+            else:
+                schema = SnmpNotificationSchema(**kwargs)
+        payload = self.hbot._create_payload(schema)
+        snmp_notifications_url = self.hbot.urlfor.snmp_notifications()
+        response = self.api.put(snmp_notifications_url, json=payload)
+        if response.status_code != 200:
+            logger.error(response.text)
+        response.raise_for_status()
+        return True
+
+    def get(self, uncommitted: bool = True):
+        snmp_notifications_url = self.hbot.urlfor.snmp_notifications()
+        if uncommitted:
+            snmp_notifications_url += self.hbot.apiopt_candidate
+        response = self.api.get(snmp_notifications_url)
+        response_json = response.json()
+        if response.status_code != 200:
+            logger.error(response.text)
+            raise NotFoundError(response_json)
+        return  response_json
+
+    def delete(self):
+        snmp_notifications_url = self.hbot.urlfor.snmp_notifications()
+        response = self.api.delete(snmp_notifications_url)
+        if response.status_code != 200:
+            logger.error(response.text)
+        response.raise_for_status()
+        return True
+

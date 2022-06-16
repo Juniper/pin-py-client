@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -31,12 +34,14 @@ class ResourceSchema(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'depends_on': 'list[TopicSchemaDependson]',
+        'depends_on': 'list[ResourceSchemaDependson]',
         'description': 'str',
-        'field': 'list[TopicSchemaField]',
-        'function': 'list[TopicSchemaFunction]',
+        'field': 'list[ResourceSchemaField]',
+        'function': 'list[ResourceSchemaFunction]',
         'keys': 'list[str]',
-        'resource_name': 'str'
+        'resource_name': 'str',
+        'is_default': 'bool',
+        'is_modified': 'bool'
     }
 
     attribute_map = {
@@ -45,10 +50,12 @@ class ResourceSchema(object):
         'field': 'field',
         'function': 'function',
         'keys': 'keys',
-        'resource_name': 'resource-name'
+        'resource_name': 'resource-name',
+        'is_default': 'is-default',
+        'is_modified': 'is-modified'
     }
 
-    def __init__(self, depends_on=None, description=None, field=None, function=None, keys=None, resource_name=None):  # noqa: E501
+    def __init__(self, depends_on=None, description=None, field=None, function=None, keys=None, resource_name=None, is_default=None, is_modified=None):  # noqa: E501
         """ResourceSchema - a model defined in Swagger"""  # noqa: E501
 
         self._depends_on = None
@@ -57,6 +64,8 @@ class ResourceSchema(object):
         self._function = None
         self._keys = None
         self._resource_name = None
+        self._is_default = None
+        self._is_modified = None
         self.discriminator = None
 
         if depends_on is not None:
@@ -70,6 +79,10 @@ class ResourceSchema(object):
         if keys is not None:
             self.keys = keys
         self.resource_name = resource_name
+        if is_default is not None:
+            self.is_default = is_default
+        if is_modified is not None:
+            self.is_modified = is_modified
 
     @property
     def depends_on(self):
@@ -77,7 +90,7 @@ class ResourceSchema(object):
 
 
         :return: The depends_on of this ResourceSchema.  # noqa: E501
-        :rtype: list[TopicSchemaDependson]
+        :rtype: list[ResourceSchemaDependson]
         """
         return self._depends_on
 
@@ -87,7 +100,7 @@ class ResourceSchema(object):
 
 
         :param depends_on: The depends_on of this ResourceSchema.  # noqa: E501
-        :type: list[TopicSchemaDependson]
+        :type: list[ResourceSchemaDependson]
         """
 
         self._depends_on = depends_on
@@ -121,7 +134,7 @@ class ResourceSchema(object):
 
 
         :return: The field of this ResourceSchema.  # noqa: E501
-        :rtype: list[TopicSchemaField]
+        :rtype: list[ResourceSchemaField]
         """
         return self._field
 
@@ -131,7 +144,7 @@ class ResourceSchema(object):
 
 
         :param field: The field of this ResourceSchema.  # noqa: E501
-        :type: list[TopicSchemaField]
+        :type: list[ResourceSchemaField]
         """
 
         self._field = field
@@ -142,7 +155,7 @@ class ResourceSchema(object):
 
 
         :return: The function of this ResourceSchema.  # noqa: E501
-        :rtype: list[TopicSchemaFunction]
+        :rtype: list[ResourceSchemaFunction]
         """
         return self._function
 
@@ -152,7 +165,7 @@ class ResourceSchema(object):
 
 
         :param function: The function of this ResourceSchema.  # noqa: E501
-        :type: list[TopicSchemaFunction]
+        :type: list[ResourceSchemaFunction]
         """
 
         self._function = function
@@ -208,6 +221,52 @@ class ResourceSchema(object):
             raise ValueError(r"Invalid value for `resource_name`, must be a follow pattern or equal to `/^[a-z][a-z0-9-]*$/`")  # noqa: E501
 
         self._resource_name = resource_name
+
+    @property
+    def is_default(self):
+        """Gets the is_default of this ResourceSchema.  # noqa: E501
+
+        Flag to denote default resource  # noqa: E501
+
+        :return: The is_default of this ResourceSchema.  # noqa: E501
+        :rtype: bool
+        """
+        return self._is_default
+
+    @is_default.setter
+    def is_default(self, is_default):
+        """Sets the is_default of this ResourceSchema.
+
+        Flag to denote default resource  # noqa: E501
+
+        :param is_default: The is_default of this ResourceSchema.  # noqa: E501
+        :type: bool
+        """
+
+        self._is_default = is_default
+
+    @property
+    def is_modified(self):
+        """Gets the is_modified of this ResourceSchema.  # noqa: E501
+
+        Flag to denote if default resource is modified  # noqa: E501
+
+        :return: The is_modified of this ResourceSchema.  # noqa: E501
+        :rtype: bool
+        """
+        return self._is_modified
+
+    @is_modified.setter
+    def is_modified(self, is_modified):
+        """Sets the is_modified of this ResourceSchema.
+
+        Flag to denote if default resource is modified  # noqa: E501
+
+        :param is_modified: The is_modified of this ResourceSchema.  # noqa: E501
+        :type: bool
+        """
+
+        self._is_modified = is_modified
 
     def to_dict(self):
         """Returns the model properties as a dict"""

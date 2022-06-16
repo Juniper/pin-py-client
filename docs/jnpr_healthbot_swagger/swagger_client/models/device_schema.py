@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -33,6 +36,7 @@ class DeviceSchema(object):
     swagger_types = {
         'authentication': 'DevicegroupSchemaAuthentication',
         'description': 'str',
+        'name': 'str',
         'device_id': 'str',
         'uuid': 'str',
         'flow': 'DeviceSchemaFlow',
@@ -49,12 +53,14 @@ class DeviceSchema(object):
         'system_id': 'str',
         'use_ingest_receive_time': 'list[object]',
         'variable': 'list[DeviceSchemaVariable]',
-        'vendor': 'DeviceSchemaVendor'
+        'vendor': 'DeviceSchemaVendor',
+        'marked_for_delete': 'bool'
     }
 
     attribute_map = {
         'authentication': 'authentication',
         'description': 'description',
+        'name': 'name',
         'device_id': 'device-id',
         'uuid': 'uuid',
         'flow': 'flow',
@@ -71,14 +77,16 @@ class DeviceSchema(object):
         'system_id': 'system-id',
         'use_ingest_receive_time': 'use-ingest-receive-time',
         'variable': 'variable',
-        'vendor': 'vendor'
+        'vendor': 'vendor',
+        'marked_for_delete': 'marked-for-delete'
     }
 
-    def __init__(self, authentication=None, description=None, device_id=None, uuid=None, flow=None, host=None, i_agent=None, open_config=None, server_monitoring=None, outbound_ssh=None, owner=None, snmp=None, syslog=None, tagging_profile=None, timezone=None, system_id=None, use_ingest_receive_time=None, variable=None, vendor=None):  # noqa: E501
+    def __init__(self, authentication=None, description=None, name=None, device_id=None, uuid=None, flow=None, host=None, i_agent=None, open_config=None, server_monitoring=None, outbound_ssh=None, owner=None, snmp=None, syslog=None, tagging_profile=None, timezone=None, system_id=None, use_ingest_receive_time=None, variable=None, vendor=None, marked_for_delete=None):  # noqa: E501
         """DeviceSchema - a model defined in Swagger"""  # noqa: E501
 
         self._authentication = None
         self._description = None
+        self._name = None
         self._device_id = None
         self._uuid = None
         self._flow = None
@@ -96,12 +104,15 @@ class DeviceSchema(object):
         self._use_ingest_receive_time = None
         self._variable = None
         self._vendor = None
+        self._marked_for_delete = None
         self.discriminator = None
 
         if authentication is not None:
             self.authentication = authentication
         if description is not None:
             self.description = description
+        if name is not None:
+            self.name = name
         self.device_id = device_id
         if uuid is not None:
             self.uuid = uuid
@@ -134,6 +145,8 @@ class DeviceSchema(object):
             self.variable = variable
         if vendor is not None:
             self.vendor = vendor
+        if marked_for_delete is not None:
+            self.marked_for_delete = marked_for_delete
 
     @property
     def authentication(self):
@@ -178,6 +191,33 @@ class DeviceSchema(object):
         """
 
         self._description = description
+
+    @property
+    def name(self):
+        """Gets the name of this DeviceSchema.  # noqa: E501
+
+        Name for the device. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*  # noqa: E501
+
+        :return: The name of this DeviceSchema.  # noqa: E501
+        :rtype: str
+        """
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        """Sets the name of this DeviceSchema.
+
+        Name for the device. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*  # noqa: E501
+
+        :param name: The name of this DeviceSchema.  # noqa: E501
+        :type: str
+        """
+        if name is not None and len(name) > 64:
+            raise ValueError("Invalid value for `name`, length must be less than or equal to `64`")  # noqa: E501
+        if name is not None and not re.search(r'^[a-zA-Z0-9]([a-zA-Z0-9_-]*\\.*)*$', name):  # noqa: E501
+            raise ValueError(r"Invalid value for `name`, must be a follow pattern or equal to `/^[a-zA-Z0-9]([a-zA-Z0-9_-]*\\.*)*$/`")  # noqa: E501
+
+        self._name = name
 
     @property
     def device_id(self):
@@ -565,6 +605,29 @@ class DeviceSchema(object):
         """
 
         self._vendor = vendor
+
+    @property
+    def marked_for_delete(self):
+        """Gets the marked_for_delete of this DeviceSchema.  # noqa: E501
+
+        Mark device for deletion  # noqa: E501
+
+        :return: The marked_for_delete of this DeviceSchema.  # noqa: E501
+        :rtype: bool
+        """
+        return self._marked_for_delete
+
+    @marked_for_delete.setter
+    def marked_for_delete(self, marked_for_delete):
+        """Sets the marked_for_delete of this DeviceSchema.
+
+        Mark device for deletion  # noqa: E501
+
+        :param marked_for_delete: The marked_for_delete of this DeviceSchema.  # noqa: E501
+        :type: bool
+        """
+
+        self._marked_for_delete = marked_for_delete
 
     def to_dict(self):
         """Returns the model properties as a dict"""

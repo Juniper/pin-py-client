@@ -1,9 +1,12 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 import unittest
 from nose.plugins.attrib import attr
 
 from mock import patch, PropertyMock
 
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from jnpr.healthbot import NotificationSchema
 from jnpr.healthbot import NotificationSchemaSlack
 from jnpr.healthbot import SchedulerSchema
@@ -24,13 +27,13 @@ class TestSettings(unittest.TestCase):
         self.mock_user_login = _mock_user_login
         self.mock_request = mock_request
         self.mock_request().get.side_effect = self._mock_manager
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.version',
+        with patch('jnpr.healthbot.healthbot.PINClient.version',
                    new_callable=PropertyMock) as mock_ver:
-            with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+            with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                        new_callable=PropertyMock) as mock_cnf:
                 mock_ver.return_value = '4.0.0'
                 mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
-                self.conn = HealthBotClient(
+                self.conn = PINClient(
                     server='1.1.1.1',
                     user='test',
                     password='password123').open()
@@ -40,28 +43,28 @@ class TestSettings(unittest.TestCase):
         self.conn.close()
 
     def test_add_notification(self):
-        ns = NotificationSchema(notification_name='HbEZ-notification')
+        ns = NotificationSchema(notification_name='PinEZ-notification')
         ns.description = "example of adding notification via API"
-        nss = NotificationSchemaSlack(channel="HbEZ", url='https://testing')
+        nss = NotificationSchemaSlack(channel="PinEZ", url='https://testing')
         ns.slack = nss
         self.assertTrue(self.conn.settings.notification.add(ns))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/notification/HbEZ-notification')
+            'https://1.1.1.1:8080/api/v2/config/notification/PinEZ-notification')
         # add without schema
         self.assertTrue(
             self.conn.settings.notification.add(
-                notification_name='HbEZ-notification',
+                notification_name='PinEZ-notification',
                 description="example of adding notification via API"))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/notification/HbEZ-notification')
+            'https://1.1.1.1:8080/api/v2/config/notification/PinEZ-notification')
 
     def test_add_scheduler(self):
         sc = SchedulerSchema(
-            name='HbEZ-schedule',
+            name='PinEZ-schedule',
             repeat={
                 'every': 'week'},
             start_time="2019-07-22T05:32:23Z")
@@ -69,84 +72,84 @@ class TestSettings(unittest.TestCase):
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/system-settings/scheduler/HbEZ-schedule')
+            'https://1.1.1.1:8080/api/v2/config/system-settings/scheduler/PinEZ-schedule')
         # add without schema
         self.assertTrue(
             self.conn.settings.scheduler.add(
-                name='HbEZ-schedule',
+                name='PinEZ-schedule',
                 repeat={
                     'every': 'week'},
                 start_time="2019-07-22T05:32:23Z"))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/system-settings/scheduler/HbEZ-schedule')
+            'https://1.1.1.1:8080/api/v2/config/system-settings/scheduler/PinEZ-schedule')
 
     def test_add_destinaton(self):
         ds = DestinationSchema(
-            name='HbEZ-destination',
+            name='PinEZ-destination',
             email={
                 'id': 'xyz@abc.com'})
         self.assertTrue(self.conn.settings.destination.add(ds))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/destination/HbEZ-destination')
+            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/destination/PinEZ-destination')
         # add without schema
         self.assertTrue(self.conn.settings.destination.add(
-            name='HbEZ-destination', email={'id': 'xyz@abc.com'}))
+            name='PinEZ-destination', email={'id': 'xyz@abc.com'}))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/destination/HbEZ-destination')
+            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/destination/PinEZ-destination')
 
     def test_add_report(self):
         rs = ReportSchema(
-            name="HbEZ-report",
-            destination=['HbEZ-destination'],
+            name="PinEZ-report",
+            destination=['PinEZ-destination'],
             format="html",
-            schedule=["HbEZ-schedule"])
+            schedule=["PinEZ-schedule"])
         self.assertTrue(self.conn.settings.report.add(rs))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/report/HbEZ-report')
+            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/report/PinEZ-report')
         # add without schema
         self.assertTrue(
             self.conn.settings.report.add(
-                name="HbEZ-report",
-                destination=['HbEZ-destination'],
+                name="PinEZ-report",
+                destination=['PinEZ-destination'],
                 format="html",
-                schedule=["HbEZ-schedule"]))
+                schedule=["PinEZ-schedule"]))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/report/HbEZ-report')
+            'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/report/PinEZ-report')
 
     def test_add_retention_policy(self):
-        rps = RetentionPolicySchema(retention_policy_name='HbEZ-testing')
+        rps = RetentionPolicySchema(retention_policy_name='PinEZ-testing')
         self.assertTrue(
             self.conn.settings.retention_policy.add(rps))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/retention-policy/HbEZ-testing')
+            'https://1.1.1.1:8080/api/v2/config/retention-policy/PinEZ-testing')
         # without creating schema
         self.assertTrue(
             self.conn.settings.retention_policy.add(
-                retention_policy_name='HbEZ-testing'))
+                retention_policy_name='PinEZ-testing'))
         self.assertEqual(self.mock_request().mock_calls[2][0], 'post')
         self.assertEqual(
             self.mock_request().mock_calls[2][1][0],
-            'https://1.1.1.1:8080/api/v2/config/retention-policy/HbEZ-testing')
+            'https://1.1.1.1:8080/api/v2/config/retention-policy/PinEZ-testing')
 
     def test_get_notification(self):
         ns = self.conn.settings.notification.get(
-            notification_name='HbEZ-notification')
+            notification_name='PinEZ-notification')
         self.assertEqual(
             ns.description,
             "example of adding notification via API")
-        self.assertEqual(ns.notification_name, "HbEZ-notification")
+        self.assertEqual(ns.notification_name, "PinEZ-notification")
 
     def test_get_notification_error(self):
         self.assertRaises(
@@ -155,24 +158,24 @@ class TestSettings(unittest.TestCase):
             notification_name='error')
 
     def test_get_scheduler(self):
-        sc = self.conn.settings.scheduler.get(name='HbEZ-schedule')
+        sc = self.conn.settings.scheduler.get(name='PinEZ-schedule')
         self.assertEqual(sc.repeat, {
             "every": "week"
         })
 
     def test_get_destination(self):
         ds = self.conn.settings.destination.get(
-            name='HbEZ-destination')
+            name='PinEZ-destination')
         self.assertEqual(ds.email, {'id': 'xyz@abc.com'})
 
     def test_get_report(self):
-        rs = self.conn.settings.report.get(name="HbEZ-report")
+        rs = self.conn.settings.report.get(name="PinEZ-report")
         self.assertEqual(rs.format, 'html')
 
     def test_get_retention_policy(self):
         rp = self.conn.settings.retention_policy.get(
-            'HbEZ-testing')
-        self.assertEqual(rp.retention_policy_name, "HbEZ-testing")
+            'PinEZ-testing')
+        self.assertEqual(rp.retention_policy_name, "PinEZ-testing")
 
     def test_get_reports(self):
         rs = self.conn.settings.report.get()
@@ -200,41 +203,41 @@ class TestSettings(unittest.TestCase):
 
     def test_delete_notification(self):
         ret = self.conn.settings.notification.delete(
-            notification_name='HbEZ-notification')
+            notification_name='PinEZ-notification')
         self.assertTrue(ret)
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
     def test_delete_scheduler(self):
         ret = self.conn.settings.scheduler.delete(
-            name='HbEZ-schedule')
+            name='PinEZ-schedule')
         self.assertTrue(ret)
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
     def test_delete_destinaton(self):
         ret = self.conn.settings.destination.delete(
-            name='HbEZ-destination')
+            name='PinEZ-destination')
         self.assertTrue(ret)
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
     def test_delete_report(self):
-        ret = self.conn.settings.report.delete(name="HbEZ-report")
+        ret = self.conn.settings.report.delete(name="PinEZ-report")
         self.assertTrue(ret)
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
     def test_delete_retention_policy(self):
         ret = self.conn.settings.retention_policy.delete(
-            "HbEZ-testing")
+            "PinEZ-testing")
         self.assertTrue(ret)
         self.assertEqual(self.mock_request().mock_calls[2][0],
                          'delete')
 
     def test_update_notification(self):
         ns = self.conn.settings.notification.get(
-            notification_name='HbEZ-notification')
+            notification_name='PinEZ-notification')
         from jnpr.healthbot import NotificationSchemaHttppost
         ns.http_post = NotificationSchemaHttppost(url='https://juniper.net')
         self.conn.settings.notification.update(ns)
@@ -243,7 +246,7 @@ class TestSettings(unittest.TestCase):
             'https://juniper.net')
 
     def test_update_scheduler(self):
-        sc = self.conn.settings.scheduler.get(name='HbEZ-schedule')
+        sc = self.conn.settings.scheduler.get(name='PinEZ-schedule')
         sc.repeat = {'every': 'daily'}
         self.conn.settings.scheduler.update(sc)
         self.assertEqual(
@@ -252,7 +255,7 @@ class TestSettings(unittest.TestCase):
 
     def test_update_destination(self):
         ds = self.conn.settings.destination.get(
-            name='HbEZ-destination')
+            name='PinEZ-destination')
         ds.email = {'id': 'pqr@abc.com'}
         self.conn.settings.destination.update(ds)
         self.assertEqual(
@@ -260,7 +263,7 @@ class TestSettings(unittest.TestCase):
             'pqr@abc.com')
 
     def test_update_report(self):
-        rs = self.conn.settings.report.get(name="HbEZ-report")
+        rs = self.conn.settings.report.get(name="PinEZ-report")
         rs.format = 'json'
         self.conn.settings.report.update(rs)
         self.assertEqual(
@@ -269,7 +272,7 @@ class TestSettings(unittest.TestCase):
 
     def test_update_retention_policy(self):
         rp = self.conn.settings.retention_policy.get(
-            'HbEZ-testing')
+            'PinEZ-testing')
         rp.duration = '10h'
         self.conn.settings.retention_policy.update(rp)
         self.assertEqual(
@@ -315,39 +318,39 @@ class TestSettings(unittest.TestCase):
             def raise_for_status(self):
                 return None
 
-        if args[0] == 'https://1.1.1.1:8080/api/v2/config/notification/HbEZ-notification/?working=true':
+        if args[0] == 'https://1.1.1.1:8080/api/v2/config/notification/PinEZ-notification/?working=true':
             return MockResponse({
                 "description": "example of adding notification via API",
-                "notification-name": "HbEZ-notification",
+                "notification-name": "PinEZ-notification",
                 "slack": {
-                    "channel": "HbEZ",
+                    "channel": "PinEZ",
                     "url": "http://testing"
                 }
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/system-settings/scheduler/HbEZ-schedule/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/system-settings/scheduler/PinEZ-schedule/?working=true':
             return MockResponse({
-                "name": "HbEZ-schedule",
+                "name": "PinEZ-schedule",
                 "repeat": {
                     "every": "week"
                 },
                 "start-time": "2019-07-22T05:32:23Z"
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/destination/HbEZ-destination/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/destination/PinEZ-destination/?working=true':
             return MockResponse({
                 "email": {
                     "id": "xyz@abc.com"
                 },
-                "name": "HbEZ-destination"
+                "name": "PinEZ-destination"
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/report/HbEZ-report/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/report/PinEZ-report/?working=true':
             return MockResponse({
                 "destination": [
-                    "HbEZ-destination"
+                    "PinEZ-destination"
                 ],
                 "format": "html",
-                "name": "HbEZ-report",
+                "name": "PinEZ-report",
                 "schedule": [
-                    "HbEZ-schedule"
+                    "PinEZ-schedule"
                 ]
             }, 200)
         elif args[0] == 'https://1.1.1.1:8080/api/v2/config/system-settings/report-generation/reports/?working=true':
@@ -355,12 +358,12 @@ class TestSettings(unittest.TestCase):
                 "report": [
                     {
                         "destination": [
-                            "HbEZ-destination"
+                            "PinEZ-destination"
                         ],
                         "format": "html",
-                        "name": "HbEZ-report",
+                        "name": "PinEZ-report",
                         "schedule": [
-                            "HbEZ-schedule"
+                            "PinEZ-schedule"
                         ]
                     }
                 ]
@@ -370,9 +373,9 @@ class TestSettings(unittest.TestCase):
                 "notification": [
                     {
                         "description": "example of adding notification via API",
-                        "notification-name": "HbEZ-notification",
+                        "notification-name": "PinEZ-notification",
                         "slack": {
-                            "channel": "HbEZ",
+                            "channel": "PinEZ",
                             "url": "http://testing"
                         }
                     }
@@ -382,7 +385,7 @@ class TestSettings(unittest.TestCase):
             return MockResponse({
                 "scheduler": [
                     {
-                        "name": "HbEZ-schedule",
+                        "name": "PinEZ-schedule",
                         "repeat": {
                             "every": "week"
                         },
@@ -397,19 +400,19 @@ class TestSettings(unittest.TestCase):
                         "email": {
                             "id": "xyz@abc.com"
                         },
-                        "name": "HbEZ-destination"
+                        "name": "PinEZ-destination"
                     }
                 ]
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/retention-policy/HbEZ-testing/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/retention-policy/PinEZ-testing/?working=true':
             return MockResponse({
-                "retention-policy-name": "HbEZ-testing"
+                "retention-policy-name": "PinEZ-testing"
             }, 200)
         elif args[0] == 'https://1.1.1.1:8080/api/v2/config/retention-policies/?working=true':
             return MockResponse({
                 "retention-policy": [
                     {
-                        "retention-policy-name": "HbEZ-testing"
+                        "retention-policy-name": "PinEZ-testing"
                     }
                 ]
             }, 200)

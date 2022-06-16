@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 **author** | **str** | E-mail address of the rule writer | [optional] 
 **catalogue** | [**RuleSchemaRulepropertiesCatalogue**](RuleSchemaRulepropertiesCatalogue.md) |  | [optional] 
 **contributor** | **str** |  | [optional] 
+**category** | **str** |  | [optional] 
+**is_scaling_rule** | [**RuleSchemaRulepropertiesIsscalingrule**](RuleSchemaRulepropertiesIsscalingrule.md) |  | [optional] 
 **_date** | **str** |  | [optional] 
 **helper_files** | [**list[RuleSchemaRulepropertiesHelperfiles]**](RuleSchemaRulepropertiesHelperfiles.md) |  | [optional] 
 **supported_devices** | [**RuleSchemaRulepropertiesSupporteddevices**](RuleSchemaRulepropertiesSupporteddevices.md) |  | [optional] 

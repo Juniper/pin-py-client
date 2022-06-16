@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -34,6 +37,8 @@ class RuleSchemaRuleproperties(object):
         'author': 'str',
         'catalogue': 'RuleSchemaRulepropertiesCatalogue',
         'contributor': 'str',
+        'category': 'str',
+        'is_scaling_rule': 'RuleSchemaRulepropertiesIsscalingrule',
         '_date': 'str',
         'helper_files': 'list[RuleSchemaRulepropertiesHelperfiles]',
         'supported_devices': 'RuleSchemaRulepropertiesSupporteddevices',
@@ -46,6 +51,8 @@ class RuleSchemaRuleproperties(object):
         'author': 'author',
         'catalogue': 'catalogue',
         'contributor': 'contributor',
+        'category': 'category',
+        'is_scaling_rule': 'is-scaling-rule',
         '_date': 'date',
         'helper_files': 'helper-files',
         'supported_devices': 'supported-devices',
@@ -54,12 +61,14 @@ class RuleSchemaRuleproperties(object):
         'apply_macro': 'apply-macro'
     }
 
-    def __init__(self, author=None, catalogue=None, contributor=None, _date=None, helper_files=None, supported_devices=None, supported_healthbot_version=None, version=None, apply_macro=None):  # noqa: E501
+    def __init__(self, author=None, catalogue=None, contributor=None, category=None, is_scaling_rule=None, _date=None, helper_files=None, supported_devices=None, supported_healthbot_version=None, version=None, apply_macro=None):  # noqa: E501
         """RuleSchemaRuleproperties - a model defined in Swagger"""  # noqa: E501
 
         self._author = None
         self._catalogue = None
         self._contributor = None
+        self._category = None
+        self._is_scaling_rule = None
         self.__date = None
         self._helper_files = None
         self._supported_devices = None
@@ -74,6 +83,10 @@ class RuleSchemaRuleproperties(object):
             self.catalogue = catalogue
         if contributor is not None:
             self.contributor = contributor
+        if category is not None:
+            self.category = category
+        if is_scaling_rule is not None:
+            self.is_scaling_rule = is_scaling_rule
         if _date is not None:
             self._date = _date
         if helper_files is not None:
@@ -159,6 +172,54 @@ class RuleSchemaRuleproperties(object):
             )
 
         self._contributor = contributor
+
+    @property
+    def category(self):
+        """Gets the category of this RuleSchemaRuleproperties.  # noqa: E501
+
+
+        :return: The category of this RuleSchemaRuleproperties.  # noqa: E501
+        :rtype: str
+        """
+        return self._category
+
+    @category.setter
+    def category(self, category):
+        """Sets the category of this RuleSchemaRuleproperties.
+
+
+        :param category: The category of this RuleSchemaRuleproperties.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["basic", "advanced", "comprehensive"]  # noqa: E501
+        if category not in allowed_values:
+            raise ValueError(
+                "Invalid value for `category` ({0}), must be one of {1}"  # noqa: E501
+                .format(category, allowed_values)
+            )
+
+        self._category = category
+
+    @property
+    def is_scaling_rule(self):
+        """Gets the is_scaling_rule of this RuleSchemaRuleproperties.  # noqa: E501
+
+
+        :return: The is_scaling_rule of this RuleSchemaRuleproperties.  # noqa: E501
+        :rtype: RuleSchemaRulepropertiesIsscalingrule
+        """
+        return self._is_scaling_rule
+
+    @is_scaling_rule.setter
+    def is_scaling_rule(self, is_scaling_rule):
+        """Sets the is_scaling_rule of this RuleSchemaRuleproperties.
+
+
+        :param is_scaling_rule: The is_scaling_rule of this RuleSchemaRuleproperties.  # noqa: E501
+        :type: RuleSchemaRulepropertiesIsscalingrule
+        """
+
+        self._is_scaling_rule = is_scaling_rule
 
     @property
     def _date(self):

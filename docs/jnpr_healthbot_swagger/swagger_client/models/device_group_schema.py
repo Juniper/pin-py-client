@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -55,6 +58,7 @@ class DeviceGroupSchema(object):
         'variable': 'list[DevicegroupSchemaVariable]',
         'snmp': 'DevicegroupSchemaSnmp',
         'syslog': 'DevicegroupSchemaSyslog',
+        'paragon_active_assurance': 'DevicegroupSchemaParagonactiveassurance',
         'tagging_profile': 'list[str]',
         'timezone': 'str',
         'use_ingest_receive_time': 'list[object]'
@@ -85,12 +89,13 @@ class DeviceGroupSchema(object):
         'variable': 'variable',
         'snmp': 'snmp',
         'syslog': 'syslog',
+        'paragon_active_assurance': 'paragon-active-assurance',
         'tagging_profile': 'tagging-profile',
         'timezone': 'timezone',
         'use_ingest_receive_time': 'use-ingest-receive-time'
     }
 
-    def __init__(self, authentication=None, edge=None, action_scheduler=None, description=None, device_group_name=None, devices=None, logging=None, native_gpb=None, flow=None, ingest_frequency=None, raw_data=None, field_data=None, notification=None, open_config=None, outbound_ssh=None, playbooks=None, publish=None, reports=None, retention_policy=None, root_cause_analysis=None, scheduler=None, variable=None, snmp=None, syslog=None, tagging_profile=None, timezone=None, use_ingest_receive_time=None):  # noqa: E501
+    def __init__(self, authentication=None, edge=None, action_scheduler=None, description=None, device_group_name=None, devices=None, logging=None, native_gpb=None, flow=None, ingest_frequency=None, raw_data=None, field_data=None, notification=None, open_config=None, outbound_ssh=None, playbooks=None, publish=None, reports=None, retention_policy=None, root_cause_analysis=None, scheduler=None, variable=None, snmp=None, syslog=None, paragon_active_assurance=None, tagging_profile=None, timezone=None, use_ingest_receive_time=None):  # noqa: E501
         """DeviceGroupSchema - a model defined in Swagger"""  # noqa: E501
 
         self._authentication = None
@@ -117,6 +122,7 @@ class DeviceGroupSchema(object):
         self._variable = None
         self._snmp = None
         self._syslog = None
+        self._paragon_active_assurance = None
         self._tagging_profile = None
         self._timezone = None
         self._use_ingest_receive_time = None
@@ -169,6 +175,8 @@ class DeviceGroupSchema(object):
             self.snmp = snmp
         if syslog is not None:
             self.syslog = syslog
+        if paragon_active_assurance is not None:
+            self.paragon_active_assurance = paragon_active_assurance
         if tagging_profile is not None:
             self.tagging_profile = tagging_profile
         if timezone is not None:
@@ -707,6 +715,27 @@ class DeviceGroupSchema(object):
         """
 
         self._syslog = syslog
+
+    @property
+    def paragon_active_assurance(self):
+        """Gets the paragon_active_assurance of this DeviceGroupSchema.  # noqa: E501
+
+
+        :return: The paragon_active_assurance of this DeviceGroupSchema.  # noqa: E501
+        :rtype: DevicegroupSchemaParagonactiveassurance
+        """
+        return self._paragon_active_assurance
+
+    @paragon_active_assurance.setter
+    def paragon_active_assurance(self, paragon_active_assurance):
+        """Sets the paragon_active_assurance of this DeviceGroupSchema.
+
+
+        :param paragon_active_assurance: The paragon_active_assurance of this DeviceGroupSchema.  # noqa: E501
+        :type: DevicegroupSchemaParagonactiveassurance
+        """
+
+        self._paragon_active_assurance = paragon_active_assurance
 
     @property
     def tagging_profile(self):

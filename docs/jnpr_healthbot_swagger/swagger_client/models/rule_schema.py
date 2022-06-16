@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -37,6 +40,9 @@ class RuleSchema(object):
         'keys': 'list[str]',
         'network_rule': 'list[object]',
         'disable_no_data_alarm': 'list[object]',
+        'pre_hook': 'list[RuleSchemaPrehook]',
+        'post_hook': 'list[RuleSchemaPrehook]',
+        'redirect_to': 'RuleSchemaRedirectto',
         'rule_frequency': 'str',
         'rule_name': 'str',
         'sensor': 'list[RuleSchemaSensor1]',
@@ -55,6 +61,9 @@ class RuleSchema(object):
         'keys': 'keys',
         'network_rule': 'network-rule',
         'disable_no_data_alarm': 'disable-no-data-alarm',
+        'pre_hook': 'pre-hook',
+        'post_hook': 'post-hook',
+        'redirect_to': 'redirect-to',
         'rule_frequency': 'rule-frequency',
         'rule_name': 'rule-name',
         'sensor': 'sensor',
@@ -66,7 +75,7 @@ class RuleSchema(object):
         'rule_properties': 'rule-properties'
     }
 
-    def __init__(self, description=None, field=None, function=None, keys=None, network_rule=None, disable_no_data_alarm=None, rule_frequency=None, rule_name=None, sensor=None, synopsis=None, field_aggregation_time_range=None, trigger=None, variable=None, vector=None, rule_properties=None):  # noqa: E501
+    def __init__(self, description=None, field=None, function=None, keys=None, network_rule=None, disable_no_data_alarm=None, pre_hook=None, post_hook=None, redirect_to=None, rule_frequency=None, rule_name=None, sensor=None, synopsis=None, field_aggregation_time_range=None, trigger=None, variable=None, vector=None, rule_properties=None):  # noqa: E501
         """RuleSchema - a model defined in Swagger"""  # noqa: E501
 
         self._description = None
@@ -75,6 +84,9 @@ class RuleSchema(object):
         self._keys = None
         self._network_rule = None
         self._disable_no_data_alarm = None
+        self._pre_hook = None
+        self._post_hook = None
+        self._redirect_to = None
         self._rule_frequency = None
         self._rule_name = None
         self._sensor = None
@@ -98,6 +110,12 @@ class RuleSchema(object):
             self.network_rule = network_rule
         if disable_no_data_alarm is not None:
             self.disable_no_data_alarm = disable_no_data_alarm
+        if pre_hook is not None:
+            self.pre_hook = pre_hook
+        if post_hook is not None:
+            self.post_hook = post_hook
+        if redirect_to is not None:
+            self.redirect_to = redirect_to
         if rule_frequency is not None:
             self.rule_frequency = rule_frequency
         self.rule_name = rule_name
@@ -247,6 +265,73 @@ class RuleSchema(object):
         """
 
         self._disable_no_data_alarm = disable_no_data_alarm
+
+    @property
+    def pre_hook(self):
+        """Gets the pre_hook of this RuleSchema.  # noqa: E501
+
+        List of pre hook workflows per rule  # noqa: E501
+
+        :return: The pre_hook of this RuleSchema.  # noqa: E501
+        :rtype: list[RuleSchemaPrehook]
+        """
+        return self._pre_hook
+
+    @pre_hook.setter
+    def pre_hook(self, pre_hook):
+        """Sets the pre_hook of this RuleSchema.
+
+        List of pre hook workflows per rule  # noqa: E501
+
+        :param pre_hook: The pre_hook of this RuleSchema.  # noqa: E501
+        :type: list[RuleSchemaPrehook]
+        """
+
+        self._pre_hook = pre_hook
+
+    @property
+    def post_hook(self):
+        """Gets the post_hook of this RuleSchema.  # noqa: E501
+
+        List of post hook workflows per rule  # noqa: E501
+
+        :return: The post_hook of this RuleSchema.  # noqa: E501
+        :rtype: list[RuleSchemaPrehook]
+        """
+        return self._post_hook
+
+    @post_hook.setter
+    def post_hook(self, post_hook):
+        """Sets the post_hook of this RuleSchema.
+
+        List of post hook workflows per rule  # noqa: E501
+
+        :param post_hook: The post_hook of this RuleSchema.  # noqa: E501
+        :type: list[RuleSchemaPrehook]
+        """
+
+        self._post_hook = post_hook
+
+    @property
+    def redirect_to(self):
+        """Gets the redirect_to of this RuleSchema.  # noqa: E501
+
+
+        :return: The redirect_to of this RuleSchema.  # noqa: E501
+        :rtype: RuleSchemaRedirectto
+        """
+        return self._redirect_to
+
+    @redirect_to.setter
+    def redirect_to(self, redirect_to):
+        """Sets the redirect_to of this RuleSchema.
+
+
+        :param redirect_to: The redirect_to of this RuleSchema.  # noqa: E501
+        :type: RuleSchemaRedirectto
+        """
+
+        self._redirect_to = redirect_to
 
     @property
     def rule_frequency(self):

@@ -1,9 +1,12 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 import unittest
 from nose.plugins.attrib import attr
 
 from mock import patch
 
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from requests.models import Response
 from . import _mock_user_login
 
@@ -16,7 +19,7 @@ class TestDatabase(unittest.TestCase):
     def setUp(self, mock_user_login, mock_request):
         self.mock_user_login = _mock_user_login
         self.mock_request = mock_request
-        self.conn = HealthBotClient(
+        self.conn = PINClient(
             server='1.1.1.1',
             user='test',
             password='password123').open()

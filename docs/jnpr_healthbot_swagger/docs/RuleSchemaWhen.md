@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 **does_not_match_with** | [**list[RuleSchemaWhenDoesnotmatchwith]**](RuleSchemaWhenDoesnotmatchwith.md) |  | [optional] 
 **equal_to** | [**list[RuleSchemaWhenEqualto]**](RuleSchemaWhenEqualto.md) |  | [optional] 
 **exists** | [**list[RuleSchemaWhenExists]**](RuleSchemaWhenExists.md) |  | [optional] 
+**matches_with_previous** | [**list[RuleSchemaWhenMatcheswithprevious]**](RuleSchemaWhenMatcheswithprevious.md) |  | [optional] 
+**does_not_match_with_previous** | [**list[RuleSchemaWhenMatcheswithprevious]**](RuleSchemaWhenMatcheswithprevious.md) |  | [optional] 
 **greater_than** | [**list[RuleSchemaWhenEqualto]**](RuleSchemaWhenEqualto.md) |  | [optional] 
 **greater_than_or_equal_to** | [**list[RuleSchemaWhenEqualto]**](RuleSchemaWhenEqualto.md) |  | [optional] 
 **increasing_at_least_by_rate** | [**list[RuleSchemaWhenIncreasingatleastbyrate]**](RuleSchemaWhenIncreasingatleastbyrate.md) | Rate of increase between successive values is at least given rate | [optional] 

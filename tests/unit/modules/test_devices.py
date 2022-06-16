@@ -1,7 +1,10 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 import unittest
 from nose.plugins.attrib import attr
 
-from jnpr.healthbot import HealthBotClient
+from jnpr.healthbot import PINClient
 from jnpr.healthbot import DeviceSchema, DeviceGroupSchema
 from jnpr.healthbot.exception import SchemaError
 from mock import patch, PropertyMock
@@ -16,13 +19,13 @@ class TestDevices(unittest.TestCase):
     def setUp(self, mock_user_login, mock_request):
         self.mock_user_login = _mock_user_login
         self.mock_request = mock_request
-        with patch('jnpr.healthbot.healthbot.HealthBotClient.version',
+        with patch('jnpr.healthbot.healthbot.PINClient.version',
                    new_callable=PropertyMock) as mock_ver:
-            with patch('jnpr.healthbot.healthbot.HealthBotClient.config_url',
+            with patch('jnpr.healthbot.healthbot.PINClient.config_url',
                        new_callable=PropertyMock) as mock_cnf:
                 mock_ver.return_value = '4.0.0'
                 mock_cnf.return_value = "https://1.1.1.1:8080/api/v2/config"
-                self.conn = HealthBotClient(
+                self.conn = PINClient(
                     server='1.1.1.1',
                     user='test',
                     password='password123').open()
@@ -187,7 +190,7 @@ class TestDevices(unittest.TestCase):
         self.mock_request().post.side_effect = self._mock_manager
         self.mock_request().get.side_effect = self._mock_manager
         from jnpr.healthbot.modules.devices import NetworkGroupSchema
-        ngs = NetworkGroupSchema(network_group_name="HbEZ")
+        ngs = NetworkGroupSchema(network_group_name="PinEZ")
         ret = self.conn.network_group.add(schema=ngs)
         self.assertTrue(ret)
 
@@ -195,11 +198,11 @@ class TestDevices(unittest.TestCase):
         self.mock_request().get.side_effect = self._mock_manager
         self.assertTrue(
             self.conn.network_group.add(
-                network_group_name="HbEZ"))
+                network_group_name="PinEZ"))
 
     def test_get_network_group(self):
         self.mock_request().get.side_effect = self._mock_manager
-        obj = self.conn.network_group.get(network_group_name="HbEZ")
+        obj = self.conn.network_group.get(network_group_name="PinEZ")
         self.assertEqual(obj.description, "testing")
 
     def test_get_network_groups(self):
@@ -209,7 +212,7 @@ class TestDevices(unittest.TestCase):
 
     def test_update_network_group(self):
         self.mock_request().get.side_effect = self._mock_manager
-        obj = self.conn.network_group.get('HbEZ')
+        obj = self.conn.network_group.get('PinEZ')
         obj.description = 'test in progress'
         self.conn.network_group.update(schema=obj)
         self.assertEqual(
@@ -218,7 +221,7 @@ class TestDevices(unittest.TestCase):
 
     def test_delete_network_group(self):
         self.assertTrue(self.conn.network_group.delete(
-            network_group_name="HbEZ"))
+            network_group_name="PinEZ"))
 
     def test_get_device_health(self):
         self.mock_request().get.side_effect = self._mock_manager
@@ -505,13 +508,13 @@ class TestDevices(unittest.TestCase):
                     },
                     "device-id": "demo",
                     "host": "10.221.136.140",
-                    "system-id": "Demo:HbEZ"
+                    "system-id": "Demo:PinEZ"
                 }
             ]
             }, 200)
-        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/network-group/HbEZ/?working=true':
+        elif args[0] == 'https://1.1.1.1:8080/api/v2/config/network-group/PinEZ/?working=true':
             obj = MockResponse({'description': "testing",
-                                'network-group-name': 'HbEZ',
+                                'network-group-name': 'PinEZ',
                                 'notification': {},
                                 'playbooks': [],
                                 'reports': [],
@@ -521,7 +524,7 @@ class TestDevices(unittest.TestCase):
             obj = MockResponse({
                 "network-group": [
                     {
-                        "network-group-name": "HbEZ",
+                        "network-group-name": "PinEZ",
                         "notification": {},
                         "playbooks": [],
                         "reports": []

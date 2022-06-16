@@ -144,9 +144,12 @@ Class | Method | HTTP request | Description
 *ConfigurationApi* | [**delete_iceberg_topics_topics_by_id**](docs/ConfigurationApi.md#delete_iceberg_topics_topics_by_id) | **DELETE** /config/topics/ | Delete all topics.
 *ConfigurationApi* | [**first_login**](docs/ConfigurationApi.md#first_login) | **POST** /first-login/ | Change password after first login
 *ConfigurationApi* | [**initialize**](docs/ConfigurationApi.md#initialize) | **POST** /config/initialize/ | Initialize config-server
+*ConfigurationApi* | [**remove_iceberg_devices_from_group**](docs/ConfigurationApi.md#remove_iceberg_devices_from_group) | **DELETE** /config/device-group/{device_group_name}/device/ | Remove devices from group.
+*ConfigurationApi* | [**remove_iceberg_network_group_network_group_by_id**](docs/ConfigurationApi.md#remove_iceberg_network_group_network_group_by_id) | **DELETE** /config/network-group/{network_group_name}/variable/ | Overwrite a network-group.
 *ConfigurationApi* | [**retrieve_affected_groups**](docs/ConfigurationApi.md#retrieve_affected_groups) | **GET** /config/configuration/ | Get all groups affected by un-committed configuration changes.
 *ConfigurationApi* | [**retrieve_device_group_status**](docs/ConfigurationApi.md#retrieve_device_group_status) | **GET** /device-group/{device_group_name}/status/ | Get device-group&#39;s status.
 *ConfigurationApi* | [**retrieve_device_group_trigger_info**](docs/ConfigurationApi.md#retrieve_device_group_trigger_info) | **GET** /device-group/{device_group_name}/trigger_info/ | Get device-group&#39;s trigger info.
+*ConfigurationApi* | [**retrieve_device_trigger_info**](docs/ConfigurationApi.md#retrieve_device_trigger_info) | **GET** /device/{device_id}/trigger_info/ | Get trigger info for device-groups containing the device.
 *ConfigurationApi* | [**retrieve_healthbot_organizations_organizations**](docs/ConfigurationApi.md#retrieve_healthbot_organizations_organizations) | **GET** /config/organizations/ | Get all organizations&#39; configuration.
 *ConfigurationApi* | [**retrieve_iceberg_device_device**](docs/ConfigurationApi.md#retrieve_iceberg_device_device) | **GET** /config/device/ | List all device-ids.
 *ConfigurationApi* | [**retrieve_iceberg_device_device_by_id**](docs/ConfigurationApi.md#retrieve_iceberg_device_device_by_id) | **GET** /config/device/{device_id}/ | Get a device&#39;s configuration.
@@ -237,6 +240,8 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**create_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id**](docs/DefaultApi.md#create_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id) | **POST** /config/ingest/byoi/default-plugin/tlive-kafka-oc/{name}/ | Create tlive-kafka-oc by ID
 *DefaultApi* | [**create_healthbot_ingest_byoi_ingest_mapping_by_id**](docs/DefaultApi.md#create_healthbot_ingest_byoi_ingest_mapping_by_id) | **POST** /config/ingest/byoi/ingest-mapping/{name}/ | Create ingest-mapping by ID
 *DefaultApi* | [**create_healthbot_ingest_frequency_profile_by_id**](docs/DefaultApi.md#create_healthbot_ingest_frequency_profile_by_id) | **POST** /config/ingest/frequency-profile/{name}/ | Create frequency-profile by ID
+*DefaultApi* | [**create_healthbot_ingest_ifa**](docs/DefaultApi.md#create_healthbot_ingest_ifa) | **POST** /config/ingest/ifa/ | Create ifa by ID
+*DefaultApi* | [**create_healthbot_ingest_ifa_device_by_id**](docs/DefaultApi.md#create_healthbot_ingest_ifa_device_by_id) | **POST** /config/ingest/ifa/device/{id}/ | Create device by ID
 *DefaultApi* | [**create_healthbot_ingest_outbound_ssh**](docs/DefaultApi.md#create_healthbot_ingest_outbound_ssh) | **POST** /config/ingest/outbound-ssh/ | Create outbound-ssh by ID
 *DefaultApi* | [**create_healthbot_ingest_settings_byoi_custom_plugin_by_id**](docs/DefaultApi.md#create_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **POST** /config/ingest-settings/byoi/custom-plugin/{name}/ | Create custom-plugin by ID
 *DefaultApi* | [**create_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](docs/DefaultApi.md#create_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **POST** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Create tlive-kafka-oc by ID
@@ -276,6 +281,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**create_iceberg_profile_security_local_certificate_by_id**](docs/DefaultApi.md#create_iceberg_profile_security_local_certificate_by_id) | **POST** /config/profile/security/local-certificate/{name}/ | Create local-certificate by ID
 *DefaultApi* | [**create_iceberg_profile_security_ssh_key_profile_by_id**](docs/DefaultApi.md#create_iceberg_profile_security_ssh_key_profile_by_id) | **POST** /config/profile/security/ssh-key-profile/{name}/ | Create ssh-key-profile by ID
 *DefaultApi* | [**create_iceberg_profiles**](docs/DefaultApi.md#create_iceberg_profiles) | **POST** /config/profiles/ | Create profile by ID
+*DefaultApi* | [**create_ingest_paa_by_paa_name**](docs/DefaultApi.md#create_ingest_paa_by_paa_name) | **POST** /config/ingest/paa/{paa_name}/ | Update paa by paa name
 *DefaultApi* | [**delete_dynamic_tagging_by_key**](docs/DefaultApi.md#delete_dynamic_tagging_by_key) | **DELETE** /config/dynamic-tagging/key/ | Delete Dynamic-tagging key-value
 *DefaultApi* | [**delete_files_certificates_by_file_name**](docs/DefaultApi.md#delete_files_certificates_by_file_name) | **DELETE** /config/files/certificates/{file_name}/ | Delete a certificate-file.
 *DefaultApi* | [**delete_files_helper_files_by_file_name**](docs/DefaultApi.md#delete_files_helper_files_by_file_name) | **DELETE** /config/files/helper-files/{file_name}/ | Delete a helper-file.
@@ -285,7 +291,10 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**delete_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id**](docs/DefaultApi.md#delete_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id) | **DELETE** /config/ingest/byoi/default-plugin/tlive-kafka-oc/{name}/ | Delete tlive-kafka-oc by ID
 *DefaultApi* | [**delete_healthbot_ingest_byoi_ingest_mapping_by_id**](docs/DefaultApi.md#delete_healthbot_ingest_byoi_ingest_mapping_by_id) | **DELETE** /config/ingest/byoi/ingest-mapping/{name}/ | Delete ingest-mapping by ID
 *DefaultApi* | [**delete_healthbot_ingest_frequency_profile_by_id**](docs/DefaultApi.md#delete_healthbot_ingest_frequency_profile_by_id) | **DELETE** /config/ingest/frequency-profile/{name}/ | Delete frequency-profile by ID
+*DefaultApi* | [**delete_healthbot_ingest_ifa**](docs/DefaultApi.md#delete_healthbot_ingest_ifa) | **DELETE** /config/ingest/ifa/ | Delete ifa by ID
+*DefaultApi* | [**delete_healthbot_ingest_ifa_device_by_id**](docs/DefaultApi.md#delete_healthbot_ingest_ifa_device_by_id) | **DELETE** /config/ingest/ifa/device/{id}/ | Delete device by ID
 *DefaultApi* | [**delete_healthbot_ingest_outbound_ssh**](docs/DefaultApi.md#delete_healthbot_ingest_outbound_ssh) | **DELETE** /config/ingest/outbound-ssh/ | Delete outbound-ssh by ID
+*DefaultApi* | [**delete_healthbot_ingest_paa_by_paa_name**](docs/DefaultApi.md#delete_healthbot_ingest_paa_by_paa_name) | **DELETE** /config/ingest/paa/{paa_name}/ | Delete paa setup by paa name
 *DefaultApi* | [**delete_healthbot_ingest_settings_byoi_custom_plugin_by_id**](docs/DefaultApi.md#delete_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **DELETE** /config/ingest-settings/byoi/custom-plugin/{name}/ | Delete custom-plugin by ID
 *DefaultApi* | [**delete_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](docs/DefaultApi.md#delete_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **DELETE** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Delete tlive-kafka-oc by ID
 *DefaultApi* | [**delete_healthbot_ingest_settings_byoi_ingest_mapping_by_id**](docs/DefaultApi.md#delete_healthbot_ingest_settings_byoi_ingest_mapping_by_id) | **DELETE** /config/ingest-settings/byoi/ingest-mapping/{name}/ | Delete ingest-mapping by ID
@@ -360,7 +369,12 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**retrieve_healthbot_ingest_byoi_ingest_mappings**](docs/DefaultApi.md#retrieve_healthbot_ingest_byoi_ingest_mappings) | **GET** /config/ingest/byoi/ingest-mappings/ | Retrieve ingest-mapping
 *DefaultApi* | [**retrieve_healthbot_ingest_frequency_profile**](docs/DefaultApi.md#retrieve_healthbot_ingest_frequency_profile) | **GET** /config/ingest/frequency-profiles/ | Retrieve frequency-profile
 *DefaultApi* | [**retrieve_healthbot_ingest_frequency_profile_by_id**](docs/DefaultApi.md#retrieve_healthbot_ingest_frequency_profile_by_id) | **GET** /config/ingest/frequency-profile/{name}/ | Retrieve frequency-profile by ID
+*DefaultApi* | [**retrieve_healthbot_ingest_ifa**](docs/DefaultApi.md#retrieve_healthbot_ingest_ifa) | **GET** /config/ingest/ifa/ | Retrieve ifa
+*DefaultApi* | [**retrieve_healthbot_ingest_ifa_device_by_id**](docs/DefaultApi.md#retrieve_healthbot_ingest_ifa_device_by_id) | **GET** /config/ingest/ifa/device/{id}/ | Retrieve device by ID
+*DefaultApi* | [**retrieve_healthbot_ingest_ifa_device_ids**](docs/DefaultApi.md#retrieve_healthbot_ingest_ifa_device_ids) | **GET** /config/ingest/ifa/device/ | Retrieve device
+*DefaultApi* | [**retrieve_healthbot_ingest_ifa_devices**](docs/DefaultApi.md#retrieve_healthbot_ingest_ifa_devices) | **GET** /config/ingest/ifa/devices/ | Retrieve devices
 *DefaultApi* | [**retrieve_healthbot_ingest_outbound_ssh**](docs/DefaultApi.md#retrieve_healthbot_ingest_outbound_ssh) | **GET** /config/ingest/outbound-ssh/ | Retrieve outbound-ssh
+*DefaultApi* | [**retrieve_healthbot_ingest_paa_by_paa_name**](docs/DefaultApi.md#retrieve_healthbot_ingest_paa_by_paa_name) | **GET** /config/ingest/paa/{paa_name}/ | Retrieve paa setup config by paa name
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_byoi_custom_plugin_by_id**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **GET** /config/ingest-settings/byoi/custom-plugin/{name}/ | Retrieve custom-plugin by ID
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_byoi_custom_plugins**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_custom_plugins) | **GET** /config/ingest-settings/byoi/custom-plugins/ | Retrieve custom-plugin by ID
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **GET** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Retrieve tlive-kafka-oc by ID
@@ -369,6 +383,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_byoi_ingest_mappings**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_byoi_ingest_mappings) | **GET** /config/ingest-settings/byoi/ingest-mappings/ | Retrieve ingest-mapping
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_frequency_profile**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_frequency_profile) | **GET** /config/ingest-settings/frequency-profiles/ | Retrieve frequency-profile
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_frequency_profile_by_id**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_frequency_profile_by_id) | **GET** /config/ingest-settings/frequency-profile/{name}/ | Retrieve frequency-profile by ID
+*DefaultApi* | [**retrieve_healthbot_ingest_settings_paa**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_paa) | **GET** /config/ingest/paa/ | Retrieve paas
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_tagging_profile_by_id**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_tagging_profile_by_id) | **GET** /config/ingest-settings/data-enrichment/tagging-profile/{name}/ | Retrieve tagging-profile by ID
 *DefaultApi* | [**retrieve_healthbot_ingest_settings_tagging_profiles**](docs/DefaultApi.md#retrieve_healthbot_ingest_settings_tagging_profiles) | **GET** /config/ingest-settings/data-enrichment/tagging-profiles/ | Retrieve tagging-profile by ID
 *DefaultApi* | [**retrieve_healthbot_ingest_sflow**](docs/DefaultApi.md#retrieve_healthbot_ingest_sflow) | **GET** /config/ingest/sflow/ | Retrieve sflow
@@ -433,6 +448,8 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**update_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id**](docs/DefaultApi.md#update_healthbot_ingest_byoi_default_plugin_tlive_kafka_by_id) | **PUT** /config/ingest/byoi/default-plugin/tlive-kafka-oc/{name}/ | Update tlive-kafka-oc by ID
 *DefaultApi* | [**update_healthbot_ingest_byoi_ingest_mapping_by_id**](docs/DefaultApi.md#update_healthbot_ingest_byoi_ingest_mapping_by_id) | **PUT** /config/ingest/byoi/ingest-mapping/{name}/ | Update ingest-mapping by ID
 *DefaultApi* | [**update_healthbot_ingest_frequency_profile_by_id**](docs/DefaultApi.md#update_healthbot_ingest_frequency_profile_by_id) | **PUT** /config/ingest/frequency-profile/{name}/ | Update frequency-profile by ID
+*DefaultApi* | [**update_healthbot_ingest_ifa**](docs/DefaultApi.md#update_healthbot_ingest_ifa) | **PUT** /config/ingest/ifa/ | Update ifa by ID
+*DefaultApi* | [**update_healthbot_ingest_ifa_device_by_id**](docs/DefaultApi.md#update_healthbot_ingest_ifa_device_by_id) | **PUT** /config/ingest/ifa/device/{id}/ | Update device by ID
 *DefaultApi* | [**update_healthbot_ingest_outbound_ssh**](docs/DefaultApi.md#update_healthbot_ingest_outbound_ssh) | **PUT** /config/ingest/outbound-ssh/ | Update outbound-ssh by ID
 *DefaultApi* | [**update_healthbot_ingest_settings_byoi_custom_plugin_by_id**](docs/DefaultApi.md#update_healthbot_ingest_settings_byoi_custom_plugin_by_id) | **PUT** /config/ingest-settings/byoi/custom-plugin/{name}/ | Update custom-plugin by ID
 *DefaultApi* | [**update_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id**](docs/DefaultApi.md#update_healthbot_ingest_settings_byoi_default_plugin_tlive_kafka_by_id) | **PUT** /config/ingest-settings/byoi/default-plugin/tlive-kafka-oc/{name}/ | Update tlive-kafka-oc by ID
@@ -472,6 +489,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**update_iceberg_profile_security_local_certificate_by_id**](docs/DefaultApi.md#update_iceberg_profile_security_local_certificate_by_id) | **PUT** /config/profile/security/local-certificate/{name}/ | Update local-certificate by ID
 *DefaultApi* | [**update_iceberg_profile_security_ssh_key_profile_by_id**](docs/DefaultApi.md#update_iceberg_profile_security_ssh_key_profile_by_id) | **PUT** /config/profile/security/ssh-key-profile/{name}/ | Update ssh-key-profile by ID
 *DefaultApi* | [**update_iceberg_profiles**](docs/DefaultApi.md#update_iceberg_profiles) | **PUT** /config/profiles/ | Update profile by ID
+*DefaultApi* | [**update_ingest_paa_by_paa_name**](docs/DefaultApi.md#update_ingest_paa_by_paa_name) | **PUT** /config/ingest/paa/{paa_name}/ | Update paa by paa name
 *DocumentationApi* | [**retrieve_defined_api**](docs/DocumentationApi.md#retrieve_defined_api) | **GET** / | Get all All API&#39;s.
 *DocumentationApi* | [**retrieve_insights_api**](docs/DocumentationApi.md#retrieve_insights_api) | **GET** /insights/ | Get all All API&#39;s.
 *FactsApi* | [**retrieve_iceberg_device_device_facts_by_id**](docs/FactsApi.md#retrieve_iceberg_device_device_facts_by_id) | **GET** /config/device/{device_id}/facts/ | Get a device&#39;s facts.
@@ -513,6 +531,8 @@ Class | Method | HTTP request | Description
 *SystemApi* | [**retrieve_sensor_device_group**](docs/SystemApi.md#retrieve_sensor_device_group) | **GET** /config/sensor/device-group/{device_group_name}/ | Get all All API&#39;s.
 *SystemApi* | [**retrieve_system_details**](docs/SystemApi.md#retrieve_system_details) | **GET** /system-details/ | Retrieve system details.
 *SystemApi* | [**retrieve_tsdb_counters**](docs/SystemApi.md#retrieve_tsdb_counters) | **GET** /tsdb-counters/ | TSDB counters
+*UtilityApi* | [**junosdecode**](docs/UtilityApi.md#junosdecode) | **POST** /junos-decode/ | Decode string with Junos
+*UtilityApi* | [**junosencode**](docs/UtilityApi.md#junosencode) | **POST** /junos-encode/ | Encode string with Junos
 *WorkflowApi* | [**create_healthbot_workflow_workflow_by_id**](docs/WorkflowApi.md#create_healthbot_workflow_workflow_by_id) | **POST** /config/workflow/{workflow_name}/ | Create workflow by ID
 *WorkflowApi* | [**create_healthbot_workflows_workflow_by_id**](docs/WorkflowApi.md#create_healthbot_workflows_workflow_by_id) | **POST** /config/workflows/ | Create workflow by ID
 *WorkflowApi* | [**delete_healthbot_workflow_workflow_by_id**](docs/WorkflowApi.md#delete_healthbot_workflow_workflow_by_id) | **DELETE** /config/workflow/{workflow_name}/ | Delete workflow by ID
@@ -554,6 +574,8 @@ Class | Method | HTTP request | Description
  - [CustompluginSchemaSecurityparameters](docs/CustompluginSchemaSecurityparameters.md)
  - [CustompluginSchemaSecurityparametersTls](docs/CustompluginSchemaSecurityparametersTls.md)
  - [CustompluginSchemaSecurityparametersUserauthentication](docs/CustompluginSchemaSecurityparametersUserauthentication.md)
+ - [Data](docs/Data.md)
+ - [Data1](docs/Data1.md)
  - [DatastoreSchema](docs/DatastoreSchema.md)
  - [DebugArgumentsSchema](docs/DebugArgumentsSchema.md)
  - [DebugJobResponseSchema](docs/DebugJobResponseSchema.md)
@@ -602,6 +624,7 @@ Class | Method | HTTP request | Description
  - [DevicegroupSchemaFielddata](docs/DevicegroupSchemaFielddata.md)
  - [DevicegroupSchemaFielddataRollup](docs/DevicegroupSchemaFielddataRollup.md)
  - [DevicegroupSchemaFlow](docs/DevicegroupSchemaFlow.md)
+ - [DevicegroupSchemaFlowIfa](docs/DevicegroupSchemaFlowIfa.md)
  - [DevicegroupSchemaFlowNetflow](docs/DevicegroupSchemaFlowNetflow.md)
  - [DevicegroupSchemaFlowSflow](docs/DevicegroupSchemaFlowSflow.md)
  - [DevicegroupSchemaLogging](docs/DevicegroupSchemaLogging.md)
@@ -609,6 +632,7 @@ Class | Method | HTTP request | Description
  - [DevicegroupSchemaLoggingByoiService](docs/DevicegroupSchemaLoggingByoiService.md)
  - [DevicegroupSchemaLoggingFlow](docs/DevicegroupSchemaLoggingFlow.md)
  - [DevicegroupSchemaLoggingIAgent](docs/DevicegroupSchemaLoggingIAgent.md)
+ - [DevicegroupSchemaLoggingIfa](docs/DevicegroupSchemaLoggingIfa.md)
  - [DevicegroupSchemaLoggingMLmodelbuilder](docs/DevicegroupSchemaLoggingMLmodelbuilder.md)
  - [DevicegroupSchemaLoggingNativegpb](docs/DevicegroupSchemaLoggingNativegpb.md)
  - [DevicegroupSchemaLoggingNonsensorrules](docs/DevicegroupSchemaLoggingNonsensorrules.md)
@@ -626,6 +650,7 @@ Class | Method | HTTP request | Description
  - [DevicegroupSchemaOpenconfig](docs/DevicegroupSchemaOpenconfig.md)
  - [DevicegroupSchemaOpenconfigGnmi](docs/DevicegroupSchemaOpenconfigGnmi.md)
  - [DevicegroupSchemaOutboundssh](docs/DevicegroupSchemaOutboundssh.md)
+ - [DevicegroupSchemaParagonactiveassurance](docs/DevicegroupSchemaParagonactiveassurance.md)
  - [DevicegroupSchemaPublish](docs/DevicegroupSchemaPublish.md)
  - [DevicegroupSchemaRawdata](docs/DevicegroupSchemaRawdata.md)
  - [DevicegroupSchemaRawdataSummarize](docs/DevicegroupSchemaRawdataSummarize.md)
@@ -639,6 +664,7 @@ Class | Method | HTTP request | Description
  - [DevicegroupSchemaSyslog](docs/DevicegroupSchemaSyslog.md)
  - [DevicegroupSchemaVariable](docs/DevicegroupSchemaVariable.md)
  - [DevicegroupSchemaVariablevalue](docs/DevicegroupSchemaVariablevalue.md)
+ - [Devices](docs/Devices.md)
  - [DevicesSchema](docs/DevicesSchema.md)
  - [DynamicTaggingSchemaObject](docs/DynamicTaggingSchemaObject.md)
  - [DynamicTaggingsSchemaObject](docs/DynamicTaggingsSchemaObject.md)
@@ -656,13 +682,12 @@ Class | Method | HTTP request | Description
  - [FrequencyprofileSchemaNonsensor](docs/FrequencyprofileSchemaNonsensor.md)
  - [FrequencyprofileSchemaSensor](docs/FrequencyprofileSchemaSensor.md)
  - [GroupHealthSchema](docs/GroupHealthSchema.md)
- - [HbGraphs](docs/HbGraphs.md)
- - [HbGraphsQuery](docs/HbGraphsQuery.md)
- - [HbGraphsQueryWhere](docs/HbGraphsQueryWhere.md)
- - [HbGraphsQueryWhereWhereClause](docs/HbGraphsQueryWhereWhereClause.md)
  - [HeaderPatternSchema](docs/HeaderPatternSchema.md)
  - [HeaderpatternSchemaField](docs/HeaderpatternSchemaField.md)
  - [HealthSchema](docs/HealthSchema.md)
+ - [IfaDeviceSchema](docs/IfaDeviceSchema.md)
+ - [IfaSchema](docs/IfaSchema.md)
+ - [IfaSchemaDevice](docs/IfaSchemaDevice.md)
  - [IngestMappingSchema](docs/IngestMappingSchema.md)
  - [IngestMappingsSchema](docs/IngestMappingsSchema.md)
  - [IngestSettingsSchema](docs/IngestSettingsSchema.md)
@@ -692,6 +717,7 @@ Class | Method | HTTP request | Description
  - [NetworkGroupSchema](docs/NetworkGroupSchema.md)
  - [NetworkGroupsSchema](docs/NetworkGroupsSchema.md)
  - [NetworkHealthTree](docs/NetworkHealthTree.md)
+ - [NetworkVariableSchema](docs/NetworkVariableSchema.md)
  - [NetworkgroupSchemaLogging](docs/NetworkgroupSchemaLogging.md)
  - [NetworkgroupSchemaNotification](docs/NetworkgroupSchemaNotification.md)
  - [NetworkgroupSchemaPublish](docs/NetworkgroupSchemaPublish.md)
@@ -711,6 +737,10 @@ Class | Method | HTTP request | Description
  - [OrganizationsSchema](docs/OrganizationsSchema.md)
  - [OutboundSshSchema](docs/OutboundSshSchema.md)
  - [OutboundsshSchemaOutboundssh](docs/OutboundsshSchemaOutboundssh.md)
+ - [PaaSetupSchema](docs/PaaSetupSchema.md)
+ - [PaaSetupSchemas](docs/PaaSetupSchemas.md)
+ - [PaasetupSchemaSecurity](docs/PaasetupSchemaSecurity.md)
+ - [PaasetupSchemaSecuritySasl](docs/PaasetupSchemaSecuritySasl.md)
  - [PanelDataSchema](docs/PanelDataSchema.md)
  - [PanelDataSchemaAddGroupByTag](docs/PanelDataSchemaAddGroupByTag.md)
  - [PanelDataSchemaAddWhereCondition](docs/PanelDataSchemaAddWhereCondition.md)
@@ -737,6 +767,10 @@ Class | Method | HTTP request | Description
  - [PatternSchemaConstant](docs/PatternSchemaConstant.md)
  - [PatternSchemaField](docs/PatternSchemaField.md)
  - [PatternSetSchema](docs/PatternSetSchema.md)
+ - [PinGraphs](docs/PinGraphs.md)
+ - [PinGraphsQuery](docs/PinGraphsQuery.md)
+ - [PinGraphsQueryWhere](docs/PinGraphsQueryWhere.md)
+ - [PinGraphsQueryWhereWhereClause](docs/PinGraphsQueryWhereWhereClause.md)
  - [PlaybookSchema](docs/PlaybookSchema.md)
  - [PlaybooksSchema](docs/PlaybooksSchema.md)
  - [ProfileSchema](docs/ProfileSchema.md)
@@ -759,6 +793,25 @@ Class | Method | HTTP request | Description
  - [ReportSchemaGraphcanvas](docs/ReportSchemaGraphcanvas.md)
  - [ReportsSchema](docs/ReportsSchema.md)
  - [ResourceSchema](docs/ResourceSchema.md)
+ - [ResourceSchemaArgument](docs/ResourceSchemaArgument.md)
+ - [ResourceSchemaDependson](docs/ResourceSchemaDependson.md)
+ - [ResourceSchemaField](docs/ResourceSchemaField.md)
+ - [ResourceSchemaForeverydevice](docs/ResourceSchemaForeverydevice.md)
+ - [ResourceSchemaForeverynetworkgroup](docs/ResourceSchemaForeverynetworkgroup.md)
+ - [ResourceSchemaFunction](docs/ResourceSchemaFunction.md)
+ - [ResourceSchemaGetdependenciesfromcache](docs/ResourceSchemaGetdependenciesfromcache.md)
+ - [ResourceSchemaLocateresource](docs/ResourceSchemaLocateresource.md)
+ - [ResourceSchemaSource](docs/ResourceSchemaSource.md)
+ - [ResourceSchemaSourceRule](docs/ResourceSchemaSourceRule.md)
+ - [ResourceSchemaTerm](docs/ResourceSchemaTerm.md)
+ - [ResourceSchemaUserdefinedfunction](docs/ResourceSchemaUserdefinedfunction.md)
+ - [ResourceSchemaWhere](docs/ResourceSchemaWhere.md)
+ - [ResourceSchemaWhereArgument](docs/ResourceSchemaWhereArgument.md)
+ - [ResourceSchemaWhereDoesnotmatchwith](docs/ResourceSchemaWhereDoesnotmatchwith.md)
+ - [ResourceSchemaWhereEqualto](docs/ResourceSchemaWhereEqualto.md)
+ - [ResourceSchemaWhereMatcheswith](docs/ResourceSchemaWhereMatcheswith.md)
+ - [ResourceSchemaWhereUserdefinedfunction](docs/ResourceSchemaWhereUserdefinedfunction.md)
+ - [ResourceSchemaWithcapturegroup](docs/ResourceSchemaWithcapturegroup.md)
  - [RetentionPoliciesSchema](docs/RetentionPoliciesSchema.md)
  - [RetentionPolicySchema](docs/RetentionPolicySchema.md)
  - [RoleSchema](docs/RoleSchema.md)
@@ -812,13 +865,18 @@ Class | Method | HTTP request | Description
  - [RuleSchemaFunction](docs/RuleSchemaFunction.md)
  - [RuleSchemaIAgent](docs/RuleSchemaIAgent.md)
  - [RuleSchemaIAgentArgs](docs/RuleSchemaIAgentArgs.md)
+ - [RuleSchemaIfa](docs/RuleSchemaIfa.md)
  - [RuleSchemaNativegpb](docs/RuleSchemaNativegpb.md)
  - [RuleSchemaOpenconfig](docs/RuleSchemaOpenconfig.md)
+ - [RuleSchemaPrehook](docs/RuleSchemaPrehook.md)
+ - [RuleSchemaRedirectto](docs/RuleSchemaRedirectto.md)
  - [RuleSchemaReference](docs/RuleSchemaReference.md)
  - [RuleSchemaReferenceDataifmissing](docs/RuleSchemaReferenceDataifmissing.md)
+ - [RuleSchemaReturn](docs/RuleSchemaReturn.md)
  - [RuleSchemaRuleproperties](docs/RuleSchemaRuleproperties.md)
  - [RuleSchemaRulepropertiesCatalogue](docs/RuleSchemaRulepropertiesCatalogue.md)
  - [RuleSchemaRulepropertiesHelperfiles](docs/RuleSchemaRulepropertiesHelperfiles.md)
+ - [RuleSchemaRulepropertiesIsscalingrule](docs/RuleSchemaRulepropertiesIsscalingrule.md)
  - [RuleSchemaRulepropertiesSupporteddevices](docs/RuleSchemaRulepropertiesSupporteddevices.md)
  - [RuleSchemaRulepropertiesSupporteddevicesJuniper](docs/RuleSchemaRulepropertiesSupporteddevicesJuniper.md)
  - [RuleSchemaRulepropertiesSupporteddevicesJuniperOperatingsystem](docs/RuleSchemaRulepropertiesSupporteddevicesJuniperOperatingsystem.md)
@@ -854,6 +912,7 @@ Class | Method | HTTP request | Description
  - [RuleSchemaWhenExists](docs/RuleSchemaWhenExists.md)
  - [RuleSchemaWhenIncreasingatleastbyrate](docs/RuleSchemaWhenIncreasingatleastbyrate.md)
  - [RuleSchemaWhenIncreasingatleastbyvalue](docs/RuleSchemaWhenIncreasingatleastbyvalue.md)
+ - [RuleSchemaWhenMatcheswithprevious](docs/RuleSchemaWhenMatcheswithprevious.md)
  - [RuleSchemaWhenMaxrateofincrease](docs/RuleSchemaWhenMaxrateofincrease.md)
  - [RuleSchemaWhenRange](docs/RuleSchemaWhenRange.md)
  - [RuleSchemaWhenUserdefinedfunction](docs/RuleSchemaWhenUserdefinedfunction.md)
@@ -899,6 +958,7 @@ Class | Method | HTTP request | Description
  - [TaggingprofileSchemaWhen](docs/TaggingprofileSchemaWhen.md)
  - [TaggingprofileSchemaWhenDoesnotmatchwith](docs/TaggingprofileSchemaWhenDoesnotmatchwith.md)
  - [TaggingprofileSchemaWhenEqualto](docs/TaggingprofileSchemaWhenEqualto.md)
+ - [TaggingprofileSchemaWhenEval](docs/TaggingprofileSchemaWhenEval.md)
  - [TaggingprofileSchemaWhenExists](docs/TaggingprofileSchemaWhenExists.md)
  - [TaggingprofileSchemaWhenMatcheswithscheduler](docs/TaggingprofileSchemaWhenMatcheswithscheduler.md)
  - [TemplateSchema](docs/TemplateSchema.md)
@@ -910,28 +970,6 @@ Class | Method | HTTP request | Description
  - [Token](docs/Token.md)
  - [TopicFieldCaptureSchema](docs/TopicFieldCaptureSchema.md)
  - [TopicSchema](docs/TopicSchema.md)
- - [TopicSchemaArgument](docs/TopicSchemaArgument.md)
- - [TopicSchemaDependson](docs/TopicSchemaDependson.md)
- - [TopicSchemaField](docs/TopicSchemaField.md)
- - [TopicSchemaForeverydevice](docs/TopicSchemaForeverydevice.md)
- - [TopicSchemaForeverynetworkgroup](docs/TopicSchemaForeverynetworkgroup.md)
- - [TopicSchemaFunction](docs/TopicSchemaFunction.md)
- - [TopicSchemaGetdependenciesfromcache](docs/TopicSchemaGetdependenciesfromcache.md)
- - [TopicSchemaLocateresource](docs/TopicSchemaLocateresource.md)
- - [TopicSchemaResource](docs/TopicSchemaResource.md)
- - [TopicSchemaSource](docs/TopicSchemaSource.md)
- - [TopicSchemaSourceRule](docs/TopicSchemaSourceRule.md)
- - [TopicSchemaTerm](docs/TopicSchemaTerm.md)
- - [TopicSchemaUserdefinedfunction](docs/TopicSchemaUserdefinedfunction.md)
- - [TopicSchemaVariable](docs/TopicSchemaVariable.md)
- - [TopicSchemaWhere](docs/TopicSchemaWhere.md)
- - [TopicSchemaWhereArgument](docs/TopicSchemaWhereArgument.md)
- - [TopicSchemaWhereDoesnotmatchwith](docs/TopicSchemaWhereDoesnotmatchwith.md)
- - [TopicSchemaWhereEqualto](docs/TopicSchemaWhereEqualto.md)
- - [TopicSchemaWhereEval](docs/TopicSchemaWhereEval.md)
- - [TopicSchemaWhereMatcheswith](docs/TopicSchemaWhereMatcheswith.md)
- - [TopicSchemaWhereUserdefinedfunction](docs/TopicSchemaWhereUserdefinedfunction.md)
- - [TopicSchemaWithcapturegroup](docs/TopicSchemaWithcapturegroup.md)
  - [TopicsSchema](docs/TopicsSchema.md)
  - [TriggerActionSchema](docs/TriggerActionSchema.md)
  - [TriggerSchema](docs/TriggerSchema.md)

@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -33,6 +36,7 @@ class RuleSchemaWhenIncreasingatleastbyvalue(object):
     swagger_types = {
         'all': 'list[object]',
         'any': 'list[object]',
+        'latest': 'list[object]',
         'field_name': 'str',
         'time_range': 'str',
         'value': 'str'
@@ -41,16 +45,18 @@ class RuleSchemaWhenIncreasingatleastbyvalue(object):
     attribute_map = {
         'all': 'all',
         'any': 'any',
+        'latest': 'latest',
         'field_name': 'field-name',
         'time_range': 'time-range',
         'value': 'value'
     }
 
-    def __init__(self, all=None, any=None, field_name=None, time_range=None, value=None):  # noqa: E501
+    def __init__(self, all=None, any=None, latest=None, field_name=None, time_range=None, value=None):  # noqa: E501
         """RuleSchemaWhenIncreasingatleastbyvalue - a model defined in Swagger"""  # noqa: E501
 
         self._all = None
         self._any = None
+        self._latest = None
         self._field_name = None
         self._time_range = None
         self._value = None
@@ -60,6 +66,8 @@ class RuleSchemaWhenIncreasingatleastbyvalue(object):
             self.all = all
         if any is not None:
             self.any = any
+        if latest is not None:
+            self.latest = latest
         self.field_name = field_name
         if time_range is not None:
             self.time_range = time_range
@@ -111,6 +119,29 @@ class RuleSchemaWhenIncreasingatleastbyvalue(object):
         """
 
         self._any = any
+
+    @property
+    def latest(self):
+        """Gets the latest of this RuleSchemaWhenIncreasingatleastbyvalue.  # noqa: E501
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :return: The latest of this RuleSchemaWhenIncreasingatleastbyvalue.  # noqa: E501
+        :rtype: list[object]
+        """
+        return self._latest
+
+    @latest.setter
+    def latest(self, latest):
+        """Sets the latest of this RuleSchemaWhenIncreasingatleastbyvalue.
+
+        With this flag, result is set to True if the latest data matches the condition  # noqa: E501
+
+        :param latest: The latest of this RuleSchemaWhenIncreasingatleastbyvalue.  # noqa: E501
+        :type: list[object]
+        """
+
+        self._latest = latest
 
     @property
     def field_name(self):

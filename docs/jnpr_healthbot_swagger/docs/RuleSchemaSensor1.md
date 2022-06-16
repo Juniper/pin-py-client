@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **str** | Description about the sensor | [optional] 
 **sflow** | [**RuleSchemaSflow**](RuleSchemaSflow.md) |  | [optional] 
+**ifa** | [**RuleSchemaIfa**](RuleSchemaIfa.md) |  | [optional] 
 **flow** | [**RuleSchemaFlow**](RuleSchemaFlow.md) |  | [optional] 
 **i_agent** | [**RuleSchemaIAgent**](RuleSchemaIAgent.md) |  | [optional] 
 **native_gpb** | [**RuleSchemaNativegpb**](RuleSchemaNativegpb.md) |  | [optional] 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **snmp** | [**RuleSchemaSnmp**](RuleSchemaSnmp.md) |  | [optional] 
 **snmp_notification** | [**RuleSchemaSnmpnotification**](RuleSchemaSnmpnotification.md) |  | [optional] 
 **syslog** | [**RuleSchemaSyslog**](RuleSchemaSyslog.md) |  | [optional] 
+**paragon_active_assurance** | **list[object]** | Paragon Active Assurance Sensor | [optional] 
 **synopsis** | **str** | Synopsis about the sensor | [optional] 
 **byoi** | [**RuleSchemaByoi**](RuleSchemaByoi.md) |  | [optional] 
 

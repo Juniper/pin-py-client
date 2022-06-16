@@ -48,7 +48,7 @@ class HBCharts(BaseModule):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
         """
         super().__init__(hbot)
 

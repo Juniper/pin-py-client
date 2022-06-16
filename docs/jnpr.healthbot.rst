@@ -13,12 +13,12 @@ jnpr.healthbot.modules
    jnpr.healthbot.modules
 
 
-HealthBotClient
+PINClient
 ---------------
 
 .. automodule:: jnpr.healthbot.healthbot
 
-	.. autoclass:: jnpr.healthbot.healthbot.HealthBotClient
+	.. autoclass:: jnpr.healthbot.healthbot.PINClient
 		:members:
 		:undoc-members:
 		:show-inheritance:

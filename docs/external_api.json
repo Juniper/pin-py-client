@@ -67,6 +67,10 @@
     {
       "description": "workflows",
       "name": "workflow"
+    },
+    {
+      "description": "Utility endpoints",
+      "name": "utility"
     }
   ],
   "paths": {
@@ -91,6 +95,120 @@
         "summary": "Get all All API's.",
         "tags": [
           "documentation"
+        ]
+      }
+    },
+    "/junos-encode/": {
+      "post": {
+        "description": "Encode string with Junos",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "String to Encode with Junos",
+            "in": "body",
+            "name": "data",
+            "required": true,
+            "schema": {
+              "properties": {
+                "data": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "properties": {
+                "data": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "operationId": "junosencode",
+        "summary": "Encode string with Junos",
+        "tags": [
+          "utility"
+        ]
+      }
+    },
+    "/junos-decode/": {
+      "post": {
+        "description": "Decode string with Junos",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "String to Encode with Junos",
+            "in": "body",
+            "name": "data",
+            "required": true,
+            "schema": {
+              "properties": {
+                "data": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "properties": {
+                "data": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "operationId": "junosdecode",
+        "summary": "Decode string with Junos",
+        "tags": [
+          "utility"
         ]
       }
     },
@@ -2507,6 +2625,597 @@
           }
         },
         "summary": "Update frequency-profile by ID"
+      }
+    },
+    "/config/ingest/paa/": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieve operation of resource: paa",
+        "operationId": "retrieve_healthbot_ingest_settings_paa",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "true queries undeployed configuration",
+            "in": "query",
+            "name": "working",
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/paa-setup_schemas"
+            }
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Retrieve paas"
+      }
+    },
+    "/config/ingest/paa/{paa_name}/": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Delete operation of resource: paa by paa name",
+        "operationId": "delete_healthbot_ingest_paa_by_paa_name",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "name of paa setup",
+            "in": "path",
+            "name": "paa_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Delete paa setup by paa name"
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieve operation of resource: paa by paa_name",
+        "operationId": "retrieve_healthbot_ingest_paa_by_paa_name",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "name of paa setup",
+            "in": "path",
+            "name": "paa_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "true queries undeployed configuration",
+            "in": "query",
+            "name": "working",
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/paa-setup_schema"
+            }
+          },
+          "404": {
+            "description": "Setup not found"
+          },
+          "500": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Retrieve paa setup config by paa name"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update operation of resource: paa by paa_name",
+        "operationId": "update_ingest_paa_by_paa_name",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "name of paa setup",
+            "in": "path",
+            "name": "paa_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "paa body object",
+            "in": "body",
+            "name": "paa_setup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/paa-setup_schema"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Update paa by paa name"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Create operation of resource: paa by paa_name",
+        "operationId": "create_ingest_paa_by_paa_name",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "name of paa setup",
+            "in": "path",
+            "name": "paa_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "paa body object",
+            "in": "body",
+            "name": "paa_setup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/paa-setup_schema"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Update paa by paa name"
+      }
+    },
+    "/config/ingest/ifa/": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Delete operation of resource: ifa",
+        "operationId": "delete_healthbot_ingest_ifa",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Delete ifa by ID"
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieve operation of resource: ifa",
+        "operationId": "retrieve_healthbot_ingest_ifa",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "true queries undeployed configuration",
+            "in": "query",
+            "name": "working",
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ifa_schema"
+            }
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Retrieve ifa"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Create operation of resource: ifa",
+        "operationId": "create_healthbot_ingest_ifa",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ifabody object",
+            "in": "body",
+            "name": "ifa",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ifa_schema"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Create ifa by ID"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update operation of resource: ifa",
+        "operationId": "update_healthbot_ingest_ifa",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ifabody object",
+            "in": "body",
+            "name": "ifa",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ifa_schema"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Update ifa by ID"
+      }
+    },
+    "/config/ingest/ifa/device/": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieve operation of resource: device",
+        "operationId": "retrieve_healthbot_ingest_ifa_device_ids",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "true queries undeployed configuration",
+            "in": "query",
+            "name": "working",
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "items": {
+                "type": "string",
+                "x-path": "/healthbot/ingest/ifa/device/{id}/"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Retrieve device"
+      }
+    },
+    "/config/ingest/ifa/devices/": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieve operation of resource: device",
+        "operationId": "retrieve_healthbot_ingest_ifa_devices",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "true queries undeployed configuration",
+            "in": "query",
+            "name": "working",
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ifa_device_schema"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Retrieve devices"
+      }
+    },
+    "/config/ingest/ifa/device/{id}/": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Delete operation of resource: device",
+        "operationId": "delete_healthbot_ingest_ifa_device_by_id",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ID of ifa device",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Delete device by ID"
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieve operation of resource: device",
+        "operationId": "retrieve_healthbot_ingest_ifa_device_by_id",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ID of ifa device",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "true queries undeployed configuration",
+            "in": "query",
+            "name": "working",
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ifa_device_schema"
+            }
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Retrieve device by ID"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Create operation of resource: device",
+        "operationId": "create_healthbot_ingest_ifa_device_by_id",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ID of ifa device",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "devicebody object",
+            "in": "body",
+            "name": "device",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ifa_device_schema"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Create device by ID"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update operation of resource: device",
+        "operationId": "update_healthbot_ingest_ifa_device_by_id",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ID of ifa device",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "devicebody object",
+            "in": "body",
+            "name": "device",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ifa_device_schema"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Update device by ID"
       }
     },
     "/config/ingest/native-gpb/": {
@@ -7992,6 +8701,45 @@
         ]
       }
     },
+    "/device/{device_id}/trigger_info/": {
+      "get": {
+        "description": "Get information about the triggers in device-groups having the provided device.",
+        "operationId": "retrieve_device_trigger_info",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "Name of device",
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger info for device-groups having the provided device.",
+            "schema": {
+              "$ref": "#/definitions/trigger_schema"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "summary": "Get trigger info for device-groups containing the device.",
+        "tags": [
+          "configuration"
+        ]
+      }
+    },
     "/device-group/{device_group_name}/status/": {
       "get": {
         "description": "Get information about the status of a device-group's services.",
@@ -8126,6 +8874,63 @@
         "summary": "Get a devices facts for given group.",
         "tags": [
           "facts"
+        ]
+      }
+    },
+    "/config/device-group/{device_group_name}/device/": {
+      "delete": {
+        "description": "Remove the list of devices from the device group",
+        "operationId": "remove_iceberg_devices_from_group",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ID of group",
+            "in": "path",
+            "name": "device_group_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "device list",
+            "in": "body",
+            "name": "devices",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "device-ids"
+              ],
+              "properties":{
+                "device-ids": {
+                  "type": "array",
+                  "description": "list of device ids",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Remove devices from group.",
+        "tags": [
+          "configuration"
         ]
       }
     },
@@ -11326,6 +12131,57 @@
         ]
       }
     },
+    "/config/network-group/{network_group_name}/variable/": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Overwrite a network-group by the `network-group-name`. The `network-group-name` specified in the URL and the request body must match.",
+        "operationId": "remove_iceberg_network_group_network_group_by_id",
+        "parameters": [
+          {
+            "description": "authentication header object",
+            "in": "header",
+            "name": "x-iam-token",
+            "type": "string"
+          },
+          {
+            "description": "ID of network-group-name",
+            "in": "path",
+            "name": "network_group_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "network_groupbody object",
+            "in": "body",
+            "name": "network_variable",
+            "required": true,
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/network-variable-schema"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Internal Error"
+          }
+        },
+        "summary": "Overwrite a network-group.",
+        "tags": [
+          "configuration"
+        ]
+      }
+    },
     "/config/network-group/{network_group_name}/": {
       "delete": {
         "consumes": [
@@ -14069,7 +14925,8 @@
               "syslog",
               "byoi",
               "flow",
-              "sflow"
+              "sflow",
+              "ifa"
             ]
           },
           {
@@ -21362,6 +22219,49 @@
         "sflow-fields-group"
       ]
     },
+    "ifa_schema": {
+      "additionalProperties": false,
+      "description": "Inband Flow Analyzer ingest configuration",
+      "patternProperties": {
+        "^@": {
+          "type": "object"
+        }
+      },
+      "properties": {
+        "device": {
+          "description": "Device details of Inband Flow Analyzer",
+          "items": {
+            "additionalProperties": false,
+            "patternProperties": {
+              "^@": {
+                "type": "object"
+              }
+            },
+            "properties": {
+              "id": {
+                "description": "Device number",
+                "format": "int32",
+                "type": "integer"
+              },
+              "name": {
+                "description": "Device name",
+                "format": "string",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "type": "array",
+          "x-key": "id"
+        }
+      },
+      "type": "object",
+      "x-ref": [
+        "ifa-ingest-group"
+      ]
+    },
     "native-gpb_schema": {
       "additionalProperties": false,
       "patternProperties": {
@@ -22571,6 +23471,128 @@
       },
       "required": [
         "custom-plugin"
+      ],
+      "type": "object"
+    },
+    "paa-setup_schema": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^@": {
+          "type": "object"
+        }
+      },
+      "properties": {
+        "name": {
+          "description": "Paragon Active Assurance setup name",
+          "format": "string",
+          "maxLength": 64,
+          "type": "string"
+        },
+        "brokers": {
+          "items": {
+            "description": "Kafka brokers in host/ip:port format",
+            "format": "string",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "paa-account": {
+          "description": "Paragon Active Assurance account",
+          "format": "string",
+          "maxLength": 64,
+          "type": "string"
+        },
+        "security": {
+          "additionalProperties": false,
+          "description": "PAA Kafka specific security parameters",
+          "patternProperties": {
+            "^@": {
+              "type": "object"
+            }
+          },
+          "properties": {
+            "tls": {
+              "additionalProperties": false,
+              "patternProperties": {
+                "^@": {
+                  "type": "object"
+                }
+              },
+              "properties": {
+                "ca-profile": {
+                  "description": "CA profile name",
+                  "format": "string",
+                  "type": "string"
+                },
+                "insecure-skip-verify": {
+                  "description": "Use TLS but skip verification of certificate chain and host",
+                  "type": "boolean"
+                },
+                "local-certificate-profile": {
+                  "description": "Local certificate profile name",
+                  "format": "string",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "sasl": {
+              "additionalProperties": false,
+              "description": "SASL user authentication",
+              "patternProperties": {
+                "^@": {
+                  "type": "object"
+                }
+              },
+              "properties": {
+                "password": {
+                  "description": "Kafka SASL password",
+                  "format": "string",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Kafka SASL username",
+                  "format": "string",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ],
+              "type": "object",
+              "x-ref": [
+                "log-level-group"
+              ]
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "brokers",
+        "paa-account"
+      ],
+      "type": "object"
+    },
+    "paa-setup_schemas": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^@": {
+          "type": "object"
+        }
+      },
+      "properties": {
+        "paa-setup": {
+          "items": {
+            "$ref": "#/definitions/paa-setup_schema"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "paa-setup"
       ],
       "type": "object"
     },
@@ -23817,6 +24839,47 @@
                 "ingest-daemon-group"
               ]
             },
+            "ifa": {
+              "additionalProperties": false,
+              "description": "Service responsible for Inband Flow Analyzer data collection",
+              "patternProperties": {
+                "^@": {
+                  "type": "object"
+                }
+              },
+              "properties": {
+                "daemons": {
+                  "items": {
+                    "description": "List of daemons for which log-level needs to be applied",
+                    "enum": [
+                      "ingest",
+                      "tand",
+                      "publishd"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "log-level": {
+                  "description": "Set the logging level",
+                  "enum": [
+                    "error",
+                    "debug",
+                    "warn",
+                    "info"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "log-level"
+              ],
+              "type": "object",
+              "x-ref": [
+                "log-level-group",
+                "ingest-daemon-group"
+              ]
+            },
             "byoi": {
               "additionalProperties": false,
               "description": "Service responsible for the custom BYOI plugins",
@@ -23995,6 +25058,34 @@
                 "type": "string"
               },
               "type": "array"
+            },
+            "ifa": {
+              "additionalProperties": false,
+              "description": "Inband Flow Analyzer specific parameters in Flow ingest",
+              "patternProperties": {
+                "^@": {
+                  "type": "object"
+                }
+              },
+              "properties": {
+                "ports": {
+                  "items": {
+                    "description": "UDP ports on which the Inband Flow Analyzer sensors will be received",
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                "deploy-nodes": {
+                  "items": {
+                    "description": "List of nodes where Inband Flow Analyzer ingest needs to be deployed in case of multi-node",
+                    "format": "string",
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
             },
             "netflow": {
               "additionalProperties": false,
@@ -24686,6 +25777,21 @@
           },
           "type": "object"
         },
+        "paragon-active-assurance": {
+          "additionalProperties": false,
+          "patternProperties": {
+            "^@": {
+              "type": "object"
+            }
+          },
+          "properties": {
+            "paa-setup": {
+              "description": "Name of configured Paragon Active Assurance setup",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "tagging-profile": {
           "items": {
             "description": "Name of the tagging-profile to be used",
@@ -25158,6 +26264,13 @@
         "description": {
           "description": "Description about the device",
           "format": "string",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name for the device. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
+          "format": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*\\.*)*$",
           "type": "string"
         },
         "device-id": {
@@ -26015,6 +27128,10 @@
             }
           },
           "type": "object"
+        },
+        "marked-for-delete": {
+          "description": "Mark device for deletion",
+          "type": "boolean"
         }
       },
       "required": [
@@ -26051,9 +27168,9 @@
           "type": "object",
           "properties": {
             "device-id": {
-          "description": "Event name",
-          "type": "string"
-        },
+              "description": "Identifier for the device",
+              "type": "string"
+            },
             "databases": {
               "type": "object",
               "additionalProperties": {
@@ -27016,6 +28133,36 @@
       },
       "required": [
         "network-group"
+      ],
+      "type": "object"
+    },
+    "network-variable-schema": {
+      "properties": {
+        "instance-id": {
+          "description": "Unique ID of the variable instance. This should be unique per playbook and rule combination. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
+          "format": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "type": "string"
+        },
+        "playbook": {
+          "description": "Name of the playbook in which the variable instance needs to be used",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+          "type": "string",
+          "x-path": "../../../playbook/playbook-name"
+        },
+        "rule": {
+          "description": "Name of the rule. This must be of the format <topic-name>/<rule-name>",
+          "format": "string",
+          "pattern": "^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z]+[a-z0-9_-]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instance-id",
+        "playbook",
+        "rule"
       ],
       "type": "object"
     },
@@ -28870,6 +30017,45 @@
                 "type": "array",
                 "x-key": "argument-name"
               },
+              "return": {
+                "items": {
+                  "additionalProperties": false,
+                  "patternProperties": {
+                    "^@": {
+                      "type": "object"
+                    }
+                  },
+                  "properties": {
+                    "field-name": {
+                      "description": "Name of the output field. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
+                      "format": "string",
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+                      "type": "string"
+                    },
+                    "type": {
+                      "enum": [
+                        "string",
+                        "integer",
+                        "unsigned-integer",
+                        "float"
+                      ],
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "Description about this field",
+                      "format": "string",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "field-name"
+                  ]
+                },
+                "type": "array",
+                "x-key": "field-name"
+              },
               "description": {
                 "description": "Description of the function",
                 "format": "string",
@@ -28921,12 +30107,111 @@
           "type": "array"
         },
         "disable-no-data-alarm": {
-          "description": "Disable No Data Alarm",
+            "description": "Disable No Data Alarm",
+            "items": {
+              "type": "object",
+              "x-nullable": true
+            },
+            "type": "array"
+        },
+        "pre-hook": {
+          "description": "List of pre hook workflows per rule",
           "items": {
-            "type": "object",
-            "x-nullable": true
+            "additionalProperties": false,
+            "patternProperties": {
+              "^@": {
+                "type": "object"
+              }
+            },
+            "properties": {
+              "argument": {
+                "$ref": "#/definitions/workflow_argument_group_schema"
+              },
+              "workflow-name": {
+                "description": "Name of the workflow to trigger",
+                "format": "string",
+                "type": "string"
+              },
+              "execute-once": {
+                "type": "boolean",
+                "description": "Execute workflow once with in a device group"
+              }
+            },
+            "required": [
+              "workflow-name"
+            ],
+            "x-ref": [
+              "arguments-group"
+            ]
           },
-          "type": "array"
+          "type": "array",
+          "x-key": "workflow-name"
+        },
+        "post-hook": {
+          "description": "List of post hook workflows per rule",
+          "items": {
+            "additionalProperties": false,
+            "patternProperties": {
+              "^@": {
+                "type": "object"
+              }
+            },
+            "properties": {
+              "argument": {
+                "$ref": "#/definitions/workflow_argument_group_schema"
+              },
+              "workflow-name": {
+                "description": "Name of the workflow to trigger",
+                "format": "string",
+                "type": "string"
+              },
+              "execute-once": {
+                "type": "boolean",
+                "description": "Execute workflow once with in a device group"
+              }
+            },
+            "required": [
+              "workflow-name"
+            ],
+            "x-ref": [
+              "arguments-group"
+            ]
+          },
+          "type": "array",
+          "x-key": "workflow-name"
+        },
+        "redirect-to": {
+          "additionalProperties": false,
+          "patternProperties": {
+            "^@": {
+              "type": "object"
+            }
+          },
+          "properties": {
+            "mandatory-fields": {
+              "items": {
+                "description": "List of mandatory fields which needs to be present in all the redirected rules",
+                "format": "string",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Measurement name for redirecting rule data. Format: <topic-name>/<rule-name>. Should be of pattern [a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9_-]*",
+              "format": "string",
+              "maxLength": 129,
+              "minLength": 1,
+              "pattern": "^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9_-]*$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
         },
         "rule-frequency": {
           "description": "Frequency at which the rule\u2019s field, reference, and vector elements should be computed. Required only when a rule doesn\u2019t have a sensor defined. Specify integer >= 0 followed by s/m/h/d/w/y representing seconds/minutes/hours/days/weeks/years. Eg: 2s",
@@ -28976,6 +30261,28 @@
                 "type": "object",
                 "x-choice": "sensor-type",
                 "x-choice-case": "sflow"
+              },
+              "ifa": {
+                "additionalProperties": false,
+                "patternProperties": {
+                  "^@": {
+                    "type": "object"
+                  }
+                },
+                "properties": {
+                  "sensor-name": {
+                    "description": "Sensor to subscribe",
+                    "format": "string",
+                    "pattern": "^\\S+$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sensor-name"
+                ],
+                "type": "object",
+                "x-choice": "sensor-type",
+                "x-choice-case": "ifa"
               },
               "flow": {
                 "additionalProperties": false,
@@ -29248,6 +30555,16 @@
                 "x-choice": "sensor-type",
                 "x-choice-case": "syslog"
               },
+              "paragon-active-assurance": {
+                "description": "Paragon Active Assurance Sensor",
+                "items": {
+                  "type": "object",
+                  "x-nullable": true
+                },
+                "type": "array",
+                "x-choice": "sensor-type",
+                "x-choice-case": "paragon-active-assurance"
+              },
               "synopsis": {
                 "description": "Synopsis about the sensor",
                 "format": "string",
@@ -29501,6 +30818,15 @@
                                 "format": "int32",
                                 "type": "integer"
                               },
+                              "log-level": {
+                                "description": "Logging level of workflow",
+                                "type": "string",
+                                "enum": [
+                                  "info",
+                                  "debug",
+                                  "error"
+                                ]
+                              },
                               "retry": {
                                 "additionalProperties": false,
                                 "description": "Retry failed steps",
@@ -29606,6 +30932,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "ignore-case": {
                                 "description": "Flag to ignore case while matching the string",
                                 "items": {
@@ -29672,6 +31008,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "left-operand": {
                                 "description": "Left operand",
                                 "format": "string",
@@ -29730,10 +31076,160 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "field-name": {
                                 "description": "Field name which needs to be present",
                                 "format": "string",
                                 "type": "string"
+                              },
+                              "time-range": {
+                                "description": "How much back in time should we look for data. Specify positive integer followed by s/m/h/d/w/y/o representing seconds/minutes/hours/days/weeks/years/offset. Eg: 2s",
+                                "format": "string",
+                                "pattern": "^[1-9][0-9]*(\\.[0-9]+)?(o|s|m|h|d|w|y|offset)$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "field-name"
+                            ],
+                            "x-ref": [
+                              "time-range-group",
+                              "condition-check-group"
+                            ]
+                          },
+                          "type": "array",
+                          "x-key": "field-name"
+                        },
+                        "matches-with-previous": {
+                          "items": {
+                            "additionalProperties": false,
+                            "patternProperties": {
+                              "^@": {
+                                "type": "object"
+                              }
+                            },
+                            "properties": {
+                              "all": {
+                                "description": "With this flag, result is set to True only if all the data matches the given condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "all"
+                              },
+                              "any": {
+                                "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "field-name": {
+                                "description": "Field name which previous and current value needs to be matched",
+                                "format": "string",
+                                "type": "string"
+                              },
+                              "ignore-case": {
+                                "description": "Flag to ignore case while matching the string",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array"
+                              },
+                              "time-range": {
+                                "description": "How much back in time should we look for data. Specify positive integer followed by s/m/h/d/w/y/o representing seconds/minutes/hours/days/weeks/years/offset. Eg: 2s",
+                                "format": "string",
+                                "pattern": "^[1-9][0-9]*(\\.[0-9]+)?(o|s|m|h|d|w|y|offset)$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "field-name"
+                            ],
+                            "x-ref": [
+                              "time-range-group",
+                              "condition-check-group"
+                            ]
+                          },
+                          "type": "array",
+                          "x-key": "field-name"
+                        },
+                        "does-not-match-with-previous": {
+                          "items": {
+                            "additionalProperties": false,
+                            "patternProperties": {
+                              "^@": {
+                                "type": "object"
+                              }
+                            },
+                            "properties": {
+                              "all": {
+                                "description": "With this flag, result is set to True only if all the data matches the given condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "all"
+                              },
+                              "any": {
+                                "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "field-name": {
+                                "description": "Field name which previous and current value needs to be matched",
+                                "format": "string",
+                                "type": "string"
+                              },
+                              "ignore-case": {
+                                "description": "Flag to ignore case while matching the string",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array"
                               },
                               "time-range": {
                                 "description": "How much back in time should we look for data. Specify positive integer followed by s/m/h/d/w/y/o representing seconds/minutes/hours/days/weeks/years/offset. Eg: 2s",
@@ -29774,6 +31270,16 @@
                               },
                               "any": {
                                 "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
                                 "items": {
                                   "type": "object",
                                   "x-nullable": true
@@ -29840,6 +31346,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "left-operand": {
                                 "description": "Left operand",
                                 "format": "string",
@@ -29891,6 +31407,16 @@
                               },
                               "any": {
                                 "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
                                 "items": {
                                   "type": "object",
                                   "x-nullable": true
@@ -29983,6 +31509,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "field-name": {
                                 "description": "Field name. Should match the pattern $[a-z][a-zA-Z0-9_-]*",
                                 "format": "string",
@@ -30034,6 +31570,16 @@
                               },
                               "any": {
                                 "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
                                 "items": {
                                   "type": "object",
                                   "x-nullable": true
@@ -30126,6 +31672,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "field-name": {
                                 "description": "Field name. Should match the pattern $[a-z][a-zA-Z0-9_-]*",
                                 "format": "string",
@@ -30176,6 +31732,16 @@
                               },
                               "any": {
                                 "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
                                 "items": {
                                   "type": "object",
                                   "x-nullable": true
@@ -30242,6 +31808,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "left-operand": {
                                 "description": "Left operand",
                                 "format": "string",
@@ -30292,6 +31868,16 @@
                               },
                               "any": {
                                 "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
                                 "items": {
                                   "type": "object",
                                   "x-nullable": true
@@ -30366,6 +31952,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "field-name": {
                                 "description": "Field name on which rate should be compared",
                                 "format": "string",
@@ -30423,6 +32019,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "field-name": {
                                 "description": "Field name on which rate should be compared",
                                 "format": "string",
@@ -30472,6 +32078,16 @@
                               },
                               "any": {
                                 "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
                                 "items": {
                                   "type": "object",
                                   "x-nullable": true
@@ -30538,6 +32154,16 @@
                                 "x-choice": "condition-check",
                                 "x-choice-case": "any"
                               },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
                               "field-name": {
                                 "description": "Field name on which range should be applied",
                                 "format": "string",
@@ -30594,6 +32220,16 @@
                               },
                               "any": {
                                 "description": "With this flag, result is set to True if any one of the data matches the condition",
+                                "items": {
+                                  "type": "object",
+                                  "x-nullable": true
+                                },
+                                "type": "array",
+                                "x-choice": "condition-check",
+                                "x-choice-case": "any"
+                              },
+                              "latest": {
+                                "description": "With this flag, result is set to True if the latest data matches the condition",
                                 "items": {
                                   "type": "object",
                                   "x-nullable": true
@@ -30942,6 +32578,31 @@
                 "external"
               ],
               "type": "string"
+            },
+            "category": {
+              "enum": [
+                "basic",
+                "advanced",
+                "comprehensive"
+              ],
+              "type": "string"
+            },
+            "is-scaling-rule": {
+              "additionalProperties": false,
+              "description": "Scaling rule",
+              "patternProperties": {
+                "^@": {
+                  "type": "object"
+                }
+              },
+              "properties": {
+                "description": {
+                  "description": "Description of how the rule affects scaling",
+                  "format": "string",
+                  "type": "string"
+                }
+              },
+              "type": "object"
             },
             "date": {
               "pattern": "^(19|20)\\d\\d[/](0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])$",
@@ -32417,6 +34078,49 @@
                 "flow-templates-group"
               ]
             },
+            "ifa": {
+              "additionalProperties": false,
+              "description": "Inband Flow Analyzer ingest configuration",
+              "patternProperties": {
+                "^@": {
+                  "type": "object"
+                }
+              },
+              "properties": {
+                "device": {
+                  "description": "Device details of Inband Flow Analyzer",
+                  "items": {
+                    "additionalProperties": false,
+                    "patternProperties": {
+                      "^@": {
+                        "type": "object"
+                      }
+                    },
+                    "properties": {
+                      "id": {
+                        "description": "Device number",
+                        "format": "int32",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "Device name",
+                        "format": "string",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ]
+                  },
+                  "type": "array",
+                  "x-key": "id"
+                }
+              },
+              "type": "object",
+              "x-ref": [
+                "ifa-ingest-group"
+              ]
+            },
             "native-gpb": {
               "additionalProperties": false,
               "description": "Native-gpb ingest configuration",
@@ -32965,6 +34669,24 @@
               },
               "type": "object"
             },
+            "paragon-active-assurance": {
+              "additionalProperties": false,
+              "description": "Paragon Active Assurance Setups",
+              "patternProperties": {
+                "^@": {
+                  "type": "object"
+                }
+              },
+              "properties": {
+                "paa-setup": {
+                  "items": {
+                    "$ref": "#/definitions/paa-setup_schema"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
             "frequency-profile": {
               "items": {
                 "additionalProperties": false,
@@ -33220,979 +34942,7 @@
         },
         "resource": {
           "items": {
-            "additionalProperties": false,
-            "patternProperties": {
-              "^@": {
-                "type": "object"
-              }
-            },
-            "properties": {
-              "depends-on": {
-                "items": {
-                  "additionalProperties": false,
-                  "patternProperties": {
-                    "^@": {
-                      "type": "object"
-                    }
-                  },
-                  "properties": {
-                    "depends-on-multiple-instances": {
-                      "description": "Depends on multiple instances of the depends-on resource. One to many relationship. Eg: ae interface can be dependent on multiple interfaces",
-                      "type": "boolean"
-                    },
-                    "description": {
-                      "description": "Description about the dependency",
-                      "format": "string",
-                      "type": "string"
-                    },
-                    "resource-name": {
-                      "description": "Name of dependent resource <topic-name>/<resource-name>. Should be of pattern [a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9-]*",
-                      "format": "string",
-                      "pattern": "^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9-]*$",
-                      "type": "string"
-                    },
-                    "term": {
-                      "items": {
-                        "additionalProperties": false,
-                        "patternProperties": {
-                          "^@": {
-                            "type": "object"
-                          }
-                        },
-                        "properties": {
-                          "for-every-device": {
-                            "additionalProperties": false,
-                            "description": "Loop over all devices",
-                            "patternProperties": {
-                              "^@": {
-                                "type": "object"
-                              }
-                            },
-                            "properties": {
-                              "across-all-device-groups": {
-                                "description": "evaluate for all device groups",
-                                "type": "boolean",
-                                "x-choice": "device-groups",
-                                "x-choice-case": "across-all-device-groups"
-                              },
-                              "in-groups": {
-                                "items": {
-                                  "description": "Limit the loop to device groups in this list",
-                                  "format": "string",
-                                  "maxLength": 64,
-                                  "minLength": 1,
-                                  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                                  "type": "string"
-                                },
-                                "type": "array",
-                                "x-choice": "device-groups",
-                                "x-choice-case": "in-groups"
-                              },
-                              "label-as": {
-                                "format": "string",
-                                "maxLength": 64,
-                                "minLength": 1,
-                                "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "label-as"
-                            ],
-                            "type": "object"
-                          },
-                          "for-every-network-group": {
-                            "additionalProperties": false,
-                            "description": "Loop over all network groups",
-                            "patternProperties": {
-                              "^@": {
-                                "type": "object"
-                              }
-                            },
-                            "properties": {
-                              "across-all-network-groups": {
-                                "description": "evaluate for all network groups",
-                                "type": "boolean",
-                                "x-choice": "network-groups",
-                                "x-choice-case": "across-all-network-groups"
-                              },
-                              "in-groups": {
-                                "items": {
-                                  "description": "Limit the loop to network groups in this list",
-                                  "format": "string",
-                                  "maxLength": 64,
-                                  "minLength": 1,
-                                  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                                  "type": "string"
-                                },
-                                "type": "array",
-                                "x-choice": "network-groups",
-                                "x-choice-case": "in-groups"
-                              },
-                              "label-as": {
-                                "format": "string",
-                                "maxLength": 64,
-                                "minLength": 1,
-                                "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "label-as"
-                            ],
-                            "type": "object"
-                          },
-                          "get-dependencies-from-cache": {
-                            "additionalProperties": false,
-                            "patternProperties": {
-                              "^@": {
-                                "type": "object"
-                              }
-                            },
-                            "properties": {
-                              "path": {
-                                "description": "Instance name given while pushing the dependencies to HealthBot",
-                                "format": "string",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "locate-resource": {
-                            "items": {
-                              "additionalProperties": false,
-                              "patternProperties": {
-                                "^@": {
-                                  "type": "object"
-                                }
-                              },
-                              "properties": {
-                                "label-as": {
-                                  "format": "string",
-                                  "maxLength": 64,
-                                  "minLength": 1,
-                                  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                                  "type": "string"
-                                },
-                                "resource": {
-                                  "description": "Name of the resource which needs to looped over. Format: <optional-idetifier followed by :><topic-name/rule-name>. Should be of pattern ([a-zA-Z][a-zA-Z0-9-]*:)?[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9-]*.",
-                                  "format": "string",
-                                  "pattern": "^([a-zA-Z][a-zA-Z0-9-]*:)?[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9-]*$",
-                                  "type": "string"
-                                },
-                                "where": {
-                                  "additionalProperties": false,
-                                  "patternProperties": {
-                                    "^@": {
-                                      "type": "object"
-                                    }
-                                  },
-                                  "properties": {
-                                    "does-not-match-with": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "left-operand": {
-                                            "description": "Left operand. This is the string in which we have to match the expression",
-                                            "format": "string",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "Right operand. This is the match expression",
-                                            "format": "string",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "equal-to": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "left-operand": {
-                                            "description": "Left operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "right operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ],
-                                        "x-ref": [
-                                          "lhs-rhs-group"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "eval": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "expression": {
-                                            "description": "Expression for evaluation must be a valid golang expression. Field-name if used in expression must be prefixed with $. operators should be prefix and suffix with spaces. For Example: $a + $b > $c",
-                                            "format": "string",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "expression"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "expression"
-                                    },
-                                    "greater-than": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "left-operand": {
-                                            "description": "Left operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "right operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ],
-                                        "x-ref": [
-                                          "lhs-rhs-group"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "greater-than-or-equal-to": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "left-operand": {
-                                            "description": "Left operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "right operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ],
-                                        "x-ref": [
-                                          "lhs-rhs-group"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "less-than": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "left-operand": {
-                                            "description": "Left operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "right operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ],
-                                        "x-ref": [
-                                          "lhs-rhs-group"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "less-than-or-equal-to": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "left-operand": {
-                                            "description": "Left operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "right operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ],
-                                        "x-ref": [
-                                          "lhs-rhs-group"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "matches-with": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "ignore-case": {
-                                            "description": "Flag to ignore case while matching the string",
-                                            "items": {
-                                              "type": "null"
-                                            },
-                                            "type": "array"
-                                          },
-                                          "left-operand": {
-                                            "description": "Left operand. This is the string in which we have to match the expression",
-                                            "format": "string",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "Right operand. This is the match expression",
-                                            "format": "string",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "not-equal-to": {
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "left-operand": {
-                                            "description": "Left operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          },
-                                          "right-operand": {
-                                            "description": "right operand",
-                                            "format": "string",
-                                            "pattern": "^\\S+$",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "right-operand",
-                                          "left-operand"
-                                        ],
-                                        "x-ref": [
-                                          "lhs-rhs-group"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "left-operand right-operand"
-                                    },
-                                    "user-defined-function": {
-                                      "description": "User defined function to populate field value",
-                                      "items": {
-                                        "additionalProperties": false,
-                                        "patternProperties": {
-                                          "^@": {
-                                            "type": "object"
-                                          }
-                                        },
-                                        "properties": {
-                                          "argument": {
-                                            "items": {
-                                              "additionalProperties": false,
-                                              "patternProperties": {
-                                                "^@": {
-                                                  "type": "object"
-                                                }
-                                              },
-                                              "properties": {
-                                                "argument-name": {
-                                                  "description": "Name of the argument. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
-                                                  "format": "string",
-                                                  "maxLength": 64,
-                                                  "minLength": 1,
-                                                  "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
-                                                  "type": "string"
-                                                },
-                                                "value": {
-                                                  "description": "Argument value",
-                                                  "format": "string",
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "value",
-                                                "argument-name"
-                                              ]
-                                            },
-                                            "type": "array",
-                                            "x-key": "argument-name value"
-                                          },
-                                          "function-name": {
-                                            "description": "Name of the function that is defined in the resource. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
-                                            "format": "string",
-                                            "maxLength": 64,
-                                            "minLength": 1,
-                                            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "function-name"
-                                        ]
-                                      },
-                                      "type": "array",
-                                      "x-key": "function-name"
-                                    }
-                                  },
-                                  "type": "object"
-                                },
-                                "with-capture-group": {
-                                  "items": {
-                                    "additionalProperties": false,
-                                    "patternProperties": {
-                                      "^@": {
-                                        "type": "object"
-                                      }
-                                    },
-                                    "properties": {
-                                      "capture-group-name": {
-                                        "description": "Name of the capture group. Should be of pattern [a-zA-Z][a-zA-Z0-9-]*",
-                                        "format": "string",
-                                        "maxLength": 64,
-                                        "minLength": 1,
-                                        "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                                        "type": "string"
-                                      },
-                                      "expression": {
-                                        "description": "Regular expression to extract sub strings",
-                                        "format": "string",
-                                        "type": "string"
-                                      },
-                                      "field-name": {
-                                        "description": "Name of the local or depending resource field name",
-                                        "format": "string",
-                                        "type": "string"
-                                      },
-                                      "ignore-case": {
-                                        "description": "If true, regex match with be case insensitive",
-                                        "type": "boolean"
-                                      }
-                                    },
-                                    "required": [
-                                      "capture-group-name"
-                                    ]
-                                  },
-                                  "type": "array",
-                                  "x-key": "capture-group-name"
-                                }
-                              },
-                              "required": [
-                                "resource",
-                                "label-as"
-                              ]
-                            },
-                            "type": "array",
-                            "x-key": "resource"
-                          },
-                          "next": {
-                            "description": "Continue evaluating next term",
-                            "type": "boolean"
-                          },
-                          "term-name": {
-                            "description": "Term name. Should be of pattern [a-zA-Z][a-zA-Z0-9-]*",
-                            "format": "string",
-                            "maxLength": 64,
-                            "minLength": 1,
-                            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                            "type": "string"
-                          },
-                          "user-defined-function": {
-                            "additionalProperties": false,
-                            "description": "User defined function to populate field value",
-                            "patternProperties": {
-                              "^@": {
-                                "type": "object"
-                              }
-                            },
-                            "properties": {
-                              "argument": {
-                                "items": {
-                                  "additionalProperties": false,
-                                  "patternProperties": {
-                                    "^@": {
-                                      "type": "object"
-                                    }
-                                  },
-                                  "properties": {
-                                    "argument-name": {
-                                      "description": "Name of the argument. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
-                                      "format": "string",
-                                      "maxLength": 64,
-                                      "minLength": 1,
-                                      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
-                                      "type": "string"
-                                    },
-                                    "value": {
-                                      "description": "Argument value",
-                                      "format": "string",
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "value",
-                                    "argument-name"
-                                  ]
-                                },
-                                "type": "array",
-                                "x-key": "argument-name value"
-                              },
-                              "function-name": {
-                                "description": "Name of the function that is defined in the resource. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
-                                "format": "string",
-                                "maxLength": 64,
-                                "minLength": 1,
-                                "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "function-name"
-                            ],
-                            "type": "object"
-                          },
-                          "with-capture-group": {
-                            "items": {
-                              "additionalProperties": false,
-                              "patternProperties": {
-                                "^@": {
-                                  "type": "object"
-                                }
-                              },
-                              "properties": {
-                                "capture-group-name": {
-                                  "description": "Name of the capture group. Should be of pattern [a-zA-Z][a-zA-Z0-9-]*",
-                                  "format": "string",
-                                  "maxLength": 64,
-                                  "minLength": 1,
-                                  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                                  "type": "string"
-                                },
-                                "expression": {
-                                  "description": "Regular expression to extract sub strings",
-                                  "format": "string",
-                                  "type": "string"
-                                },
-                                "field-name": {
-                                  "description": "Name of the local or depending resource field name",
-                                  "format": "string",
-                                  "type": "string"
-                                },
-                                "ignore-case": {
-                                  "description": "If true, regex match with be case insensitive",
-                                  "type": "boolean"
-                                }
-                              },
-                              "required": [
-                                "capture-group-name"
-                              ]
-                            },
-                            "type": "array",
-                            "x-key": "capture-group-name"
-                          }
-                        },
-                        "required": [
-                          "term-name"
-                        ]
-                      },
-                      "minItems": 1,
-                      "type": "array",
-                      "x-key": "term-name"
-                    },
-                    "triggered-by": {
-                      "items": {
-                        "description": "Triggers based on which the dependency should be triggered",
-                        "format": "string",
-                        "maxLength": 129,
-                        "minLength": 1,
-                        "pattern": "^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9_-]*$",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    },
-                    "with-capture-group": {
-                      "items": {
-                        "additionalProperties": false,
-                        "patternProperties": {
-                          "^@": {
-                            "type": "object"
-                          }
-                        },
-                        "properties": {
-                          "capture-group-name": {
-                            "description": "Name of the capture group. Should be of pattern [a-zA-Z][a-zA-Z0-9-]*",
-                            "format": "string",
-                            "maxLength": 64,
-                            "minLength": 1,
-                            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
-                            "type": "string"
-                          },
-                          "expression": {
-                            "description": "Regular expression to extract sub strings",
-                            "format": "string",
-                            "type": "string"
-                          },
-                          "field-name": {
-                            "description": "Name of the local or depending resource field name",
-                            "format": "string",
-                            "type": "string"
-                          },
-                          "ignore-case": {
-                            "description": "If true, regex match with be case insensitive",
-                            "type": "boolean"
-                          }
-                        },
-                        "required": [
-                          "capture-group-name"
-                        ]
-                      },
-                      "type": "array",
-                      "x-key": "capture-group-name"
-                    }
-                  },
-                  "required": [
-                    "resource-name",
-                    "term"
-                  ]
-                },
-                "type": "array",
-                "x-key": "resource-name"
-              },
-              "description": {
-                "description": "Description about the resource",
-                "format": "string",
-                "type": "string"
-              },
-              "field": {
-                "items": {
-                  "additionalProperties": false,
-                  "patternProperties": {
-                    "^@": {
-                      "type": "object"
-                    }
-                  },
-                  "properties": {
-                    "description": {
-                      "description": "Description about resource field",
-                      "format": "string",
-                      "type": "string"
-                    },
-                    "field-name": {
-                      "description": "Name of the resource field. Should be of pattern [a-z][a-zA-Z0-9-]*",
-                      "format": "string",
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "pattern": "^[a-z][a-zA-Z0-9-]*$",
-                      "type": "string"
-                    },
-                    "source": {
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^@": {
-                          "type": "object"
-                        }
-                      },
-                      "properties": {
-                        "rule": {
-                          "items": {
-                            "additionalProperties": false,
-                            "patternProperties": {
-                              "^@": {
-                                "type": "object"
-                              }
-                            },
-                            "properties": {
-                              "field-name": {
-                                "description": "Rule field name from where resource field should be populated. Should be of pattern [a-z][a-zA-Z0-9_-]*",
-                                "format": "string",
-                                "maxLength": 64,
-                                "minLength": 1,
-                                "pattern": "^[a-z][a-zA-Z0-9_-]*$",
-                                "type": "string"
-                              },
-                              "rule-name": {
-                                "description": "Rule name from where the resource needs to be discovered. Format: <topic-name>/<rule-name>. Should be of pattern [a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9_-]*",
-                                "format": "string",
-                                "maxLength": 129,
-                                "minLength": 1,
-                                "pattern": "^[a-z][a-z-]*(\\.{1}[a-z0-9-]+)*/[a-z][a-z0-9_-]*$",
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "rule-name",
-                              "field-name"
-                            ]
-                          },
-                          "type": "array",
-                          "x-key": "rule-name"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "type": {
-                      "description": "Resource field type",
-                      "enum": [
-                        "string",
-                        "integer",
-                        "unsigned-integer",
-                        "float"
-                      ],
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "type",
-                    "field-name"
-                  ]
-                },
-                "type": "array",
-                "x-key": "field-name"
-              },
-              "function": {
-                "items": {
-                  "additionalProperties": false,
-                  "patternProperties": {
-                    "^@": {
-                      "type": "object"
-                    }
-                  },
-                  "properties": {
-                    "argument": {
-                      "items": {
-                        "additionalProperties": false,
-                        "patternProperties": {
-                          "^@": {
-                            "type": "object"
-                          }
-                        },
-                        "properties": {
-                          "argument-name": {
-                            "description": "Name of the argument. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
-                            "format": "string",
-                            "maxLength": 64,
-                            "minLength": 1,
-                            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
-                            "type": "string"
-                          },
-                          "mandatory": {
-                            "description": "Flag to indicate a mandatory attribute",
-                            "items": {
-                              "type": "null"
-                            },
-                            "type": "array"
-                          }
-                        },
-                        "required": [
-                          "argument-name"
-                        ]
-                      },
-                      "type": "array",
-                      "x-key": "argument-name"
-                    },
-                    "description": {
-                      "description": "Description of the function",
-                      "format": "string",
-                      "type": "string"
-                    },
-                    "function-name": {
-                      "description": "Name of the function. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
-                      "format": "string",
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
-                      "type": "string"
-                    },
-                    "method": {
-                      "description": "Function to be called",
-                      "format": "string",
-                      "type": "string"
-                    },
-                    "path": {
-                      "description": "File in which function is defined. This is relative path to the data directory",
-                      "format": "string",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "function-name",
-                    "path",
-                    "method"
-                  ]
-                },
-                "type": "array",
-                "x-key": "function-name"
-              },
-              "keys": {
-                "items": {
-                  "description": "List of values which form the unique identifier of the resource. Should be of pattern [a-z][a-z0-9-]*",
-                  "format": "string",
-                  "maxLength": 64,
-                  "minLength": 1,
-                  "pattern": "^[a-z][a-z0-9-]*$",
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "resource-name": {
-                "description": "Name of the resource. Should be of pattern [a-z][a-z0-9-]*",
-                "format": "string",
-                "maxLength": 64,
-                "minLength": 1,
-                "pattern": "^[a-z][a-z0-9-]*$",
-                "type": "string"
-              },
-              "variable": {
-                "description": "Resource variable configuration",
-                "items": {
-                  "additionalProperties": false,
-                  "patternProperties": {
-                    "^@": {
-                      "type": "object"
-                    }
-                  },
-                  "properties": {
-                    "description": {
-                      "description": "Description about the variable",
-                      "format": "string",
-                      "type": "string"
-                    },
-                    "name": {
-                      "description": "Variable name used in the playbook. Should be of pattern [a-zA-Z][a-zA-Z0-9_-]*",
-                      "format": "string",
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
-                      "type": "string"
-                    },
-                    "type": {
-                      "description": "Type of value supported. This information will be used by UI to display options available for the values",
-                      "enum": [
-                        "device-group",
-                        "device",
-                        "sensor-argument",
-                        "group-type"
-                      ],
-                      "type": "string"
-                    },
-                    "value": {
-                      "description": "Default value for the variable",
-                      "format": "string",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "type",
-                    "name"
-                  ]
-                },
-                "type": "array",
-                "x-key": "name"
-              }
-            },
-            "required": [
-              "resource-name"
-            ],
-            "x-ref": [
-              "resource-fields-group",
-              "functions-group",
-              "dependency-group",
-              "resource-variables-group"
-            ]
+            "$ref": "#/definitions/resource_schema"
           },
           "type": "array",
           "x-key": "resource-name"
@@ -36325,6 +37075,15 @@
           "type": "string",
           "x-path": "../task/task-name"
         },
+        "log-level": {
+          "description": "Logging level of workflow",
+          "type": "string",
+          "enum": [
+            "info",
+            "debug",
+            "error"
+          ]
+        },
         "argument": {
           "$ref": "#/definitions/workflow_argument_group_schema"
         },
@@ -36335,6 +37094,11 @@
           "description": "Maximum parallel steps launched",
           "format": "int32",
           "type": "integer"
+        },
+        "pod-gc-strategy": {
+          "description": "Garbage Collection Strategy for workflow pods",
+          "format": "string",
+          "type": "string"
         },
         "retry": {
           "additionalProperties": false,
@@ -36918,6 +37682,11 @@
           "description": "Maximum parallel steps launched",
           "format": "int32",
           "type": "integer"
+        },
+        "pod-gc-strategy": {
+          "description": "Garbage Collection Strategy for workflow pods",
+          "format": "string",
+          "type": "string"
         },
         "retry": {
           "additionalProperties": false,
@@ -38034,6 +38803,16 @@
           "minLength": 1,
           "pattern": "^[a-z][a-z0-9-]*$",
           "type": "string"
+        },
+        "is-default": {
+          "description": "Flag to denote default resource",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "is-modified": {
+          "description": "Flag to denote if default resource is modified",
+          "type": "boolean",
+          "readOnly": true
         }
       },
       "required": [
@@ -38046,6 +38825,30 @@
         "dependency-group",
         "resource-variables-group"
       ]
+    },
+    "ifa_device_schema": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^@": {
+          "type": "object"
+        }
+      },
+      "properties": {
+        "id": {
+          "description": "Device number",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Device name",
+          "format": "string",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
     },
     "panel_schema": {
       "additionalProperties": false,
@@ -38544,7 +39347,7 @@
         },
         "type": "object"
       },
-    "hb_graphs": {
+    "pin_graphs": {
       "description": "Create Panels in a Canvas",
       "properties": {
         "graph_name": {
@@ -38689,10 +39492,10 @@
                       "type": "string"
                     }
                   },
-                  "type": "list"
+                  "type": "array"
                 }
               },
-              "type": "list"
+              "type": "array"
             },
             "group_by_interval": {
               "description": "Group by interval of the query",
@@ -38715,7 +39518,7 @@
               "type": "string"
             }
           },
-          "type": "list"
+          "type": "array"
         },
         "y_label": {
           "description": "Y Label value in visualization",

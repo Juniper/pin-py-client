@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **variable** | [**list[DevicegroupSchemaVariable]**](DevicegroupSchemaVariable.md) | Playbook variable configuration | [optional] 
 **snmp** | [**DevicegroupSchemaSnmp**](DevicegroupSchemaSnmp.md) |  | [optional] 
 **syslog** | [**DevicegroupSchemaSyslog**](DevicegroupSchemaSyslog.md) |  | [optional] 
+**paragon_active_assurance** | [**DevicegroupSchemaParagonactiveassurance**](DevicegroupSchemaParagonactiveassurance.md) |  | [optional] 
 **tagging_profile** | **list[str]** |  | [optional] 
 **timezone** | **str** | Timezone in the format +/-hh:mm, Example: -08:00 | [optional] 
 **use_ingest_receive_time** | **list[object]** | Enable using ingest receive time in formulas like elapsed-time and rate-of-change | [optional] 

@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -44,6 +47,7 @@ class DevicegroupSchemaLogging(object):
         'resource_discovery': 'DevicegroupSchemaLoggingResourcediscovery',
         'flow': 'DevicegroupSchemaLoggingFlow',
         'sflow': 'DevicegroupSchemaLoggingSflow',
+        'ifa': 'DevicegroupSchemaLoggingIfa',
         'byoi': 'DevicegroupSchemaLoggingByoi',
         'snmp_notification': 'DevicegroupSchemaLoggingSnmpnotification',
         'syslog': 'DevicegroupSchemaLoggingSyslog'
@@ -63,12 +67,13 @@ class DevicegroupSchemaLogging(object):
         'resource_discovery': 'resource-discovery',
         'flow': 'flow',
         'sflow': 'sflow',
+        'ifa': 'ifa',
         'byoi': 'byoi',
         'snmp_notification': 'snmp-notification',
         'syslog': 'syslog'
     }
 
-    def __init__(self, i_agent=None, log_level=None, native_gpb=None, non_sensor_rules=None, open_config=None, server_monitoring=None, reports_generation=None, snmp=None, trigger_evaluation=None, ml_model_builder=None, resource_discovery=None, flow=None, sflow=None, byoi=None, snmp_notification=None, syslog=None):  # noqa: E501
+    def __init__(self, i_agent=None, log_level=None, native_gpb=None, non_sensor_rules=None, open_config=None, server_monitoring=None, reports_generation=None, snmp=None, trigger_evaluation=None, ml_model_builder=None, resource_discovery=None, flow=None, sflow=None, ifa=None, byoi=None, snmp_notification=None, syslog=None):  # noqa: E501
         """DevicegroupSchemaLogging - a model defined in Swagger"""  # noqa: E501
 
         self._i_agent = None
@@ -84,6 +89,7 @@ class DevicegroupSchemaLogging(object):
         self._resource_discovery = None
         self._flow = None
         self._sflow = None
+        self._ifa = None
         self._byoi = None
         self._snmp_notification = None
         self._syslog = None
@@ -115,6 +121,8 @@ class DevicegroupSchemaLogging(object):
             self.flow = flow
         if sflow is not None:
             self.sflow = sflow
+        if ifa is not None:
+            self.ifa = ifa
         if byoi is not None:
             self.byoi = byoi
         if snmp_notification is not None:
@@ -402,6 +410,27 @@ class DevicegroupSchemaLogging(object):
         """
 
         self._sflow = sflow
+
+    @property
+    def ifa(self):
+        """Gets the ifa of this DevicegroupSchemaLogging.  # noqa: E501
+
+
+        :return: The ifa of this DevicegroupSchemaLogging.  # noqa: E501
+        :rtype: DevicegroupSchemaLoggingIfa
+        """
+        return self._ifa
+
+    @ifa.setter
+    def ifa(self, ifa):
+        """Sets the ifa of this DevicegroupSchemaLogging.
+
+
+        :param ifa: The ifa of this DevicegroupSchemaLogging.  # noqa: E501
+        :type: DevicegroupSchemaLoggingIfa
+        """
+
+        self._ifa = ifa
 
     @property
     def byoi(self):

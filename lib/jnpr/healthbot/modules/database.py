@@ -11,12 +11,12 @@ class Database(InfluxDBClient):
 
     def __init__(self, hbot):
         """
-        :param object hbot: :class:`jnpr.healthbot.HealthBotClient` client instance
+        :param object hbot: :class:`jnpr.healthbot.PINClient` client instance
 
         Example:
         ::
-            hb.tsdb.query("show databases")
-            hb.tsdb.query('select * from "protocol-eventd-host/check-host-traffic/packet-loss" limit 10',
+            pin.tsdb.query("show databases")
+            pin.tsdb.query('select * from "protocol-eventd-host/check-host-traffic/packet-loss" limit 10',
                               database='Core:vmx')
         """
         self.hbot = hbot

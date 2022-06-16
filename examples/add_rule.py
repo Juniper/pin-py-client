@@ -1,5 +1,8 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
 
-from jnpr.healthbot import HealthBotClient
+
+from jnpr.healthbot import PINClient
 from jnpr.healthbot.modules.rules import RuleSchema
 from jnpr.healthbot.swagger.models.rule_schema_field import RuleSchemaField
 from jnpr.healthbot.swagger.models.rule_schema_constant import RuleSchemaConstant
@@ -10,9 +13,9 @@ gui_username = 'admin'
 gui_password = 'pwd'
 
 
-with HealthBotClient(ip, gui_username, gui_password, port=8080) as hb:
-    rs = RuleSchema(rule_name="hbez-fpc-heap-utilization")
-    rs.description = "HealthBot EZ example"
+with PINClient(ip, gui_username, gui_password, port=8080) as pin:
+    rs = RuleSchema(rule_name="pinez-fpc-heap-utilization")
+    rs.description = "Paragon Insights EZ example"
     rs.synopsis = "Using python client for demo"
     rs.sensor = [{'description': 'Monitors FPC buffer, heap and cpu utilization',
                   'iAgent': {'file': 'fpc-utilization.yml',
@@ -52,6 +55,6 @@ with HealthBotClient(ip, gui_username, gui_password, port=8080) as hb:
                            path="diff-percentage.py")
         ]
 
-    hb.rule.add('mytopic', schema=rs)
-    hb.commit()
+    pin.rule.add('mytopic', schema=rs)
+    pin.commit()
 

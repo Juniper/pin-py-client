@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+
 # coding: utf-8
 
 """
@@ -1200,6 +1203,220 @@ class DefaultApi(object):
 
         return self.api_client.call_api(
             '/config/ingest/frequency-profile/{name}/', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def create_healthbot_ingest_ifa(self, ifa, **kwargs):  # noqa: E501
+        """Create ifa by ID  # noqa: E501
+
+        Create operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_healthbot_ingest_ifa(ifa, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param IfaSchema ifa: ifabody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_healthbot_ingest_ifa_with_http_info(ifa, **kwargs)  # noqa: E501
+        else:
+            (data) = self.create_healthbot_ingest_ifa_with_http_info(ifa, **kwargs)  # noqa: E501
+            return data
+
+    def create_healthbot_ingest_ifa_with_http_info(self, ifa, **kwargs):  # noqa: E501
+        """Create ifa by ID  # noqa: E501
+
+        Create operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_healthbot_ingest_ifa_with_http_info(ifa, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param IfaSchema ifa: ifabody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['ifa', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_healthbot_ingest_ifa" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'ifa' is set
+        if ('ifa' not in params or
+                params['ifa'] is None):
+            raise ValueError("Missing the required parameter `ifa` when calling `create_healthbot_ingest_ifa`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'ifa' in params:
+            body_params = params['ifa']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def create_healthbot_ingest_ifa_device_by_id(self, id, device, **kwargs):  # noqa: E501
+        """Create device by ID  # noqa: E501
+
+        Create operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_healthbot_ingest_ifa_device_by_id(id, device, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: ID of ifa device (required)
+        :param IfaDeviceSchema device: devicebody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_healthbot_ingest_ifa_device_by_id_with_http_info(id, device, **kwargs)  # noqa: E501
+        else:
+            (data) = self.create_healthbot_ingest_ifa_device_by_id_with_http_info(id, device, **kwargs)  # noqa: E501
+            return data
+
+    def create_healthbot_ingest_ifa_device_by_id_with_http_info(self, id, device, **kwargs):  # noqa: E501
+        """Create device by ID  # noqa: E501
+
+        Create operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_healthbot_ingest_ifa_device_by_id_with_http_info(id, device, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: ID of ifa device (required)
+        :param IfaDeviceSchema device: devicebody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'device', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_healthbot_ingest_ifa_device_by_id" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `create_healthbot_ingest_ifa_device_by_id`")  # noqa: E501
+        # verify the required parameter 'device' is set
+        if ('device' not in params or
+                params['device'] is None):
+            raise ValueError("Missing the required parameter `device` when calling `create_healthbot_ingest_ifa_device_by_id`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'device' in params:
+            body_params = params['device']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/device/{id}/', 'POST',
             path_params,
             query_params,
             header_params,
@@ -5419,6 +5636,117 @@ class DefaultApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def create_ingest_paa_by_paa_name(self, paa_name, paa_setup, **kwargs):  # noqa: E501
+        """Update paa by paa name  # noqa: E501
+
+        Create operation of resource: paa by paa_name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_ingest_paa_by_paa_name(paa_name, paa_setup, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param PaaSetupSchema paa_setup: paa body object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_ingest_paa_by_paa_name_with_http_info(paa_name, paa_setup, **kwargs)  # noqa: E501
+        else:
+            (data) = self.create_ingest_paa_by_paa_name_with_http_info(paa_name, paa_setup, **kwargs)  # noqa: E501
+            return data
+
+    def create_ingest_paa_by_paa_name_with_http_info(self, paa_name, paa_setup, **kwargs):  # noqa: E501
+        """Update paa by paa name  # noqa: E501
+
+        Create operation of resource: paa by paa_name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_ingest_paa_by_paa_name_with_http_info(paa_name, paa_setup, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param PaaSetupSchema paa_setup: paa body object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['paa_name', 'paa_setup', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_ingest_paa_by_paa_name" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'paa_name' is set
+        if ('paa_name' not in params or
+                params['paa_name'] is None):
+            raise ValueError("Missing the required parameter `paa_name` when calling `create_ingest_paa_by_paa_name`")  # noqa: E501
+        # verify the required parameter 'paa_setup' is set
+        if ('paa_setup' not in params or
+                params['paa_setup'] is None):
+            raise ValueError("Missing the required parameter `paa_setup` when calling `create_ingest_paa_by_paa_name`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'paa_name' in params:
+            path_params['paa_name'] = params['paa_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'paa_setup' in params:
+            body_params = params['paa_setup']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/paa/{paa_name}/', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def delete_dynamic_tagging_by_key(self, key_name, **kwargs):  # noqa: E501
         """Delete Dynamic-tagging key-value  # noqa: E501
 
@@ -6342,6 +6670,204 @@ class DefaultApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def delete_healthbot_ingest_ifa(self, **kwargs):  # noqa: E501
+        """Delete ifa by ID  # noqa: E501
+
+        Delete operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_healthbot_ingest_ifa(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_healthbot_ingest_ifa_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_healthbot_ingest_ifa_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def delete_healthbot_ingest_ifa_with_http_info(self, **kwargs):  # noqa: E501
+        """Delete ifa by ID  # noqa: E501
+
+        Delete operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_healthbot_ingest_ifa_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_healthbot_ingest_ifa" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_healthbot_ingest_ifa_device_by_id(self, id, **kwargs):  # noqa: E501
+        """Delete device by ID  # noqa: E501
+
+        Delete operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_healthbot_ingest_ifa_device_by_id(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: ID of ifa device (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_healthbot_ingest_ifa_device_by_id_with_http_info(id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_healthbot_ingest_ifa_device_by_id_with_http_info(id, **kwargs)  # noqa: E501
+            return data
+
+    def delete_healthbot_ingest_ifa_device_by_id_with_http_info(self, id, **kwargs):  # noqa: E501
+        """Delete device by ID  # noqa: E501
+
+        Delete operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_healthbot_ingest_ifa_device_by_id_with_http_info(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: ID of ifa device (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_healthbot_ingest_ifa_device_by_id" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `delete_healthbot_ingest_ifa_device_by_id`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/device/{id}/', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def delete_healthbot_ingest_outbound_ssh(self, **kwargs):  # noqa: E501
         """Delete outbound-ssh by ID  # noqa: E501
 
@@ -6423,6 +6949,109 @@ class DefaultApi(object):
 
         return self.api_client.call_api(
             '/config/ingest/outbound-ssh/', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_healthbot_ingest_paa_by_paa_name(self, paa_name, **kwargs):  # noqa: E501
+        """Delete paa setup by paa name  # noqa: E501
+
+        Delete operation of resource: paa by paa name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_healthbot_ingest_paa_by_paa_name(paa_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_healthbot_ingest_paa_by_paa_name_with_http_info(paa_name, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_healthbot_ingest_paa_by_paa_name_with_http_info(paa_name, **kwargs)  # noqa: E501
+            return data
+
+    def delete_healthbot_ingest_paa_by_paa_name_with_http_info(self, paa_name, **kwargs):  # noqa: E501
+        """Delete paa setup by paa name  # noqa: E501
+
+        Delete operation of resource: paa by paa name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_healthbot_ingest_paa_by_paa_name_with_http_info(paa_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['paa_name', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_healthbot_ingest_paa_by_paa_name" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'paa_name' is set
+        if ('paa_name' not in params or
+                params['paa_name'] is None):
+            raise ValueError("Missing the required parameter `paa_name` when calling `delete_healthbot_ingest_paa_by_paa_name`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'paa_name' in params:
+            path_params['paa_name'] = params['paa_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/paa/{paa_name}/', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -14162,6 +14791,410 @@ class DefaultApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def retrieve_healthbot_ingest_ifa(self, **kwargs):  # noqa: E501
+        """Retrieve ifa  # noqa: E501
+
+        Retrieve operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: IfaSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.retrieve_healthbot_ingest_ifa_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.retrieve_healthbot_ingest_ifa_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def retrieve_healthbot_ingest_ifa_with_http_info(self, **kwargs):  # noqa: E501
+        """Retrieve ifa  # noqa: E501
+
+        Retrieve operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: IfaSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['x_iam_token', 'working']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method retrieve_healthbot_ingest_ifa" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'working' in params:
+            query_params.append(('working', params['working']))  # noqa: E501
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='IfaSchema',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def retrieve_healthbot_ingest_ifa_device_by_id(self, id, **kwargs):  # noqa: E501
+        """Retrieve device by ID  # noqa: E501
+
+        Retrieve operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa_device_by_id(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: ID of ifa device (required)
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: IfaDeviceSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.retrieve_healthbot_ingest_ifa_device_by_id_with_http_info(id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.retrieve_healthbot_ingest_ifa_device_by_id_with_http_info(id, **kwargs)  # noqa: E501
+            return data
+
+    def retrieve_healthbot_ingest_ifa_device_by_id_with_http_info(self, id, **kwargs):  # noqa: E501
+        """Retrieve device by ID  # noqa: E501
+
+        Retrieve operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa_device_by_id_with_http_info(id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param int id: ID of ifa device (required)
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: IfaDeviceSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'x_iam_token', 'working']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method retrieve_healthbot_ingest_ifa_device_by_id" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `retrieve_healthbot_ingest_ifa_device_by_id`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+        if 'working' in params:
+            query_params.append(('working', params['working']))  # noqa: E501
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/device/{id}/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='IfaDeviceSchema',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def retrieve_healthbot_ingest_ifa_device_ids(self, **kwargs):  # noqa: E501
+        """Retrieve device  # noqa: E501
+
+        Retrieve operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa_device_ids(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: list[str]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.retrieve_healthbot_ingest_ifa_device_ids_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.retrieve_healthbot_ingest_ifa_device_ids_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def retrieve_healthbot_ingest_ifa_device_ids_with_http_info(self, **kwargs):  # noqa: E501
+        """Retrieve device  # noqa: E501
+
+        Retrieve operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa_device_ids_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: list[str]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['x_iam_token', 'working']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method retrieve_healthbot_ingest_ifa_device_ids" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'working' in params:
+            query_params.append(('working', params['working']))  # noqa: E501
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/device/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[str]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def retrieve_healthbot_ingest_ifa_devices(self, **kwargs):  # noqa: E501
+        """Retrieve devices  # noqa: E501
+
+        Retrieve operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa_devices(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: list[IfaDeviceSchema]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.retrieve_healthbot_ingest_ifa_devices_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.retrieve_healthbot_ingest_ifa_devices_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def retrieve_healthbot_ingest_ifa_devices_with_http_info(self, **kwargs):  # noqa: E501
+        """Retrieve devices  # noqa: E501
+
+        Retrieve operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_ifa_devices_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: list[IfaDeviceSchema]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['x_iam_token', 'working']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method retrieve_healthbot_ingest_ifa_devices" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'working' in params:
+            query_params.append(('working', params['working']))  # noqa: E501
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/devices/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[IfaDeviceSchema]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def retrieve_healthbot_ingest_outbound_ssh(self, **kwargs):  # noqa: E501
         """Retrieve outbound-ssh  # noqa: E501
 
@@ -14254,6 +15287,113 @@ class DefaultApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='OutboundSshSchema',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def retrieve_healthbot_ingest_paa_by_paa_name(self, paa_name, **kwargs):  # noqa: E501
+        """Retrieve paa setup config by paa name  # noqa: E501
+
+        Retrieve operation of resource: paa by paa_name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_paa_by_paa_name(paa_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: PaaSetupSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.retrieve_healthbot_ingest_paa_by_paa_name_with_http_info(paa_name, **kwargs)  # noqa: E501
+        else:
+            (data) = self.retrieve_healthbot_ingest_paa_by_paa_name_with_http_info(paa_name, **kwargs)  # noqa: E501
+            return data
+
+    def retrieve_healthbot_ingest_paa_by_paa_name_with_http_info(self, paa_name, **kwargs):  # noqa: E501
+        """Retrieve paa setup config by paa name  # noqa: E501
+
+        Retrieve operation of resource: paa by paa_name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_paa_by_paa_name_with_http_info(paa_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: PaaSetupSchema
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['paa_name', 'x_iam_token', 'working']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method retrieve_healthbot_ingest_paa_by_paa_name" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'paa_name' is set
+        if ('paa_name' not in params or
+                params['paa_name'] is None):
+            raise ValueError("Missing the required parameter `paa_name` when calling `retrieve_healthbot_ingest_paa_by_paa_name`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'paa_name' in params:
+            path_params['paa_name'] = params['paa_name']  # noqa: E501
+
+        query_params = []
+        if 'working' in params:
+            query_params.append(('working', params['working']))  # noqa: E501
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/paa/{paa_name}/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='PaaSetupSchema',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -15078,6 +16218,105 @@ class DefaultApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='FrequencyProfileSchema',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def retrieve_healthbot_ingest_settings_paa(self, **kwargs):  # noqa: E501
+        """Retrieve paas  # noqa: E501
+
+        Retrieve operation of resource: paa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_settings_paa(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: PaaSetupSchemas
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.retrieve_healthbot_ingest_settings_paa_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.retrieve_healthbot_ingest_settings_paa_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def retrieve_healthbot_ingest_settings_paa_with_http_info(self, **kwargs):  # noqa: E501
+        """Retrieve paas  # noqa: E501
+
+        Retrieve operation of resource: paa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.retrieve_healthbot_ingest_settings_paa_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str x_iam_token: authentication header object
+        :param bool working: true queries undeployed configuration
+        :return: PaaSetupSchemas
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['x_iam_token', 'working']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method retrieve_healthbot_ingest_settings_paa" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'working' in params:
+            query_params.append(('working', params['working']))  # noqa: E501
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/paa/', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='PaaSetupSchemas',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -21685,6 +22924,220 @@ class DefaultApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def update_healthbot_ingest_ifa(self, ifa, **kwargs):  # noqa: E501
+        """Update ifa by ID  # noqa: E501
+
+        Update operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_healthbot_ingest_ifa(ifa, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param IfaSchema ifa: ifabody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.update_healthbot_ingest_ifa_with_http_info(ifa, **kwargs)  # noqa: E501
+        else:
+            (data) = self.update_healthbot_ingest_ifa_with_http_info(ifa, **kwargs)  # noqa: E501
+            return data
+
+    def update_healthbot_ingest_ifa_with_http_info(self, ifa, **kwargs):  # noqa: E501
+        """Update ifa by ID  # noqa: E501
+
+        Update operation of resource: ifa  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_healthbot_ingest_ifa_with_http_info(ifa, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param IfaSchema ifa: ifabody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['ifa', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_healthbot_ingest_ifa" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'ifa' is set
+        if ('ifa' not in params or
+                params['ifa'] is None):
+            raise ValueError("Missing the required parameter `ifa` when calling `update_healthbot_ingest_ifa`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'ifa' in params:
+            body_params = params['ifa']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def update_healthbot_ingest_ifa_device_by_id(self, id, device, **kwargs):  # noqa: E501
+        """Update device by ID  # noqa: E501
+
+        Update operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_healthbot_ingest_ifa_device_by_id(id, device, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: ID of ifa device (required)
+        :param IfaDeviceSchema device: devicebody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.update_healthbot_ingest_ifa_device_by_id_with_http_info(id, device, **kwargs)  # noqa: E501
+        else:
+            (data) = self.update_healthbot_ingest_ifa_device_by_id_with_http_info(id, device, **kwargs)  # noqa: E501
+            return data
+
+    def update_healthbot_ingest_ifa_device_by_id_with_http_info(self, id, device, **kwargs):  # noqa: E501
+        """Update device by ID  # noqa: E501
+
+        Update operation of resource: device  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_healthbot_ingest_ifa_device_by_id_with_http_info(id, device, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: ID of ifa device (required)
+        :param IfaDeviceSchema device: devicebody object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'device', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_healthbot_ingest_ifa_device_by_id" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if ('id' not in params or
+                params['id'] is None):
+            raise ValueError("Missing the required parameter `id` when calling `update_healthbot_ingest_ifa_device_by_id`")  # noqa: E501
+        # verify the required parameter 'device' is set
+        if ('device' not in params or
+                params['device'] is None):
+            raise ValueError("Missing the required parameter `device` when calling `update_healthbot_ingest_ifa_device_by_id`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'device' in params:
+            body_params = params['device']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/ifa/device/{id}/', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def update_healthbot_ingest_outbound_ssh(self, outbound_ssh, **kwargs):  # noqa: E501
         """Update outbound-ssh by ID  # noqa: E501
 
@@ -25876,6 +27329,117 @@ class DefaultApi(object):
 
         return self.api_client.call_api(
             '/config/profiles/', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def update_ingest_paa_by_paa_name(self, paa_name, paa_setup, **kwargs):  # noqa: E501
+        """Update paa by paa name  # noqa: E501
+
+        Update operation of resource: paa by paa_name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_ingest_paa_by_paa_name(paa_name, paa_setup, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param PaaSetupSchema paa_setup: paa body object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.update_ingest_paa_by_paa_name_with_http_info(paa_name, paa_setup, **kwargs)  # noqa: E501
+        else:
+            (data) = self.update_ingest_paa_by_paa_name_with_http_info(paa_name, paa_setup, **kwargs)  # noqa: E501
+            return data
+
+    def update_ingest_paa_by_paa_name_with_http_info(self, paa_name, paa_setup, **kwargs):  # noqa: E501
+        """Update paa by paa name  # noqa: E501
+
+        Update operation of resource: paa by paa_name  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_ingest_paa_by_paa_name_with_http_info(paa_name, paa_setup, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str paa_name: name of paa setup (required)
+        :param PaaSetupSchema paa_setup: paa body object (required)
+        :param str x_iam_token: authentication header object
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['paa_name', 'paa_setup', 'x_iam_token']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_ingest_paa_by_paa_name" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'paa_name' is set
+        if ('paa_name' not in params or
+                params['paa_name'] is None):
+            raise ValueError("Missing the required parameter `paa_name` when calling `update_ingest_paa_by_paa_name`")  # noqa: E501
+        # verify the required parameter 'paa_setup' is set
+        if ('paa_setup' not in params or
+                params['paa_setup'] is None):
+            raise ValueError("Missing the required parameter `paa_setup` when calling `update_ingest_paa_by_paa_name`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'paa_name' in params:
+            path_params['paa_name'] = params['paa_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+        if 'x_iam_token' in params:
+            header_params['x-iam-token'] = params['x_iam_token']  # noqa: E501
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'paa_setup' in params:
+            body_params = params['paa_setup']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/config/ingest/paa/{paa_name}/', 'PUT',
             path_params,
             query_params,
             header_params,
