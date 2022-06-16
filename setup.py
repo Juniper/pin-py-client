@@ -1,3 +1,6 @@
+{# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+}
 __author__ = "Sharanya Bhat"
 __author_email__ = "sharanyab@juniper.net"
 __licence__ = "Apache 2.0"

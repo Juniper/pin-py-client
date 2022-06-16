@@ -1,3 +1,6 @@
+{# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+}
 from jnpr.healthbot.modules.profiles import Security
 
 from jnpr.healthbot.swagger.models.notification_schema import NotificationSchema

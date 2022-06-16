@@ -1,3 +1,6 @@
+{# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+}
 from jnpr.healthbot.swagger.models import *
 from jnpr.healthbot.exception import SchemaError, NotFoundError
 from jnpr.healthbot.modules.playbooks import PlayBookInstanceBuilder

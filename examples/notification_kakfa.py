@@ -1,3 +1,6 @@
+{# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+}
 from jnpr.healthbot import PINClient
 
 ip = 'ip'

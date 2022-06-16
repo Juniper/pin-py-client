@@ -1,3 +1,6 @@
+{# Copyright (c) 2022, Juniper Networks, Inc.
+# All rights reserved.
+}
 from jnpr.healthbot.swagger.models.inline_response2006 import InlineResponse2006
 
 
