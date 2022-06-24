@@ -372,19 +372,139 @@ class EMSDevice(BaseModule):
 
         super().__init__(hbot)
 
-    def add(self, device_id: str = None, host: str = None,
-            username: str = None, password: str = None,
-            schema: DeviceSchema = None, **kwargs):
-        print('TBD')
+    def add(self, managed: bool = True, device_id: str = None, host: str = None,
+            username: str = None, password: str = None):
+
+        print("Adding device with managed=", managed)
+
+        if managed:
+            ems_managed_url = self.hbot.urlfor.ems_device_managed()
+            ems_managed_payload = {
+                "discovery_targets": [
+                    {
+                        "ip_targets": [
+                            {
+                                "ip_address": host
+                            }
+                        ],
+                        "auth_info": {
+                            "user": username,
+                            "password": password
+                        }
+                    }
+                ]
+            }
+            response = self.api.post(ems_managed_url, json=ems_managed_payload)
+            if response.status_code != 200:
+                logger.error(response.text)
+            response.raise_for_status()
+            return True
+        else:
+            ems_unmanaged_url = self.hbot.urlfor.ems_device_unmanaged()
+            ems_unmanaged_payload = {
+                "activation_type": "MANUAL",
+                "device_info": [
+                    {
+                        "device": {
+                            "aux_system_info": {
+                                "ipv4_address": host
+                            },
+                            "system_info": {
+                                "host_name": device_id
+                            },
+                            "name": device_id,
+                            "login_info": {
+                                "username": username,
+                                "password": password
+                            }
+                        },
+                        "manageability": "UNMANAGED"
+                    }
+                ]
+            }
+            response = self.api.post(ems_unmanaged_url, json=ems_unmanaged_payload)
+            if response.status_code != 200:
+                logger.error(response.text)
+            response.raise_for_status()
+            return True
 
     def delete(self, device_id: str, force: bool = False):
         print("TBD")
 
     def get_ids(self):
-        print("TBD")
+        """
+        Return Device IDs for all the devices in HealthBot system
+
+        :return: list of device IDs
+
+        Example:
+        ::
+
+            from jnpr.healthbot import PINClient
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                print(pin.device.get_ids())
+        """
+        devices_list_url = self.hbot.urlfor.device()
+        resp = self.api.get(devices_list_url)
+
+        if resp.status_code == 404:
+            return []
+
+        return resp.json()
 
     def get(self, device_id: str = None, uncommitted: bool = True):
-        print("TBD")
+        """
+        Get `DeviceSchema <jnpr.healthbot.swagger.models.html#deviceschema>`_ for
+        given device id or list for all devices
+
+        :param str device_id: The name of the device as provided by the User
+        :param bool uncommitted: True includes fetches uncommitted changes,
+        False restricts data set to only committed changes
+
+
+        Example:
+        ::
+
+            from jnpr.healthbot import PINClient
+
+            with PINClient('xx.xxx.x.xx', 'xxxx', 'xxxx') as pin:
+                device = pin.device.get('vmx')
+                print(device)
+
+                devices = pin.device.get()
+                for device in devices:
+                    print(device)
+
+        :return: `DeviceSchema(s) <jnpr.healthbot.swagger.models.html#deviceschema>`_
+        """
+        if device_id is not None:
+            device_url = self.hbot.urlfor.device(device_id)
+            if uncommitted:
+                device_url += self.hbot.apiopt_candidate
+            response = self.api.get(device_url)
+            if response.status_code != 200:
+                logger.error(response.text)
+            response.raise_for_status()
+            return self.hbot._create_schema(response, DeviceSchema)
+        else:
+            device_list = []
+
+            devices_list_url = self.hbot.urlfor.devices()
+            if uncommitted:
+                devices_list_url += self.hbot.apiopt_candidate
+            resp = self.api.get(devices_list_url)
+
+            if resp.status_code == 404:
+                return []
+
+            # examine the existing devices and return a list of devices
+
+            existing_devices = resp.json()['device']
+            for device in existing_devices:
+                device = self.hbot._create_schema(device, DeviceSchema)
+                device_list.append(device)
+
+            return device_list
 
     def update(self, schema: DeviceSchema = None, **kwargs):
         print("TBD")

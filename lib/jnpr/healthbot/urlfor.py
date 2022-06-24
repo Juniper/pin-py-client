@@ -7,6 +7,7 @@ class UrlFor(object):
         self.url = hbot.url
         self.config_url = hbot.config_url
         self.grafana_url = hbot.grafana_url
+        self.homepage_url = hbot.homepage_url
 
     def system_details(self):
         return "{api}/system-details".format(api=self.url)
@@ -18,6 +19,12 @@ class UrlFor(object):
         else:
             return "{api}/device/".format(
                 api=self.config_url)
+
+    def ems_device_managed(self):
+        return "{api}/devicemanager/discover-devices".format(api=self.homepage_url)
+
+    def ems_device_unmanaged(self):
+        return "{api}/devicemanager/add-devices".format(api=self.homepage_url)
 
     def device_facts(self, device_id):
         return "{api}/device/{device_id}/facts".format(

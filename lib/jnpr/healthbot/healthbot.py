@@ -306,6 +306,15 @@ class PINClient(object):
         return url_initials + "v2"
 
     @property
+    def homepage_url(self):
+        """ Initials of URL to be used for API call.
+        :returns:
+            str: Initials of URL to be used for API call.
+        """
+        url_initials = "https://" + self.server + ":" + str(self.port)
+        return url_initials
+
+    @property
     def grafana_url(self):
         return "https://" + self.server + ":" + str(self.port) + "/grafana/api"
 
