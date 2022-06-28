@@ -25,8 +25,17 @@ from pprint import pprint
 
 ## Opening connection
 
+For Paragon Automation:
+
 ```python
-pin = PINClient('xx.xx.xx.xxx', 'xxxxx', 'xxxxx', port=nnnn)
+pin = PINClient('xx.xx.xx.xxx', 'xxxxx', 'xxxxx', port=443)
+pin.open()
+```
+
+For Paragon Insights:
+
+```python
+pin = PINClient('xx.xx.xx.xxx', 'xxxxx', 'xxxxx', port=8080)
 pin.open()
 ```
 
